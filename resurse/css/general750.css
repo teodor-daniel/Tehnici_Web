@@ -1,0 +1,14 @@
+html{
+    font-size:12px;
+}
+
+body{
+    --sparitere-pagina:10px;
+    --padding-sectiune:8px;
+}
+#grid-pagina{
+    display:block;
+}
+#grid-pagina > *{
+    margin-bottom: 15px;
+}

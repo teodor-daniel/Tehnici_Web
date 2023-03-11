@@ -1,0 +1,146 @@
+html{
+    font-size: 20px;
+}
+
+body{ /*parameters*/
+    --culoare-rosu:#de493c;
+    --culoare-fundal:rgb(179, 195, 203);
+    --culoare-fundal-inchis:#698d86;
+    --culoare-text:rgb(255, 255, 255);
+    --spatiere-pagina:50px;
+    --padding-sectiune:17px;
+}
+
+body.dark{ /*dark-mode*/
+    --culoare-fundal:black;
+    --culoare-text:white;
+}
+body{/*use of variables*/
+    background-color: var(--culoare-fundal);
+    color: var(--culoare-text);
+    padding-left: var(--spatiere-pagina);
+    padding-right: var(--spatiere-pagina);
+    min-width: 400px;
+
+}
+body{ /*resetat proprietati baza css*/
+    margin: 0;
+}
+h1{
+    font-size: 2.3rem;
+}
+
+h2{
+    font-size: 1.7rem;
+}
+h3{
+    font-size: 1.2rem;
+}
+.container-iframe {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+  }
+  
+  .taburi-iframe {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    margin: 0px;
+  }
+  
+  .taburi-iframe a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    background-color:var(--culoare-fundal-inchis);
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px;
+    width: 150px;
+    height: 50px;
+    text-align: left;
+  }
+  
+  .iframe-container {
+    margin: 10px;
+  }
+
+  #link-top {
+    position: fixed;
+    bottom: 1.1em;
+    opacity: 0.5;
+    left: 91em;
+    width: 3rem;
+    box-sizing: border-box;
+    height: 3rem;
+    line-height: 3rem;
+    text-align: center;
+    border: 1px solid grey;
+    transform: rotate(45deg);
+    background: rgb(220,220,220);
+}
+#triunghi {
+    height: 0;
+    width: 0;
+    display: inline-block;
+    border-left: 1rem solid transparent;
+    border-right: 1rem solid transparent;
+    border-top: 1.5rem solid grey;
+    vertical-align: top;
+    transform: rotate(135deg) translateX(20%);
+}
+
+
+#grid-pagina > *{
+    border: 2px solid green;
+    padding: var(--padding-sectiune);
+}
+#grid-pagina{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: 
+                        "Z-Sale Z-Sale Z-Sale"
+                        "Z-utilizatori Z-date_utilizatori Z-date_server_site"
+                        "Z-calendar Z-tabel Z-tabel "
+                        "Z-anunturi Z-tabel Z-tabel"
+                        "Z-produse Z-produse Z-produse"
+                        ;
+    gap:20px 10px ; /* gird-row gap si grid collum gap*/
+    }
+
+
+#Z-Sale{
+    grid-area: Z-Sale;
+}
+#Z-produse{
+    grid-area: Z-produse;
+}
+#Z-utilizatori{
+    grid-area: Z-utilizatori;
+}
+#Z-date_utilizatori{
+    grid-area: Z-date_utilizatori;
+}
+#Z-date_server_site{
+    grid-area: Z-date_server_site;
+}
+#Z-calendar{
+    grid-area:Z-calendar;
+}
+#Z-tabel{
+    grid-area: Z-tabel
+}
+#Z-anunturi{
+    grid-area:Z-anunturi
+}
+img{
+    width: 100%;
+    max-width: 1000px;
+    min-width: 100px;
+}
