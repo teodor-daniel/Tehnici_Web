@@ -1,0 +1,53 @@
+#grid-pagina>* {
+    border: 2px solid var(--culoare-linii-interimitente);
+    padding: var(--padding-sectiune);
+    background-color: var(--fundal-deschis);
+}
+
+#grid-pagina {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+        "Z-Sale Z-Sale Z-Sale Z-Sale"
+        "Z-utilizatori Z-date_utilizatori Z-date_utilizatori Z-date_server_site"
+        "Z-calendar Z-calendar Z-tabel Z-tabel "
+        "Z-anunturi Z-anunturi Z-tabel Z-tabel"
+        "Z-produse Z-produse Z-produse Z-produse"
+    ;
+    gap: 20px 10px;
+    /* gird-row gap si grid collum gap*/
+}
+
+#Z-Sale {
+    grid-area: Z-Sale;
+    
+}
+
+#Z-produse {
+    grid-area: Z-produse;
+}
+
+#Z-utilizatori {
+    grid-area: Z-utilizatori;
+}
+
+#Z-date_utilizatori {
+    grid-area: Z-date_utilizatori;
+}
+
+#Z-date_server_site {
+    grid-area: Z-date_server_site;
+}
+
+#Z-calendar {
+    grid-area: Z-calendar;
+}
+
+#Z-tabel {
+    grid-area: Z-tabel;
+    font-size: 19px;
+}
+
+#Z-anunturi {
+    grid-area: Z-anunturi
+}

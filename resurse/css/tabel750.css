@@ -1,0 +1,8 @@
+@media (max-width: 750px) {
+    .table-container {
+      overflow-x: scroll;
+      max-width: 90%; /*sa se vada scroll-ul*/
+      height: 250px; 
+    }
+  }
+

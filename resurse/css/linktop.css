@@ -1,0 +1,36 @@
+#link-top {
+  position: fixed;
+  bottom: 1em;
+  left: 95.7%;
+  width: 3rem;
+  height: 3rem;
+  line-height: 3rem;
+  text-align: center;
+  border: 1px solid var(--culoare-linii-interimitente);
+  transform: rotate(45deg);
+  transition: all 0.8s ease-out;
+  opacity: 0.4;
+}
+
+#link-top:hover {
+  background: var(--culoare-fundal-inchis) !important;
+}
+
+#triunghi {
+  height: 0.31rem;
+  width: 0;
+  display: inline-block;
+  border-left: 1rem solid transparent;
+  border-right: 1rem solid transparent;
+  border-top: 1.5rem solid var(--culoare-fundal-inchis) !important;
+  vertical-align: top;
+  transform: rotate(135deg) translateX(20%);
+
+  border-radius: 50%;
+  opacity: 0.2;
+}
+
+a#link-top:hover #triunghi {
+  border-top-color: var(--culoare-linii-interimitente)!important;
+  opacity: 0.8 !important;
+}

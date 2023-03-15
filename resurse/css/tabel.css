@@ -1,0 +1,34 @@
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+  }
+  
+  td {
+    border: 3px solid var( --culoare-linii-interimitente);
+    transition: background-color 0.9s ease;
+  }
+/* Selectează coloanele pare */
+tr:nth-child(even) {
+    background-color: var(--fundal-deschis-albastru);
+  }
+  
+  /* Selectează coloanele impare */
+  tr:nth-child(odd) {
+    background-color: var(--fundal-deschis-portocaliu);
+  }
+
+  td:hover:not(:first-child) {
+    background-color: var(--culoare-linii-interimitente);
+  }
+  td:nth-child(1):hover {
+    background-color: var(--culoare-fundal-inchis);
+  }
+
+caption {
+    caption-side: bottom ;
+    font-size: 0.8rem;
+    font-weight:smaller;
+    color: var(--culoare-text);
+  }
