@@ -5,41 +5,39 @@ body{
     --inaltime-meniu:80px;
     --latime-buton:220px;
     --culoare-meniu:var(--culoare-fundal-inchis);
-    --culoare-border-buton:black;
 }
 nav{
-
     background-color: var(--culoare-meniu);
     width:calc(100vw - 18px); /*elimin scroll bar*/
     height: var(--culoare-meniu);
     position: sticky; /*sa urmareasca nav-ul*/
     top: 0; 
-    margin-left: calc(-1 * var(--spatiere-pagina))
-    
-
+    margin-left: calc(-1 * var(--spatiere-pagina));
+ 
+ 
 }
 ul.meniu, ul.meniu ul{
     padding: 0;
     margin:0 ;
     list-style-type:none;
 }
-
+ 
 ul.meniu{
     display: flex;
-    justify-content: center; /*sigla stanga*/
+    justify-content: flex-start;
 }
-
+ 
 ul.meniu li{
+    position: relative;
     width: var(--latime-buton);
     height: var(--inaltime-meniu);
     background-color: var(--culoare-meniu);
     overflow: hidden;
     text-align: center;
-    border: 1.3px solid var(--culoare-text);
-    transition: background-color 0.3s ease; /* add transition property */
-    animation: scale-up-center 1s; /* add animation property */
-    transition: background-color 0.8s linear   ;
-
+ 
+    transition: background-color 0.3s ease;
+    animation: scale-up-center 1s;
+    transition: background-color 0.8s linear;
 }
 ul.meniu ul{
     opacity: 0;
@@ -47,20 +45,43 @@ ul.meniu ul{
     transform: scale(0,0);
     transform-origin: center top;
 }
+
 ul.meniu li:hover{
     overflow: visible;
     background-color:var(--culoare-linii-interimitente); /*sa se schimbe cand ii dau hover*/ 
-
 }
+
+ul.meniu > li:not(:has(ul)):not(.sale):not(.produse) {
+    position: relative;
+  }
+  
+  ul.meniu > li:not(:has(ul)):not(.sale):not(.produse)::before {
+    content: "";
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to left, black, white);
+    transform: scaleX(0);
+    transition: transform 0.4s ease-out;
+    transform-origin: right;
+  }
+  
+  ul.meniu > li:not(:has(ul)):not(.sale):not(.produse):hover::before {
+    transform: scaleX(1);
+  }
+ 
+ 
 ul.meniu li:hover ul{
     opacity: 1;
     transform: scale(1,1);
-
 }
+
 ul.meniu li:hover div, ul.meniu a{
-    animation: scale-up-center 1s;
+    animation: scale-up-center 1.2s;
 }
-
+ 
 @keyframes scale-up-center { /*durata si efectul animatiei*/
     0% {
       transform: scale(0.5);
@@ -69,7 +90,7 @@ ul.meniu li:hover div, ul.meniu a{
       transform: scale(1);
     }
   }
-  
+ 
 ul.meniu li div, ul.meniu li a{
     display: block;
     width: 100%; /*este implicit in block*/
@@ -79,3 +100,14 @@ ul.meniu li div, ul.meniu li a{
     font-weight: bold;
     line-height: var(--inaltime-meniu);
 }
+ 
+ul.meniu li div{
+    font-size: 1.5em;
+}
+  ul.meniu li.home {
+    background-image: url("/resurse/home-icon.png");
+    background-size: 30px;
+    background-repeat: no-repeat;
+    background-position: 30px center ;
+    padding-right: 0px;
+  }
