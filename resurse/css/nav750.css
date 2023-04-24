@@ -1,47 +1,58 @@
-body{
-    --inaltime-meniu:40px;
-    --latime-buton:100%;
+body nav ul.meniu li:not(:has(ul)):not(.sale):not(.produse)::before {
+  content: none;
 }
 
-#hamburger{
-    display: block;
-    margin:0;
-
+body {
+  --inaltime-meniu: 30px;
+  --latime-buton: 100%;
+}
+body #hamburger {
+  display: block;
+  margin: 0;
+  background-color: var(--culoare-meniu);
+}
+body #hamburger > img {
+  height: var(--inaltime-meniu);
+  width: auto;
+  display: block;
+  margin: 0;
+}
+body ul.meniu li:hover {
+  overflow: visible;
+  background-color: var(--culoare-linii-interimitente);
+}
+body ul.meniu {
+  display: none;
+}
+body nav {
+  background-color: var(--culoare-fundal);
+}
+body #ch-menu:checked + ul.meniu {
+  display: block;
+  animation: animatie_meniu 0.8s linear forwards;
+  transform-origin: left;
+  transform: rotate(90deg);
+}
+body #ch-menu:not(:checked) + ul.meniu {
+  display: none;
+  transform: rotate(0deg);
+}
+@keyframes animatie_meniu {
+  0% {
+    opacity: 0;
+    transform: rotate(-45deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(0);
+  }
+}
+body ul.meniu > li:not(:has(ul)):not(.sale):not(.produse)::before {
+  background: none;
+}
+body ul.meniu li ul li a:hover {
+  background-color: var(--culoare-linii-interimitente);
+  transition: background-color 0.2s ease-in-out;
 }
 
-#hamburger>img{
-    height: var(--inaltime-meniu);
-    width: auto;
-    display: block;
-    margin:0;
-}
-
-ul.meniu{
-    display:none;
-
-}
-
-#ch-menu:checked+ul.meniu{
-    display: block;
-    animation-name: animatie_meniu;
-    animation-duration: 1s;
-    animation-timing-function: linear;
-    animation-fill-mode: forwards;
-    animation-iteration-count: 1;
-    transform-origin: center top;
-}
-
-@keyframes animatie_meniu { 
-    0%{
-        opacity: 0;
-        transform: scale(0.5,0);
-    }
-    50%{
-        transform: scale(0.5, 1);
-    }
-    100%{
-        opacity: 1;
-        transform: scale(1,1);
-    }
-
-}
+/*# sourceMappingURL=nav750.css.map */

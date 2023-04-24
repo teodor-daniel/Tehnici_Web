@@ -1,0 +1,66 @@
+body nav ul.meniu li:not(:has(ul)):not(.sale):not(.produse)::before {
+    content: none;
+  }
+body {
+    --inaltime-meniu: 30px;
+    --latime-buton: 100%;
+  
+    #hamburger {
+      display: block;
+      margin: 0;
+      background-color: var(--culoare-meniu);
+  
+      > img {
+        height: var(--inaltime-meniu);
+        width: auto;
+        display: block;
+        margin: 0;
+      }
+    }
+  
+    ul.meniu li:hover {
+      overflow: visible;
+      background-color: var(--culoare-linii-interimitente);
+    }
+  
+    ul.meniu {
+      display: none;
+    }
+  
+    nav {
+      background-color: var(--culoare-fundal);
+    }
+  
+    #ch-menu:checked + ul.meniu {
+      display: block;
+      animation: animatie_meniu 0.8s linear forwards;
+      transform-origin: left;
+      transform: rotate(90deg);
+    }
+  
+    #ch-menu:not(:checked) + ul.meniu {
+      display: none;
+      transform: rotate(0deg);
+    }
+  
+    @keyframes animatie_meniu {
+      0% {
+        opacity: 0;
+        transform: rotate(-45deg);
+      }
+      100% {
+        opacity: 1;
+        transform: rotate(0);
+      }
+    }
+  
+    ul.meniu > li:not(:has(ul)):not(.sale):not(.produse)::before {
+      background: none;
+    }
+  
+    ul.meniu li ul li a:hover {
+      background-color: var(--culoare-linii-interimitente);
+      transition: background-color 0.2s ease-in-out;
+    }
+  }
+  

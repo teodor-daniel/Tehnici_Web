@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="/resurse/css/galerie-statica.css" type="text/css">
+<link rel="stylesheet" href="/resurse/css/galerie-statica1000.css" type="text/css" media="screen and (max-width:1000px)">
+<link rel="stylesheet" href="/resurse/css/galerie-statica500.css" type="text/css" media="screen and (max-width:500px)">
+<div id="grid-galerie">
+    <%
+    var cnt = 0;
+    for (let imag of locals.imagini) { d=new Date(); const luna =  d.getMonth(); var
+        v_luni=["ianuarie", "februarie" , "martie"
+        ,"aprilie","mai","iunie","iulie","august", "septembrie" ,"octombrie","noiembrie","decembrie"];
+        var v_sezon = ["iarna","iarna","primavara","primavara","primavara","primavara", "vara","vara","vara","toamna","toamna","toamna","iarna"];
+        const anotimp_curent =v_sezon[luna];
+        cnt++;
+        if(cnt > 11){ // conditia sa fie max 10 imagini
+            break;
+        }
+        if(imag.luni && imag.luni.includes(v_luni[d.getMonth()]) && anotimp_curent == imag.anotimp) { %>
+        <figure>
+            <picture>
+                <source srcset="<%- imag.fisier_mediu %>" media="(max-width:1000px)" />
+                <img src="<%- imag.fisier %>" alt="imagine">
+            </picture>
+            <figcaption><%- imag.descriere %></figcaption>
+        </figure>
+        <% } %>
+            <% } %>
+   <div id = "gol"></div>
+   <div id = "gol2"></div>
+</div>

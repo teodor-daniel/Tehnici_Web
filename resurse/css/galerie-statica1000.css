@@ -1,0 +1,17 @@
+#grid-galerie{
+    display:grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-areas: ". ."
+                         ". ."
+                         ". ."
+                         ". ."
+                         ". .";
+}
+
+#gol{
+    display: none;
+}
+  
+  #gol2{
+    display: none;
+}

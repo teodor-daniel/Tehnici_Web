@@ -1,0 +1,53 @@
+#imagine{
+	position:relative;
+	background-image: url("/resurse/imagini/Swim.jpg");
+	background-size:cover;
+	width:500px; 
+	height: 500px;
+	filter:brightness(100%) grayscale(0) ;
+	transition:all 2s linear;
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1em;
+    
+    border: var(--grosime-border) solid black;
+    border-radius: 1em;
+    box-shadow: 0.1em 0.1em 0.1em 0.1em rgba(0, 0, 0, 0.2),
+        -0.1em -0.1em 0.1em 0.1em rgba(0, 0, 0, 0.2),
+        -0.1em 0.1em 0.1em 0.1em rgba(0, 0, 0, 0.2),
+        0.1em -0.1em 0.1em 0.1em rgba(0, 0, 0, 0.2);
+}
+
+#imagine:after, #imagine:before{
+	content:" ";
+	position:absolute;
+	height:100%;
+	width:100%;	
+	transition:all 4s linear;
+}
+
+#imagine:after{
+    background-color: var(--culoare-fundal-inchis);
+    mix-blend-mode: lighten;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+}
+
+#imagine:before{
+    background-color: red;
+    mix-blend-mode: darken;
+    left: 0;
+    opacity: 1;
+    transition: opacity 2s ease-in-out;
+}
+
+#imagine:hover:after{
+    opacity: 1;
+}
+
+#imagine:hover:before{
+    opacity: 0;
+}

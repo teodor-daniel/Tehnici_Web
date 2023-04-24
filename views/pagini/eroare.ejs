@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html  lang="ro">
+    <head>
+        <meta name="keywords"  content="sport, sportiva, adidas, nike, echipamente sportive, incaltaminte, suplimente alimentare, sale ">
+        <meta name="description" content="Echipament sportiv. Suplimente alimentare, imbracaminte si incaltaminte sport.">
+        <title>TeoSport - eroare</title>
+        <link rel="stylesheet" type="text/css" href="/resurse/css/eroare.css">
+        <%- include("../fragmente/head.ejs");  %> 
+
+    </head>
+    <body>
+        
+    <%- include("../fragmente/header.ejs");  %> 
+
+    <main>
+        <div id="err-coloane">
+			<div id="err-imag">
+				<img src="<%- locals.imagine %>" />
+			</div>
+			<section>
+				<h2><%- locals.titlu %></h2>
+				<p><%- locals.text %></p>
+			</section>
+		</div>
+    </main>
+    
+    <%- include("../fragmente/footer.ejs");  %> 
+
+
+    </body>
+</html>

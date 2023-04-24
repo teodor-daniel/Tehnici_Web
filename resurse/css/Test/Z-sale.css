@@ -1,0 +1,32 @@
+#Z-Sale {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  #Z-Sale h2 {
+    font-size: 2rem;
+    margin-left: 1rem;
+  }
+  
+  #Z-Sale figure {
+    margin: 1rem 0;
+  }
+  
+  #Z-Sale img {
+    width: 80%;
+    min-width: 90%;
+    max-width: 80%;
+    border-radius: 35%;
+    box-sizing: border-box;
+    border: 2px var(--culoare-linii-interimitente);
+    box-shadow: 0px 0px 10px var(--umbra);
+  }
+  
+  #Z-Sale p {
+    margin: 0 5rem;
+  }
+  

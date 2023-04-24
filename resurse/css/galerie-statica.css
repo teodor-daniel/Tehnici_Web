@@ -1,0 +1,79 @@
+#grid-galerie {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+      ". . . "
+      ". z-gol ."
+      ". . ."
+      ". . ."
+      ". z-gol2 ."
+      ". . .";
+  grid-row-gap: 0.5em;
+  grid-column-gap: 0.5em;
+  counter-reset: nrimag 0; /* nrimag=3 */
+}
+
+#grid-galerie figure {
+  padding: 1em;
+  overflow: hidden;
+}
+
+#grid-galerie img {
+  width: 100%;
+  max-width: 100%;
+  transition: all 0.13s;
+}
+
+#img-container {
+  overflow: hidden;
+  transition: all 0.13s;
+}
+
+#img-container:hover{
+border-radius: 15px;
+transition: all 0.13s;
+}
+
+#grid-galerie img:hover {
+  opacity: 0.5;
+  transform: scale(1.2);
+  transform-origin: top center;
+  border-radius: 15px;
+  transition: all 0.13s;
+}
+
+#grid-galerie figcaption {
+  text-align: center;
+  counter-increment: nrimag 1; /* nrimag+=2 */
+}
+
+#grid-galerie figcaption::before {
+  content: counter(nrimag, lower-roman) ")";
+}
+
+#gol {
+  grid-area: z-gol;
+}
+
+#gol2 {
+  grid-area: z-gol2;
+}
+
+#grid-galerie, #reflexie-container, #container-animat{
+  border: var(--grosime-border) solid black;
+  background-color: white;
+  padding: var(--padding_pagina);
+  border-radius: 1em;
+  max-width: 100vw;
+  box-shadow: 0.05em 0.05em 0.05em 0.05em #e07e07 inset,
+      -0.05em -0.05em 0.05em 0.05em #e07e07 inset,
+      -0.05em 0.05em 0.05em 0.05em #e07e07 inset,
+      0.05em -0.05 0.05 0.05 #e07e07 inset;
+}
+
+#reflexie-container{
+  margin-bottom: 1em;
+}
+
+
+

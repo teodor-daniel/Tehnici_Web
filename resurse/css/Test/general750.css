@@ -1,0 +1,23 @@
+html{
+    font-size:10px;
+}
+
+body{
+    --sparitere-pagina:10px;
+    --padding-sectiune:8px;
+}
+.table-container {
+    overflow-x: auto;
+    max-width: 100%;
+  }
+
+#grid-pagina{
+    display:block;
+}
+#grid-pagina > *{
+    margin-bottom: 15px;
+}
+body * {
+    transition: none;
+    animation: none;
+}

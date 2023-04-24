@@ -18,11 +18,8 @@ body{
                         "Z-anunturi  Z-tabel"
                         "Z-produse  Z-produse"
                         "Z-produse  Z-produse"
+
                         ;
     gap:12px 7px ;
 }
 
-body * {
-    transition: none;
-    animation: none;
-}

@@ -1,0 +1,47 @@
+{
+	"cale_galerie":"resurse/imagini/galerie",
+	"imagini": [
+		{
+			"fisier":"briose-frisca.png",
+			"descriere":"Brioșe",
+			"luni":["ianuarie","februarie","decembrie"],
+			"anotimp":["iarna"]
+		},
+		{
+			"fisier":"clatite.png",
+			"descriere":"Clătite cu dulceață",
+			"luni":["martie","aprilie"],
+			"anotimp":["primavara"]
+		},
+		{
+			"fisier":"gogosi.png",
+			"descriere":"Gogoși glazurate",
+			"luni":["martie","aprilie"],
+			"anotimp":["primavara"]
+		},
+		{
+			"fisier":"tort-scortisoara.png",
+			"descriere":"Tort cu scorțisoară",
+			"luni":["martie","aprilie"],
+			"anotimp":["primavara"]
+		},
+		{
+			"fisier":"prajitura-ciocolata.png",
+			"descriere":"Prăjitură cu ciocolată",
+			"luni":["martie","aprilie"],
+			"anotimp":["primavara"]
+		},
+		{
+			"fisier":"tarta-afine.png",
+			"descriere":"Tartă cu afine",
+			"luni":["martie","aprilie"],
+			"anotimp":["primavara"]
+		},
+		{
+			"fisier":"tort-trandafiri.png",
+			"descriere":"Tort special",
+			"luni":["martie","aprilie"],
+			"anotimp":["primavara"]
+		}
+	]
+}

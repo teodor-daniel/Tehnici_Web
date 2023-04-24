@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Sa nu faca nezumat pe ecrenele mici -->
-    <meta name="keywords"
-        content="sport, sportiva, adidas, nike, echipamente sportive, incaltaminte, suplimente alimentare, sale ">
+    <meta name="keywords"  content="sport, sportiva, adidas, nike, echipamente sportive, incaltaminte, suplimente alimentare, sale ">
     <meta name="description" content="Echipament sportiv. Suplimente alimentare, imbracaminte si incaltaminte sport.">
     <meta name="author" content="Teodor-Daniel Balan">
     <title>TeoSport</title>
@@ -19,6 +18,8 @@
     <meta name="msapplication-config" content="resurse/ico/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
+    
     <link rel="stylesheet" href="resurse/css/general.css" type="text/css" />
 
     <link rel="stylesheet" href="resurse/css/logo.css" type="text/css" />
@@ -39,7 +40,7 @@
 
     <link rel="stylesheet" href="resurse/css/nav1000.css" type="text/css" media="screen and (max-width:1000px)" />
 
-    <link rel="stylesheet" href="resurse/css/nav750.css" type="text/css" media="screen and (max-width:1000px)" />
+    <link rel="stylesheet" href="resurse/css/nav750.css" type="text/css" media="screen and (max-width:750px)" />
 
     <link rel="stylesheet" href="resurse/css/tabel.css" type="text/css" />
     
@@ -57,16 +58,16 @@
       </label>
       <input id="ch-menu" type="checkbox">
       <ul class="meniu">
-        <li class="home"><a href="#">Acasa</a></li>
+        <li><div id="acasa">Acasa</div><div id="acasa-mediu"><span class="fas fa-regular fa-house"></span></div>
         <li>
-        <a href="#">Sale</a>
+        <a href="sale">Sale</a>
           <ul>
             <li><a href="#">Winter Sale</a></li>
             <li><a href="#">Summer Sale</a></li>
           </ul>
         </li>
         <li> 
-          <a href="#">Produse</a>
+          <a href="produse">Produse</a>
           <ul>
             <li><a href="http://www.google.com">Echipament Sportiv</a></li>
             <li><a href="#">Imbracaminte</a></li>
@@ -77,7 +78,7 @@
       </ul>
     </nav>
 
-    <header class="c1" id="h1">
+
 
         <header class="c1" id="h1">
             <h1>TeoSport</h1>
@@ -86,7 +87,7 @@
             </div>
           </header>
 
-    </header>
+
 
 
     <main>
@@ -226,14 +227,22 @@
         
         <h2>Video</h2>  
         <div class="container-iframe">
-            <div class="taburi-iframe">
-                <a href="https://www.youtube.com/embed/kmzStpkxkBM" target="ifr-video">Campionul nostru!</a>
-                <a href="https://www.youtube.com/embed/Fr8ZEvlag9U" target="ifr-video">Vino la Maraton!</a>
-                <a href="https://www.youtube.com/embed/6KBBPOlyMWw" target="ifr-video">Uite ce poti realiza!</a>
-            </div>
-            <div class="iframe-container">
-                <iframe name="ifr-video" width="560" height="315" src="https://www.youtube.com/embed/kmzStpkxkBM" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>            </div>
+          <div class="taburi-iframe">
+            <a href="https://www.youtube.com/embed/kmzStpkxkBM" target="ifr-video">Campionul nostru!</a>
+            <a href="https://www.youtube.com/embed/Fr8ZEvlag9U" target="ifr-video">Vino la Maraton!</a>
+            <a href="https://www.youtube.com/embed/6KBBPOlyMWw" target="ifr-video">Uite ce poti realiza!</a>
+          </div>
+          <div class="iframe-container">
+            <video width="100%" min-width="300" max-width="800" height="auto" controls preload="auto" poster="resurse/imagini/briosa-roz.png">
+              <source src="https://www.youtube.com/embed/kmzStpkxkBM" type="video/mp4">
+              <source src="https://www.youtube.com/embed/kmzStpkxkBM" type="video/webm">
+              <track default kind="subtitles" src="resurse/subtitiles/subtitles-ro.vtt" srclang="ro" label="Romana"/>
+              <track kind="subtitles" src="resurse/subtitiles/subtitles-en.vtt" srclang="en" label="English"/>
+              Your browser does not support the video tag.
+            </video>
+          </div>
         </div>
+        
 
             <section id="Intrebari">
                 <h2>Intrebari frecvente</h2>
@@ -258,6 +267,12 @@
 
 
             <section id="Politica">
+              <div class="container">
+                <div id="pauza2"></div>
+                <div id="hr"></div>
+                <div id="pauza"></div>
+              </div>
+              
                 <h2>Poltica de confidentialitate</h2>
             </section>
             Termenii si conditiile:<a href="resurse/document.pdf" download>Descarcă documentul</a><br>

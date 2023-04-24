@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <meta name="keywords"  content="sport, sportiva, adidas, nike, echipamente sportive, incaltaminte, suplimente alimentare, sale ">
+    <meta name="description" content="Echipament sportiv. Suplimente alimentare, imbracaminte si incaltaminte sport.">
+   <%- include ("../fragmente/head.ejs") %>
+
+</head>
+
+<body>
+  <%- include ("../fragmente/header.ejs") %>
+
+    <main>
+        <div id="grid-pagina">
+            <section id="Z-Sale">
+                <div>
+                  <h2>Cine suntem</h2>
+                  <p>În 2023, am decis să înființăm un magazin de echipamente sportive care să revoluționeze piața prin transparență, onestitate și produse de încredere. În scurt timp, am reușit să construim o comunitate de clienți mulțumiți și să ajungem printre cei mai apreciați retaileri de echipamente sportive din piață. Valorile noastre sunt simple: credem în transparența și onestitatea cu care tratăm clienții, iar produsele pe care le comercializăm sunt cele în care avem încredere și pe care le-am testat noi înșine.</p>
+                </div>
+                <figure>
+                  <picture>
+                    <source srcset="resurse/imagini/Store_front500.jpg" media="(max-width:500px)">
+                    <source srcset="resurse/imagini/Store_front800.jpg" media="(max-width:800px)">
+                    <source srcset="resurse/imagini/Store_front1000.jpg" media="(max-width:1000px)">
+                    <img src="resurse/imagini/Store_front.jpg" alt="Sale">
+                  </picture>
+                  <figcaption>Primul magazin</figcaption>
+                </figure>
+              </section>
+              <section id="Z-utilizatori">
+                <h2>Utilizatori</h2>
+                <div id ="imagine">
+                </div>
+              </section>
+
+            <section id="Z-date_utilizatori">
+                <h2>Date-Utilizatori</h2>
+                <p>
+                  Ip <%- locals.ip %>
+                  <%- locals.a + locals.b %>
+                  <button class="btn btn-primary">ceva</button>
+                </p>
+            </section>
+
+            <section id="Z-date_server_site">
+              <div id ="text">
+                <p>"Un text"</p>
+                <div id="text-reflectat"> <p>"Un text"</p></div>
+                
+              </div>
+            </section>
+
+            <section id="Z-tabel">
+                <h2>Prorgram angajați</h2>
+                <div class="table-container">
+                    <table>
+                      <caption>Le multumim colegilor pentru munca depusa</caption>
+                      <thead>
+                        <tr>
+                          <th>Nume</th>
+                          <th>Luni</th>
+                          <th>Marți</th>
+                          <th>Miercuri</th>
+                          <th>Joi</th>
+                          <th>Vineri</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td rowspan="1">John Doe</td>
+                          <td>9:00-12:00</td>
+                          <td>10:00-14:00</td>
+                          <td>9:00-12:00</td>
+                          <td>10:00-14:00</td>
+                          <td>9:00-12:00</td>
+                        </tr>
+
+                        <tr>
+                          <td>Jane Doe</td>
+                          <td>9:00-15:00</td>
+                          <td>10:00-16:00</td>
+                          <td>9:00-15:00</td>
+                          <td>10:00-16:00</td>
+                          <td>9:00-15:00</td>
+                        </tr>
+                        <tr>
+                          <td>Bob Smith</td>
+                          <td>12:00-18:00</td>
+                          <td>13:00-19:00</td>
+                          <td>12:00-18:00</td>
+                          <td>13:00-19:00</td>
+                          <td>12:00-18:00</td>
+                        </tr>
+                        <tr>
+                            <td>Jane Smith</td>
+                            <td>8:00-12:00</td>
+                            <td>9:00-13:00</td>
+                            <td>8:00-12:00</td>
+                            <td>9:00-13:00</td>
+                            <td>8:00-12:00</td>
+                          </tr>
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td colspan="6">*Programul poate suferi modificări în funcție de necesitățile firmei.</td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+            </section>
+
+            <section id="Z-calendar" >
+                <h2>Calendar</h2>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s.</p>
+            </section>
+
+            <section id="Z-anunturi">
+                <h2>Anunturi</h2>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s.</p>
+            </section>
+
+            <section id="Z-produse" >
+                    <div>
+                        <h2>Concurs</h2>
+                        <p>Vă invităm să vă alăturați echipei noastre pentru o competiție sportivă plină de adrenalină, sponsorizată de magazinul nostru de înot! Indiferent dacă sunteți înotători experimentați sau începători, 
+                            competiția noastră vă oferă ocazia de a vă testa abilitățile și de a vă distra în același timp. 
+                            Veniți să vă înscrieți la magazinul nostru sau pe site-ul nostru și pregătiți-vă să înotăm spre victorie!</p>
+                      </div>
+                      <figure>
+                        <picture>
+                          <source srcset="resurse/imagini/Swim.jpg" media="(max-width:500px)">
+                          <source srcset="resurse/imagini/Swim.jpg" media="(max-width:800px)">
+                          <source srcset="resurse/imagini/Swim.jpg" media="(max-width:1000px)">
+                          <img src="resurse/imagini/Swim.jpg" alt="Sale">
+                        </picture>
+                      </figure>
+                    </section>
+                    
+            </section>
+
+        </div>
+
+        
+    </main>
+    <%- include ("../fragmente/galerie_statica.ejs") %>
+  
+
+  
+    
+  </section>
+    <%- include ("../fragmente/video.ejs") %>
+    <%- include ("../fragmente/footer.ejs") %>
+</body>
+
+</html>

@@ -13,10 +13,17 @@
         "Z-calendar Z-calendar Z-tabel Z-tabel "
         "Z-anunturi Z-anunturi Z-tabel Z-tabel"
         "Z-produse Z-produse Z-produse Z-produse"
+        "Z-nou Z-nou Z-nou Z-nou"
+
     ;
     gap: 20px 10px;
     /* gird-row gap si grid collum gap*/
 }
+
+#Z-nou {
+    grid-area: Z-nou;
+}
+
 
 #Z-Sale {
     grid-area: Z-Sale;
@@ -51,3 +58,5 @@
 #Z-anunturi {
     grid-area: Z-anunturi
 }
+
+

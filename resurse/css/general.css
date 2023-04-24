@@ -14,6 +14,7 @@ body {
     --fundal-deschis:#c7e1f4;
     --fundal-deschis-portocaliu:#ffb4a2;
     --fundal-deschis-albastru:#b3e5fc;
+
     --culoare-text: #000000;
     --umbra:rgb(127, 145, 152);
     --spatiere-pagina: 50px;
@@ -62,9 +63,245 @@ p {
     font-size: 1rem;
 }
 
-img {
-    width: 100%;
-    max-width: auto;
-    min-width: auto;
+
+
+
+
+
+@media screen and (max-width: 767px) {
+    #hamburger {
+        display: block;
+        margin: 0;
+        background-color: var(--secundar);
+    }
+
+    #hamburger>img {
+        height: 30px;
+        width: auto;
+        display: block;
+        margin: 0;
+    }
+
+    #meniu_mare {
+        display: none;
+    }
+
+    #meniu_mobil {
+        display: none;
+    }
+
+    ul.meniu li{
+        width: 100%;
+    }
+
+    nav {
+        background-color: var(--secundar);
+        width: calc(100vw + 1.8vw);
+    }
+
+    #ch-menu:checked + #meniu_mobil {
+        display: block !important;
+    }
+    
+    ul.meniu > li:not(:has(ul))::before {
+        background: none;
+    }
 }
 
+#banner {
+    display: none;
+}
+@media print {
+	#banner {
+	display: block;
+	width: 70%;
+	margin: 0 auto;
+	border: 4px inset black;
+	padding: 10px;
+	text-align: center;
+	}
+	
+	img, video, iframe, .container-iframe, [href="#top"], [href="#"], [role="banner"], [role="navigation"], figcaption {
+	display: none !important;
+	}
+	
+	.container {
+	display: block;
+	}
+	
+	a {
+	text-decoration: none;
+	color: black;
+	}
+	
+	h1 {
+	font-size: 2.5em;
+	text-align: center;
+	text-decoration: underline;
+	}
+	
+	nav ul ul {
+	display: none;
+	}
+	
+	nav {
+	display: none;
+	text-align: center;
+	}
+	
+	nav ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	}
+	
+	nav ul li {
+	display: none;
+	margin-right: 20px;
+	}
+	
+	body::after {
+	content: "Teodor-Daniel Balan";
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	width: 4cm;
+	height: 1cm;
+	border: 2px solid black;
+	border-radius: 3px;
+	opacity: 0.4;
+	font-size: 0.8em;
+	font-weight: bold;
+	text-align: center;
+	padding-top: 0.25cm;
+	}
+	
+	@page {
+	margin: 0;
+	}
+	
+	@page:left {
+	margin-left: 3cm;
+	margin-right: 1cm;
+	}
+	
+	@page:right {
+	margin-left: 1cm;
+	margin-right: 3cm;
+	}
+	
+	h1 {
+	page-break-after: always;
+	}
+	
+	footer {
+	page-break-before: always;
+	}
+	}
+
+
+	a:link{
+		color: var(--culoare-linii-interimitente); 
+	}
+		
+		
+		/* Stilizare linkuri externe */
+		
+		
+		/* Schimbarea culorii simbolului la hover */
+		a[href^="http"]::before{
+			content: "\2bb3"; /* simbolul ⮳ */
+			font-size: 1.5em; 
+			vertical-align: middle; 
+			color: inherit; 
+			}
+			
+			a[href^="http"]:hover::before {
+			color: var(--culoare-text); /* se schimbă culoarea simbolului la hover */
+			
+			}
+		/* sunt*/
+ a:hover {
+		background-color: radial-gradient(center, #703170 0%, #8b008b 40%, transparent 80%, transparent 100%) !important;
+		background-position: center;
+		background-size: 0;
+		transition: background-size 0.3s ease-in-out;
+		}
+		
+		/* Anularea efectului de hover pentru linkurile vizitate */
+		a:visited:hover {
+		background-color: none;
+		}
+		a:active {
+			border: 2px solid black; /* se adauga un border de 2px cu culoarea #8b008b la click */
+		}
+
+		.container-iframe a[href^="http"]::before {
+			content: none;
+		  }
+		  
+		  .video-container {
+			width: 100%;
+			margin: 0 auto;
+		  }
+		  
+		  .video-container {
+			width: 100%;
+			margin: 0 auto;
+		  }
+		  
+		  video {
+			width: 100%;
+			min-width: 300px;
+			max-width: 800px;
+		  }
+		  
+		  track {
+			background: linear-gradient(to bottom, #333333, #666666);
+			background-clip: text;
+			-webkit-background-clip: text;
+			color: transparent;
+			white-space: pre-line;
+		  
+			}
+
+
+
+
+.container {
+  position: auto;
+  display: inline;
+  width: 60%; /* adjust as needed */
+
+}
+
+#hr {
+	border-top: 3px solid black;
+	opacity: 100%;
+	margin: 0 auto;
+	width: 20%;
+  }
+  
+  #pauza {
+	width: 0;
+	height: 0;
+	border-top: 0.6vw solid transparent; /* dynamic measurement */
+	border-right: 6vw solid black; /* dynamic measurement */
+	border-bottom: 0.6vw solid transparent; /* dynamic measurement */
+	float: right; /* or float: left */
+	right: 10vw; /* dynamic measurement */
+	margin-top: -0.7vw; /* dynamic measurement */ 
+	transform: translateX(-32vw); /* dynamic measurement */
+  }
+  
+  #pauza2 {
+	  width: 0;
+	  height: 0;
+	  border-top: 0.6vw solid transparent; /* dynamic measurement */
+	  border-left: 6vw solid black; /* dynamic measurement */
+	  border-bottom: 0.6vw solid transparent; /* dynamic measurement */
+	  float:left;
+	  margin-top: 1.4vw; /* dynamic measurement */ 
+	  transform: translateX(32vw); /* dynamic measurement */
+  
+  }
