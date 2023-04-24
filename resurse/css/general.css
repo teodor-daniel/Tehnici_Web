@@ -209,10 +209,6 @@ p {
 		color: var(--culoare-linii-interimitente); 
 	}
 		
-		
-		/* Stilizare linkuri externe */
-		
-		
 		/* Schimbarea culorii simbolului la hover */
 		a[href^="http"]::before{
 			content: "\2bb3"; /* simbolul ⮳ */
@@ -225,7 +221,7 @@ p {
 			color: var(--culoare-text); /* se schimbă culoarea simbolului la hover */
 			
 			}
-		/* sunt*/
+
  a:hover {
 		background-color: radial-gradient(center, #703170 0%, #8b008b 40%, transparent 80%, transparent 100%) !important;
 		background-position: center;
@@ -276,7 +272,7 @@ p {
 .container {
   position: auto;
   display: inline;
-  width: 60%; /* adjust as needed */
+  width: 60%; 
 
 }
 
@@ -290,24 +286,23 @@ p {
   #pauza {
 	width: 0;
 	height: 0;
-	border-top: 0.6vw solid transparent; /* dynamic measurement */
-	border-right: 6vw solid black; /* dynamic measurement */
-	border-bottom: 0.6vw solid transparent; /* dynamic measurement */
-	float: right; /* or float: left */
-	right: 10vw; /* dynamic measurement */
-	margin-top: -0.7vw; /* dynamic measurement */ 
-	transform: translateX(-32vw); /* dynamic measurement */
+	border-top: 0.6vw solid transparent;	border-right: 6vw solid black; 
+	border-bottom: 0.6vw solid transparent; 
+	float: right; 
+	right: 10vw; 
+	margin-top: -0.7vw;  
+	transform: translateX(-32vw);
   }
   
   #pauza2 {
 	  width: 0;
 	  height: 0;
-	  border-top: 0.6vw solid transparent; /* dynamic measurement */
-	  border-left: 6vw solid black; /* dynamic measurement */
-	  border-bottom: 0.6vw solid transparent; /* dynamic measurement */
+	  border-top: 0.6vw solid transparent;
+	  border-left: 6vw solid black; 
+	  border-bottom: 0.6vw solid transparent; 
 	  float:left;
-	  margin-top: 1.4vw; /* dynamic measurement */ 
-	  transform: translateX(32vw); /* dynamic measurement */
+	  margin-top: 1.4vw; 
+	  transform: translateX(32vw);
   
   }
 
