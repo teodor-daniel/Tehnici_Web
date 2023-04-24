@@ -27,3 +27,20 @@
 }
 
 
+.animat-text {
+	position: relative;
+	animation: animation-vertical 5s linear infinite;
+	overflow: hidden;
+  }
+  
+  @keyframes animation-vertical {
+	0% {
+	  top: 0;
+	}
+	50% {
+	  top: calc(70% - 10px);
+	}
+	100%{
+	  top: 0;
+	}
+  }
