@@ -64,7 +64,12 @@ p {
 }
 
 
-
+ ::selection {
+	background-color:var(--culoare-linii-interimitente);
+	color: var(--culoare-fundal-inchis);
+	text-shadow: 1px 1px var(--umbra);
+	border: 2px solid var(--umbra);
+  }
 
 
 

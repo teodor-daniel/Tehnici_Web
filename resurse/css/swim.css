@@ -6,7 +6,9 @@
 	height: 500px;
 	filter:brightness(100%) grayscale(0) ;
 	transition:all 2s linear;
-    overflow: hidden;
+    overflow: none;
+    /*not display over other elements*/
+    
     margin-left: auto;
     margin-right: auto;
     margin-top: 1em;
@@ -17,12 +19,16 @@
         -0.1em -0.1em 0.1em 0.1em rgba(0, 0, 0, 0.2),
         -0.1em 0.1em 0.1em 0.1em rgba(0, 0, 0, 0.2),
         0.1em -0.1em 0.1em 0.1em rgba(0, 0, 0, 0.2);
+        max-width: 100%;
+max-height: 100%;
 }
 
 #imagine:after, #imagine:before{
 	content:" ";
 	position:absolute;
 	height:100%;
+    max-width: 100%;
+max-height: 100%;
 	width:100%;	
 	transition:all 4s linear;
 }
@@ -34,12 +40,16 @@
     right: 0;
     opacity: 0;
     transition: opacity 2s ease-in-out;
+    max-width: 100%;
+max-height: 100%;
 }
 
 #imagine:before{
     background-color: red;
     mix-blend-mode: darken;
     left: 0;
+    max-width: 100%;
+max-height: 100%;
     opacity: 1;
     transition: opacity 2s ease-in-out;
 }
