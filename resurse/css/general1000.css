@@ -23,3 +23,10 @@ body{
     gap:12px 7px ;
 }
 
+#column-container {
+	column-count: 1;
+	column-gap: 20px;
+	column-rule: 1px solid black;
+  }
+
+
