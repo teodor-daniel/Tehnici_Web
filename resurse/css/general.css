@@ -305,3 +305,9 @@ p {
 	  transform: translateX(32vw); /* dynamic measurement */
   
   }
+
+#column-container {
+	column-count: 2;
+	column-gap: 20px;
+	column-rule: 1px solid black;
+  }
