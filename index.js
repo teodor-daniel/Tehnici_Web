@@ -41,7 +41,7 @@ console.log("Cale fisier", __filename);
 
 console.log("Director de lucru ", process.cwd());
 
-vectorFoldere = ["temp", "temp1", "backup"]
+vectorFoldere = ["temp", "temp1", "backup","statistici"]
 for (let folder of vectorFoldere) {
     //let caleFolder =__dirname+"/"+folder;
     let caleFolder = path.join(__dirname, folder)
@@ -264,6 +264,7 @@ app.get("*/galerie-animata.css",function(req, res){
 app.get("*/galerie-animata.css.map",function(req, res){
     res.sendFile(path.join(__dirname,"temp/galerie-animata.css.map"));
 });
+
 
 
 app.listen(8080);
