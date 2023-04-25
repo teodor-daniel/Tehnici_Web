@@ -1,0 +1,61 @@
+
+a.footer-link:link {
+    color: var(--culoare-linii-interimitente); 
+  }
+  
+  /* Schimbarea culorii simbolului la hover */
+  a.footer-link[href^="http"]::before {
+    content: "\2bb3"; /* simbolul ⮳ */
+    font-size: 1.5em; 
+    vertical-align: middle; 
+    color: inherit; 
+  }
+  
+  a.footer-link[href^="http"]:hover::before {
+    color: var(--culoare-text); /* se schimbă culoarea simbolului la hover */
+  }
+  
+  a.footer-link:hover {
+    background-color: radial-gradient(center, #703170 0%, #8b008b 40%, transparent 80%, transparent 100%) !important;
+    background-position: center;
+    background-size: 0;
+    transition: background-size 0.3s ease-in-out;
+  }
+  
+  /* Anularea efectului de hover pentru linkurile vizitate */
+  a.footer-link:visited:hover {
+    background-color: none;
+  }
+  
+  a.footer-link:active {
+    border: 2px solid black; /* se adauga un border de 2px cu culoarea #8b008b la click */
+  }
+  
+  .container-iframe a.footer-link[href^="http"]::before {
+    content: none;
+  }
+  
+  .video-container {
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .video-container {
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  video {
+    width: 100%;
+    min-width: 300px;
+    max-width: 800px;
+  }
+  
+  track {
+    background: linear-gradient(to bottom, #333333, #666666);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    white-space: pre-line;
+  }
+  

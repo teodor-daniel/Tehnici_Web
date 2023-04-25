@@ -75,5 +75,6 @@ transition: all 0.13s;
   margin-bottom: 1em;
 }
 
-
-
+.links a {
+  /* Your other styles for the links within .links here */
+}

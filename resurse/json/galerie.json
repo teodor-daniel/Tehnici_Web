@@ -4,8 +4,9 @@
 		{
 			"fisier":"briose-frisca.png",
 			"descriere":"Brioșe",
-			"luni":["ianuarie","februarie","decembrie"],
-			"anotimp":["iarna"]
+			"luni":["aprilie"],
+			"anotimp":["primavara"],
+			"link":"http://www.google.ro"
 		},
 		{
 			"fisier":"clatite.png",

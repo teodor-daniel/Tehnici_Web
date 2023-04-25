@@ -17,8 +17,8 @@ var client= new Client({
 client.connect();
 
 client.query("SELECT * FROM lab8_16", function(err, rezultat) {
-    console.log("erorare", err);
-    console.log("rezultat", rezultat);
+   // console.log("erorare", err);
+    //console.log("rezultat", rezultat);
 });
 
 
@@ -64,6 +64,9 @@ function compileazaCss(caleScss, caleCss) {
     //LA ACEST PUNCT AVEM CAI ABSOLUTE IN CALESCSS SI FOLDER
     let vectorCale = caleScss.split("\\");
     let numeFisCss = vectorCale[vectorCale.length - 1];
+    let data_azi = new Date();
+    let numeBackup = numeFisCss.split(".")[0] + "_" + data_azi.getDate() + "_" + (data_azi.getMonth() + 1) + "_" + data_azi.getFullYear() + "_" + data_azi.getHours() + "_" + data_azi.getMinutes() + "_" + data_azi.getSeconds() + ".css";
+    fs.writeFileSync(path.join(obGlobal.folderBackup, numeBackup), "backup");
     if (fs.existsSync(caleCss)) {
         fs.copyFileSync(caleCss, path.join(obGlobal.folderBackup, numeFisCss));
     }
