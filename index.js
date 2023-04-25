@@ -3,15 +3,36 @@ const fs = require("fs");
 const path = require("path");
 const sharp = require("sharp");
 const sass = require("sass");
+const ejs = require("ejs");
+const { Client } = require("pg");
 
-app = express();
+var client= new Client({
+    database:"site",
+    user:"teo",
+    password:"7979",
+    host:"localhost",
+    port:5432
+});
+
+client.connect();
+
+client.query("SELECT * FROM lab8_16", function(err, rezultat) {
+    console.log("erorare", err);
+    console.log("rezultat", rezultat);
+});
+
 
 obGlobal = {
     obErori: null,
     obImagini: null,
-    folderScss: path.join(__dirname, "resurse/scss"),
-    folderCss: path.join(__dirname, "resurse/css")
-}
+    folderScss: path.join(__dirname, "resurse", "scss"),
+    folderCss: path.join(__dirname, "resurse", "css"),
+    folderBackup: path.join(__dirname, "resurse/backup"),
+}; // obiect global
+
+
+
+app = express();
 
 
 console.log("Folder proiect", __dirname);
@@ -28,7 +49,6 @@ for (let folder of vectorFoldere) {
         fs.mkdirSync(caleFolder);
     }
 }
-
 function compileazaCss(caleScss, caleCss) {
     if (!caleCss) {
         let vectorCale = caleScss.split("\\");
@@ -54,6 +74,20 @@ function compileazaCss(caleScss, caleCss) {
 }
 
 
+vFisiere = fs.readdirSync(obGlobal.folderScss); //da vector de stringuri cu numele fisierelor
+for (let numeFis of vFisiere) {
+    if (path.extname(numeFis) == ".scss")
+        compileazaCss(numeFis);
+}
+
+fs.watch(obGlobal.folderScss, function (eveniment, numeFis) {
+    // console.log(eveniment, numeFis);
+    if (eveniment == "change" || eveniment == "rename") {
+        let caleCompleta = path.join(obGlobal.folderScss, numeFis);
+        if (fs.existsSync(caleCompleta))
+            compileazaCss(caleCompleta);
+    }
+})
 app.set("view engine", "ejs");
 
 app.use("/resurse", express.static(__dirname + "/resurse"));
@@ -107,7 +141,7 @@ app.get("/*", function (req, res) {
 }); // path general pentru fiecare pagina si in caz de not found, send error
 
 function initErori() {
-    var continut = fs.readFileSync(__dirname + "/Resurse/json/erori.json").toString("utf-8"); // asteptam raspuns ( se pun intr-o coada de taskuri)
+    var continut = fs.readFileSync(__dirname + "/resurse/json/erori.json").toString("utf-8"); // asteptam raspuns ( se pun intr-o coada de taskuri)
     //pentru functie asyncrona nu se asteapta raspuns 
     // console.log(continut);
     obGlobal.obErori = JSON.parse(continut);
@@ -197,6 +231,36 @@ function afiseazaEroare(res, _identificator, _titlu = "titlu default", _text, _i
     }
 }
 
+
+
+
+app.get("*/galerie-animata.css",function(req, res){
+
+    var sirScss=fs.readFileSync(__dirname+"/resurse/scss_ejs/galerie_animata.scss").toString("utf8");
+    var culori=["navy","black","purple","grey"];
+    var indiceAleator=Math.floor(Math.random()*culori.length);
+    var culoareAleatoare=culori[indiceAleator]; 
+    rezScss=ejs.render(sirScss,{culoare:culoareAleatoare});
+    console.log(rezScss);
+    var caleScss=__dirname+"/temp/galerie_animata.scss"
+    fs.writeFileSync(caleScss,rezScss);
+    try {
+        rezCompilare=sass.compile(caleScss,{sourceMap:true});
+        
+        var caleCss=__dirname+"/temp/galerie_animata.css";
+        fs.writeFileSync(caleCss,rezCompilare.css);
+        res.setHeader("Content-Type","text/css");
+        res.sendFile(caleCss);
+    }
+    catch (err){
+        console.log(err);
+        res.send("Eroare");
+    }
+});
+
+app.get("*/galerie-animata.css.map",function(req, res){
+    res.sendFile(path.join(__dirname,"temp/galerie-animata.css.map"));
+});
 
 
 app.listen(8080);

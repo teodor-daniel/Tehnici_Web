@@ -286,7 +286,8 @@ p {
   #pauza {
 	width: 0;
 	height: 0;
-	border-top: 0.6vw solid transparent;	border-right: 6vw solid black; 
+	border-top: 0.6vw solid transparent;	
+	border-right: 6vw solid black; 
 	border-bottom: 0.6vw solid transparent; 
 	float: right; 
 	right: 10vw; 
