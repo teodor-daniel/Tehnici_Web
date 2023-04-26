@@ -19,8 +19,7 @@ nav {
   position: sticky; /*sa urmareasca nav-ul*/
   top: 0;
   margin-left: calc(-1 * var(--spatiere-pagina));
-  z-index: 1;
-
+  z-index: 9999;
 }
 nav a[href^=http]::before {
   display: none;

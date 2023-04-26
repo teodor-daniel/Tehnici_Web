@@ -1,0 +1,79 @@
+@use '../../node_modules/bootstrap/scss/bootstrap.scss' with 
+(
+  // customizare screen-sizes
+  $grid-breakpoints: (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px),
+
+  // customizare border radius
+  $border-radius:               .37rem,
+  $border-radius-sm:            .24rem,
+  $border-radius-lg:            .5rem,
+  $border-radius-xl:            1rem,
+  $border-radius-2xl:           2rem,
+  $border-radius-pill:          50rem,
+
+  // customizare font-size
+  $h1-font-size: 2.4 rem,
+  $h2-font-size: 2 rem,
+  
+  // customizare font implicit
+  $font-family-base: "Raleway",
+
+  // customizare culori background
+  $primary: #0066cc,
+  $danger: #ff8c42,
+
+  // schimba font la butoane
+  $btn-close-color: #b3e5fc,
+
+  // background body - ales in plus
+  $body-bg: #f1f1f1
+);
+
+.btn-primary{
+  --bs-btn-color: white;
+}
+body {
+    text-align: center;
+  }
+
+
+ol, ul, dl{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+};
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+  
+    td {
+      border: 3px solid var(--culoare-linii-interimitente);
+      transition: background-color 0.9s ease;
+    }
+  
+    /* Selectează coloanele pare */
+    tr:nth-child(even) {
+      background-color: var(--fundal-deschis-albastru);
+    }
+  
+    /* Selectează coloanele impare */
+    tr:nth-child(odd) {
+      background-color: var(--fundal-deschis-portocaliu);
+    }
+  
+    td:hover:not(:first-child) {
+      background-color: var(--culoare-linii-interimitente);
+    }
+  
+    td:nth-child(1):hover {
+      background-color: var(--culoare-fundal-inchis);
+    }
+  
+    caption {
+      caption-side: bottom;
+      font-size: 0.8rem;
+      font-weight: smaller;
+      color: var(--culoare-text);
+    }
+  }

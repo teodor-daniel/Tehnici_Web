@@ -17,5 +17,3 @@ body.disable-hover ul.meniu > li:not(:has(ul)):not(.sale):not(.produse):hover::b
 body #acasa-mediu {
   display: flex;
 }
-
-/*# sourceMappingURL=nav1000.css.map */

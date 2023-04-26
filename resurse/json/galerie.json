@@ -2,47 +2,78 @@
 	"cale_galerie":"resurse/imagini/galerie",
 	"imagini": [
 		{
-			"fisier":"briose-frisca.png",
-			"descriere":"Brioșe",
+			"fisier":"adidasi.png",
+			"descriere":"Adidasi de vara",
 			"luni":["aprilie"],
-			"anotimp":["primavara"],
-			"link":"http://www.google.ro"
+			"anotimp":["primavara"]
+
 		},
 		{
-			"fisier":"clatite.png",
-			"descriere":"Clătite cu dulceață",
+			"fisier":"basket.png",
+			"descriere":"basket",
 			"luni":["martie","aprilie"],
 			"anotimp":["iarna"]
 		},
 		{
-			"fisier":"gogosi.png",
-			"descriere":"Gogoși glazurate",
+			"fisier":"bike.png",
+			"descriere":"Bicicleta de vara",
 			"luni":["martie","aprilie"],
 			"anotimp":["primavara"]
 		},
 		{
-			"fisier":"tort-scortisoara.png",
-			"descriere":"Tort cu scorțisoară",
+			"fisier":"football.png",
+			"descriere":"Fotbal",
 			"luni":["martie","aprilie"],
 			"anotimp":["primavara"]
 		},
 		{
-			"fisier":"prajitura-ciocolata.png",
-			"descriere":"Prăjitură cu ciocolată",
+			"fisier":"golf.png",
+			"descriere":"Golf",
 			"luni":["martie","aprilie"],
 			"anotimp":["primavara"]
 		},
 		{
-			"fisier":"tarta-afine.png",
-			"descriere":"Tartă cu afine",
+			"fisier":"plugwalk.png",
+			"descriere":"Adidasi sport",
 			"luni":["martie","aprilie"],
 			"anotimp":["primavara"]
 		},
 		{
-			"fisier":"tort-trandafiri.png",
-			"descriere":"Tort special",
+			"fisier":"proteine.png",
+			"descriere":"Proteine",
+			"luni":["martie","aprilie"],
+			"anotimp":["primavara"]
+		},
+		{
+			"fisier":"snowbike.png",
+			"descriere":"Bicicleta de iarna",
+			"luni":["martie","aprilie"],
+			"anotimp":["primavara"]
+		},
+		{
+			"fisier":"snowboard.png",
+			"descriere":"Snowboard",
+			"luni":["martie","aprilie"],
+			"anotimp":["primavara"]
+		},
+		{
+			"fisier":"surf.png",
+			"descriere":"Surf",
+			"luni":["martie","aprilie"],
+			"anotimp":["primavara"]
+		},
+		{
+			"fisier":"vegan.png",
+			"descriere":"Vegan",
+			"luni":["martie","aprilie"],
+			"anotimp":["primavara"]
+		},
+		{
+			"fisier":"mingi.png",
+			"descriere":"Mingi",
 			"luni":["martie","aprilie"],
 			"anotimp":["primavara"]
 		}
+		
 	]
 }

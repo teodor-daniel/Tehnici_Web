@@ -49,48 +49,73 @@ for (let folder of vectorFoldere) {
         fs.mkdirSync(caleFolder);
     }
 }
-function compileazaCss(caleScss, caleCss) {
+function compileazaScss(caleScss, caleCss) {
     if (!caleCss) {
         let vectorCale = caleScss.split("\\");
-        let numeFisierExtensie = vectorCale[vectorCale.length - 1];
-        let numeFisier = numeFisierExtensie.split(".")[0]; // a.scss->[("a"), ("scss")]
-        caleCss = numeFisier + ".css";
+        let numeFisierExt = vectorCale[vectorCale.length - 1];
+        let numeFis = numeFisierExt.split(".")[0];
+        caleCss = numeFis + ".css";
     }
-    if (!path.isAbsolute(caleScss))
+    if (!path.isAbsolute(caleScss)) {
         caleScss = path.join(obGlobal.folderScss, caleScss);
-    if (!path.isAbsolute(caleCss))
+    }
+
+    if (!path.isAbsolute(caleCss)) {
         caleCss = path.join(obGlobal.folderCss, caleCss);
+    }
 
-    //LA ACEST PUNCT AVEM CAI ABSOLUTE IN CALESCSS SI FOLDER
-    let vectorCale = caleScss.split("\\");
+    let vectorCale = caleCss.split("\\");
     let numeFisCss = vectorCale[vectorCale.length - 1];
-    let data_azi = new Date();
-    let numeBackup = numeFisCss.split(".")[0] + "_" + data_azi.getDate() + "_" + (data_azi.getMonth() + 1) + "_" + data_azi.getFullYear() + "_" + data_azi.getHours() + "_" + data_azi.getMinutes() + "_" + data_azi.getSeconds() + ".css";
+
+    let data_curenta = new Date();
+    let numeBackup =
+        numeFisCss.split(".")[0] +
+        "_" +
+        data_curenta.toDateString().replace(" ", "_") +
+        "_" +
+        data_curenta.getHours() +
+        "_" +
+        data_curenta.getMinutes() +
+        "_" +
+        data_curenta.getSeconds() +
+        ".css";
+
     fs.writeFileSync(path.join(obGlobal.folderBackup, numeBackup), "backup");
+
     if (fs.existsSync(caleCss)) {
-        fs.copyFileSync(caleCss, path.join(obGlobal.folderBackup, numeFisCss));
+        fs.copyFileSync(caleCss, path.join(obGlobal.folderBackup, numeBackup));
     }
-    rez = sass.compile(caleScss, { "sourceMap": true });
+
+    rez = sass.compile(caleScss, { sourceMap: true });
+
     fs.writeFileSync(caleCss, rez.css);
-    // console.log("Compilare css: ", rez);
 
+    //console.log("Compilare SCSS", rez);
 }
 
+vFisiere = fs.readdirSync(obGlobal.folderScss);
+console.log("fisiere:");
+console.log(vFisiere);
 
-vFisiere = fs.readdirSync(obGlobal.folderScss); //da vector de stringuri cu numele fisierelor
 for (let numeFis of vFisiere) {
-    if (path.extname(numeFis) == ".scss")
-        compileazaCss(numeFis);
+    if (path.extname(numeFis) === ".scss") {
+        compileazaScss(numeFis);
+    }
 }
 
-fs.watch(obGlobal.folderScss, function (eveniment, numeFis) {
-    // console.log(eveniment, numeFis);
-    if (eveniment == "change" || eveniment == "rename") {
-        let caleCompleta = path.join(obGlobal.folderScss, numeFis);
-        if (fs.existsSync(caleCompleta))
-            compileazaCss(caleCompleta);
+fs.watch(obGlobal.folderScss, function (event, filename) {
+    console.log(event, filename);
+    if (event === "change" || event === "rename") {
+        let caleCompleta = path.join(obGlobal.folderScss, filename);
+        if (fs.existsSync(caleCompleta)) {
+            compileazaScss(caleCompleta);
+        }
     }
-})
+});
+
+
+
+
 app.set("view engine", "ejs");
 
 app.use("/resurse", express.static(__dirname + "/resurse"));
