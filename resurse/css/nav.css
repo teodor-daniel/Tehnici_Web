@@ -2,10 +2,6 @@
   display: none;
 }
 
-#acasa-mediu span {
-  display: none;
-}
-
 body {
   --inaltime-meniu: 80px;
   --latime-buton: 220px;
@@ -14,7 +10,7 @@ body {
 
 nav {
   background-color: var(--culoare-meniu);
-  width: calc(100vw - 18px); /*elimin scroll bar*/
+  width: calc(100vw - 30px); /*elimin scroll bar*/
   height: var(--inaltime-meniu);
   position: sticky; /*sa urmareasca nav-ul*/
   top: 0;
@@ -29,6 +25,12 @@ nav ul.meniu ul {
   padding: 0;
   margin: 0;
   list-style-type: none;
+}
+nav > img {
+  height: var(--inaltime-meniu);
+  width: auto;
+  display: block;
+  margin: 0;
 }
 nav ul.meniu {
   display: flex;
@@ -104,7 +106,13 @@ nav ul.meniu a {
 }
 nav ul.meniu li ul li a:hover {
   background-color: var(--culoare-linii-interimitente);
-  transition: background-color 1s ease-in-out; /* add transition property */
+  transition: background-color 1s ease-in-out;
+}
+nav #acasa-mediu {
+  position: absolute;
+  right: 30%;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 /*# sourceMappingURL=nav.css.map */

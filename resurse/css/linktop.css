@@ -1,7 +1,7 @@
 #link-top {
   position: fixed;
   bottom: 1em;
-  left: 95%;
+  left: 94.8%;
   width: 3rem;
   height: 3rem;
   line-height: 3rem;
@@ -17,12 +17,12 @@
 }
 
 #triunghi {
-  height: 0.31rem;
+  height: 0.25rem;
   width: 0;
   display: inline-block;
-  border-left: 1rem solid transparent;
-  border-right: 1rem solid transparent;
-  border-top: 1.5rem solid var(--culoare-fundal-inchis) !important;
+  border-left: 1.1rem solid transparent;
+  border-right: 1.1rem solid transparent;
+  border-top: 1.6rem solid var(--culoare-fundal-inchis) !important;
   vertical-align: top;
   transform: rotate(135deg) translateX(20%);
 

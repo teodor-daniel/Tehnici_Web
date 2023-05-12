@@ -16,10 +16,6 @@ var client= new Client({
 
 client.connect();
 
-client.query("SELECT * FROM lab8_16", function(err, rezultat) {
-   // console.log("erorare", err);
-    //console.log("rezultat", rezultat);
-});
 
 
 obGlobal = {
@@ -28,6 +24,7 @@ obGlobal = {
     folderScss: path.join(__dirname, "resurse", "scss"),
     folderCss: path.join(__dirname, "resurse", "css"),
     folderBackup: path.join(__dirname, "resurse/backup"),
+    optiuniMeniu:[]
 }; // obiect global
 
 
@@ -55,6 +52,7 @@ function compileazaScss(caleScss, caleCss) {
         let numeFisierExt = vectorCale[vectorCale.length - 1];
         let numeFis = numeFisierExt.split(".")[0];
         caleCss = numeFis + ".css";
+        
     }
     if (!path.isAbsolute(caleScss)) {
         caleScss = path.join(obGlobal.folderScss, caleScss);
@@ -127,6 +125,54 @@ app.use(/^\/resurse(\/[a-zA-Z0-9]*(?!\.)[a-zA-Z0-9]*)*$/, function (req, res) {
 });
 
 
+app.get("/produse",function(req, res){
+    //console.log(req.query)
+    //TO DO query pentru a selecta toate produsele
+    //TO DO se adauaga filtrarea dupa tipul produsului
+    //TO DO se selecteaza si toate valorile din enum-ul categ_prajitura
+    client.query("select * from unnest(enum_range(null::categ_prajitura))", function(err, rezCategorie){
+        if (err){
+            console.log(err);
+        }
+        else{
+            let conditieWhere="";
+            if(req.query.tip)
+                conditieWhere=` where tip_produs='${req.query.tip}'`  //"where tip='"+req.query.tip+"'"
+            
+
+            client.query("select * from prajituri "+conditieWhere , function( err, rez){
+                console.log(300)
+                if(err){
+                    console.log(err);
+                    afiseazaEroare(res, 2);
+                }
+                else{
+                    console.log(rez);
+                    res.render("pagini/produse", {produse:rez.rows, optiuni:rezCategorie.rows});
+                }
+            });
+            }
+    });
+
+        
+
+});
+
+app.get("/produs/:id",function(req, res){
+    console.log(req.params);
+    
+    client.query(`select * from prajituri where id=${req.params.id}`, function( err, rezultat){
+        if(err){
+            console.log(err);
+            afiseazaEroare(res, 2);
+        }
+        else
+            res.render("pagini/produs", {prod:rezultat.rows[0]});
+    });
+});
+
+//______________________
+
 app.get("/favicon.ico", function (req, res) {
     res.sendFile(__dirname + "/resurse/ico/favicon.ico");
 });
@@ -138,6 +184,7 @@ app.get("/ceva", function (req, res) {
 })
 
  
+
 app.get(["/despre", "/", "/despree"], function (req, res) {
     res.render("pagini/despre", { ip: req.ip, a: 10, b: 20, imagini: obGlobal.obImagini.imagini });
 }) 
@@ -145,6 +192,9 @@ app.get("/*.ejs", function (req, res) {//wildcard pentru a verifica daca fisiere
 
     afiseazaEroare(res, 400);
 });
+
+
+
 
 app.get("/*", function (req, res) {
     try {
@@ -259,36 +309,6 @@ function afiseazaEroare(res, _identificator, _titlu = "titlu default", _text, _i
     }
 }
 
-
-
-
-app.get("*/galerie-animata.css",function(req, res){
-
-    var sirScss=fs.readFileSync(__dirname+"/resurse/scss_ejs/galerie_animata.scss").toString("utf8");
-    var culori=["navy","black","purple","grey"];
-    var indiceAleator=Math.floor(Math.random()*culori.length);
-    var culoareAleatoare=culori[indiceAleator]; 
-    rezScss=ejs.render(sirScss,{culoare:culoareAleatoare});
-    console.log(rezScss);
-    var caleScss=__dirname+"/temp/galerie_animata.scss"
-    fs.writeFileSync(caleScss,rezScss);
-    try {
-        rezCompilare=sass.compile(caleScss,{sourceMap:true});
-        
-        var caleCss=__dirname+"/temp/galerie_animata.css";
-        fs.writeFileSync(caleCss,rezCompilare.css);
-        res.setHeader("Content-Type","text/css");
-        res.sendFile(caleCss);
-    }
-    catch (err){
-        console.log(err);
-        res.send("Eroare");
-    }
-});
-
-app.get("*/galerie-animata.css.map",function(req, res){
-    res.sendFile(path.join(__dirname,"temp/galerie-animata.css.map"));
-});
 
 
 

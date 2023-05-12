@@ -4,20 +4,20 @@
 		{
 			"fisier":"adidasi.png",
 			"descriere":"Adidasi de vara",
-			"luni":["aprilie"],
+			"luni":["aprilie"," mai"],
 			"anotimp":["primavara"]
 
 		},
 		{
 			"fisier":"basket.png",
-			"descriere":"basket",
-			"luni":["martie","aprilie"],
-			"anotimp":["iarna"]
+			"descriere":"Basket",
+			"luni":["martie","aprilie","mai"],
+			"anotimp":["primavara"]
 		},
 		{
 			"fisier":"bike.png",
 			"descriere":"Bicicleta de vara",
-			"luni":["martie","aprilie"],
+			"luni":["martie","aprilie","mai"],
 			"anotimp":["primavara"]
 		},
 		{

@@ -1,27 +1,28 @@
 
+#acasa {
+  display: none;
+}
+
+#acasa-mediu {
+  span {
+    display: absolute;
+    margin-top: 10px;
+    font-size: 20px;
+    left: 150%;
+    transform: translateX(150%);
+  }
+}
+
 body {
-    --inaltime-meniu: 45px;
-    --latime-buton: 100px;
-    font-size: 14px;
-    
-    #acasa {
-      display: none;
-    }
-    
-    #acasa-mediu span {
-      display: flex;
-      margin-top: 10px;
-      margin: auto;
-    }
-    
-    &.disable-hover {
-      ul.meniu > li:not(:has(ul)):not(.sale):not(.produse):hover::before {
-        transform: scaleX(0);
-      }
-    }
-    
-    #acasa-mediu {
-      display: flex;
+  --inaltime-meniu: 45px;
+  --latime-buton: 100px;
+  font-size: 14px;
+
+  &.disable-hover {
+    ul.meniu > li:not(:has(ul)):not(.sale):not(.produse):hover::before {
+      transform: scaleX(0);
     }
   }
-  
+  font-size: 30px;
+}
+

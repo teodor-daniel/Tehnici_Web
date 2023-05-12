@@ -17,9 +17,21 @@
 
     ;
     gap: 20px 10px;
-    /* gird-row gap si grid collum gap*/
-}
 
+}
+header {
+    background-color: var(--culoare-fundal);
+    color: var(--culoare-header);
+    padding: 20px;
+    text-align: center;
+  }
+  
+  footer {
+    background-color: var(--culoare-fundal);
+    color: var(--culoare-text);
+    padding: 20px;
+    text-align: center;
+  }
 #Z-nou {
     grid-area: Z-nou;
 }

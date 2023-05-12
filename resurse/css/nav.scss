@@ -1,9 +1,8 @@
+
 #hamburger, #ch-menu {
   display: none;
 }
-#acasa-mediu span {
-  display: none;
-}
+
 body {
   --inaltime-meniu: 80px;
   --latime-buton: 220px;
@@ -12,7 +11,7 @@ body {
 
 nav {
   background-color: var(--culoare-meniu);
-  width: calc(100vw - 18px); /*elimin scroll bar*/
+  width: calc(100vw - 30px); /*elimin scroll bar*/
   height: var(--inaltime-meniu);
   position: sticky; /*sa urmareasca nav-ul*/
   top: 0;
@@ -28,6 +27,13 @@ nav {
     padding: 0;
     margin: 0;
     list-style-type: none;
+  }
+
+  > img {
+    height: var(--inaltime-meniu);
+    width: auto;
+    display: block;
+    margin: 0;
   }
 
   ul.meniu {
@@ -116,7 +122,14 @@ nav {
 
     li ul li a:hover {
       background-color: var(--culoare-linii-interimitente);
-      transition: background-color 1s ease-in-out; /* add transition property */
+      transition: background-color 1s ease-in-out; 
     }
+  }
+  #acasa-mediu {
+    position: absolute;
+    right: 30%;
+    top: 50%;
+    transform: translateY(-50%);
+
   }
 }

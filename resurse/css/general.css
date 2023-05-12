@@ -14,11 +14,11 @@ body {
     --fundal-deschis:#c7e1f4;
     --fundal-deschis-portocaliu:#ffb4a2;
     --fundal-deschis-albastru:#b3e5fc;
-
+	--culoare-header: #0000009b;
     --culoare-text: #000000;
     --umbra:rgb(127, 145, 152);
     --spatiere-pagina: 50px;
-    --padding-sectiune: 17px;
+    --padding-sectiune: 30px;
 }
 
 
@@ -71,7 +71,45 @@ p {
 	border: 2px solid var(--umbra);
   }
 
+  @media screen and (max-width: 767px) {
+    #hamburger {
+        display: block;
+        margin: 0;
+        background-color: var(--secundar);
+    }
 
+    #hamburger>img {
+        height: 30px;
+        width: auto;
+        display: block;
+        margin: 0;
+    }
+
+    #meniu_mare {
+        display: none;
+    }
+
+    #meniu_mobil {
+        display: none;
+    }
+
+    ul.meniu li{
+        width: 100%;
+    }
+
+    nav {
+        background-color: var(--secundar);
+        width: calc(100vw + 1.8vw);
+    }
+
+    #ch-menu:checked + #meniu_mobil {
+        display: block !important;
+    }
+    
+    ul.meniu > li:not(:has(ul))::before {
+        background: none;
+    }
+}
 
 @media screen and (max-width: 767px) {
     #hamburger {
@@ -143,6 +181,8 @@ p {
 	font-size: 2.5em;
 	text-align: center;
 	text-decoration: underline;
+	margin-top: 500px; 
+	page-break-after: always;
 	}
 	
 	nav ul ul {
@@ -180,10 +220,25 @@ p {
 	text-align: center;
 	padding-top: 0.25cm;
 	}
+
+	#banner {
+		display: block;
+		border: 2px solid black;
+		height: 30px;
+		width: 70%;
+		margin: 0;
+		position: absolute;
+		bottom: 20px; 
+		text-align: center;
+		padding-bottom: 40px; 
+		line-height: 30px;
+	}
+	
 	
 	@page {
 	margin: 0;
 	}
+
 	
 	@page:left {
 	margin-left: 3cm;
@@ -194,17 +249,33 @@ p {
 	margin-left: 1cm;
 	margin-right: 3cm;
 	}
-	
-	h1 {
-	page-break-after: always;
-	}
-	
+
 	footer {
 	page-break-before: always;
 	}
 	}
 
 
+@page {
+		size: A4 portrait;
+		margin-bottom:2cm;
+		margin-top:2cm;
+		counter-increment: page;
+			
+	}
+	@page:left{
+
+		margin-left:2cm;
+		margin-right:1cm;
+	}
+	@page:right{
+
+		margin-right:2cm;
+		margin-left:1cm;
+	}
+
+
+	
 .container {
   position: auto;
   display: inline;

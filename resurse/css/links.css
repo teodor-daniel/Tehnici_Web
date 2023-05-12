@@ -3,7 +3,7 @@ a.footer-link:link {
     color: var(--culoare-linii-interimitente); 
   }
   
-  /* Schimbarea culorii simbolului la hover */
+
   a.footer-link[href^="http"]::before {
     content: "\2bb3"; /* simbolul ⮳ */
     font-size: 1.5em; 
@@ -22,13 +22,13 @@ a.footer-link:link {
     transition: background-size 0.3s ease-in-out;
   }
   
-  /* Anularea efectului de hover pentru linkurile vizitate */
+
   a.footer-link:visited:hover {
     background-color: none;
   }
   
   a.footer-link:active {
-    border: 2px solid black; /* se adauga un border de 2px cu culoarea #8b008b la click */
+    border: 2px solid black; 
   }
   
   .container-iframe a.footer-link[href^="http"]::before {
