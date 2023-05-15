@@ -71,90 +71,8 @@ p {
 	border: 2px solid var(--umbra);
   }
 
-  @media screen and (max-width: 767px) {
-    #hamburger {
-        display: block;
-        margin: 0;
-        background-color: var(--secundar);
-    }
-
-    #hamburger>img {
-        height: 30px;
-        width: auto;
-        display: block;
-        margin: 0;
-    }
-
-    #meniu_mare {
-        display: none;
-    }
-
-    #meniu_mobil {
-        display: none;
-    }
-
-    ul.meniu li{
-        width: 100%;
-    }
-
-    nav {
-        background-color: var(--secundar);
-        width: calc(100vw + 1.8vw);
-    }
-
-    #ch-menu:checked + #meniu_mobil {
-        display: block !important;
-    }
-    
-    ul.meniu > li:not(:has(ul))::before {
-        background: none;
-    }
-}
-
-@media screen and (max-width: 767px) {
-    #hamburger {
-        display: block;
-        margin: 0;
-        background-color: var(--secundar);
-    }
-
-    #hamburger>img {
-        height: 30px;
-        width: auto;
-        display: block;
-        margin: 0;
-    }
-
-    #meniu_mare {
-        display: none;
-    }
-
-    #meniu_mobil {
-        display: none;
-    }
-
-    ul.meniu li{
-        width: 100%;
-    }
-
-    nav {
-        background-color: var(--secundar);
-        width: calc(100vw + 1.8vw);
-    }
-
-    #ch-menu:checked + #meniu_mobil {
-        display: block !important;
-    }
-    
-    ul.meniu > li:not(:has(ul))::before {
-        background: none;
-    }
-}
-
-#banner {
-    display: none;
-}
 @media print {
+	
 	#banner {
 	display: block;
 	width: 70%;
@@ -171,6 +89,9 @@ p {
 	.container {
 	display: block;
 	}
+	.nav{
+		display:contents;
+	}
 	
 	a {
 	text-decoration: none;
@@ -185,24 +106,8 @@ p {
 	page-break-after: always;
 	}
 	
-	nav ul ul {
-	display: none;
-	}
-	
-	nav {
-	display: none;
-	text-align: center;
-	}
-	
-	nav ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	}
-	
-	nav ul li {
-	display: none;
-	margin-right: 20px;
+	#Z-date_server_site{
+		page-break-after: always;
 	}
 	
 	body::after {
@@ -253,7 +158,8 @@ p {
 	footer {
 	page-break-before: always;
 	}
-	}
+
+}
 
 
 @page {
@@ -272,7 +178,7 @@ p {
 
 		margin-right:2cm;
 		margin-left:1cm;
-	}
+}
 
 
 	

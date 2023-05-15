@@ -131,7 +131,7 @@ app.use("/node_modules", express.static(__dirname + "/node_modules"));
 
 app.use("/*", function(req, res, next){
     res.locals.optiuniMeniu = obGlobal.optiuniMeniu;
-    console.log(obGlobal.optiuniMeniu);
+    //console.log(obGlobal.optiuniMeniu);
     next();
 })
 
