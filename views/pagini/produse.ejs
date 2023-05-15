@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html  lang="ro">
     <head>
-        <meta name="description" content="Cofetaria Dulcelind ofera prajituri, torturi, produse de patiserie cu optiunea de achizitie online si livrare prin curier.">
-        <meta name="keywords" content="cofetarie, Dulcelind, prajituri, torturi, dulce, pateuri, produse">
-        <link rel="stylesheet" href="/resurse/css/produse.css" type="text/css" />
-        <title>Cofetăria Dulcelind - home</title>
         <%- include("../fragmente/head") %>     
+
+        <%-include ("../fragmente/header") %>
+        <link rel="stylesheet" href="/resurse/css/produse.css" type="text/css" />
         <script type="text/javascript" src=/resurse/js/produse.js></script>
 
     </head>
     <body>
-    <%- include("../fragmente/header") %>
 
     <main>
         <label> Nume: <input type="text" id="inp-nume"></label>
@@ -56,15 +54,16 @@
                 <% for( let prod of locals.produse) { %>
                     <article class="produs" >
                         <h3 class="nume">Nume: <a href="/produs/<%-prod.id %>" ><span class="val-nume"><%- prod.nume%></span></a></h3>
-                        <div class="info-prod">
-                            <p class="pret">Pret: <span class="val-pret"><%- prod.pret%></span></p>
-                            <p class="calorii">Calorii: <span class="val-calorii"><%- prod.calorii%></span></p>
-                            <p class="gramaj">Gramaj: <span class="val-gramaj"><%- prod.gramaj%></span></p>
-                        </div>
-                        <p class="categorie">Categorie:<span class="val-categorie"><%- prod.categorie%></span></p>
                         <figure>
                             <a href="/produs/<%-prod.id %>" ><img src="/resurse/imagini/produse/<%- prod.imagine %>" style="width:50%;height:auto;" alt="[imagine <%- prod.nume %>]" /></a>
                         </figure>
+                        <div class="info-prod">
+                            <p class="pret">Pret: <span class="val-pret"><%- prod.pret%></span></p>
+                            <p class="calorii">Bucati: <span class="val-calorii"><%- prod.bucati%></span></p>
+                            <p class="gramaj">Gramj: <span class="val-gramaj"><%- prod.greutate%></span></p> 
+                        </div>
+                        <p class="categorie">Categorie:<span class="val-categorie"><%- prod.categorie%></span></p>
+
                         <label class="selecteaza-cos">
                             Selectează:<br/>
                             <input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">

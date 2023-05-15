@@ -21,10 +21,9 @@
       <li> 
         <a href="#">Produse</a>
         <ul>
-          <li><a href="/produse">Echipament Sportiv</a></li>
-          <li><a href="/produse?tip=cofetarie">Imbracaminte</a></li>
-          <li><a href="/produse?tip=gelaterie">Incaltaminte</a></li>
-          <li><a href="/produse?tip=cofetari">Suplimente </a></li>
+          <% for (let opt of locals.optiuniMeniu) { %>
+            <li><a href="/produse?tip=<%= opt.unnest %>"><%= opt.unnest %></a></li>
+                <% } %>
         </ul>
       </li>
     </ul>

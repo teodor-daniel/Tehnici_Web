@@ -7,10 +7,7 @@ iframe {
 .container-iframe {
     display: flex;
     flex-direction: column-reverse;
-    /* change to column-reverse */
     align-items: center;
-    /* Add some space between the video and the container */
-
 }
 
 .taburi-iframe {
@@ -76,9 +73,10 @@ iframe {
 
 .iframe-container {
     margin: 0;
-    border: 3px solid var(--culoare-linii-interimitente);
+    border: 4px solid var(--culoare-linii-interimitente);
     border-radius: 2px;
-    width: 560px; 
-    height: 315px; 
+    padding-right: 2px;
+    width: 565px; 
+    height: 320px; 
 }
 

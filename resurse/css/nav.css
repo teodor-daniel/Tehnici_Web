@@ -3,18 +3,18 @@
 }
 
 body {
-  --inaltime-meniu: 80px;
-  --latime-buton: 220px;
+  --inaltime-meniu: 65px;
+  --latime-buton: 210px;
   --culoare-meniu: var(--culoare-fundal-inchis);
 }
 
 nav {
   background-color: var(--culoare-meniu);
-  width: calc(100vw - 30px); /*elimin scroll bar*/
+  width: calc(100vw - 16.5px); /*elimin scroll bar*/
   height: var(--inaltime-meniu);
   position: sticky; /*sa urmareasca nav-ul*/
   top: 0;
-  margin-left: calc(-1 * var(--spatiere-pagina));
+  margin-left: calc(-1 * (var(--spatiere-pagina)));
   z-index: 9999;
 }
 nav a[href^=http]::before {
@@ -114,5 +114,3 @@ nav #acasa-mediu {
   top: 50%;
   transform: translateY(-50%);
 }
-
-/*# sourceMappingURL=nav.css.map */

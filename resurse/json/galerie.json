@@ -4,7 +4,7 @@
 		{
 			"fisier":"adidasi.png",
 			"descriere":"Adidasi de vara",
-			"luni":["aprilie"," mai"],
+			"luni":["aprilie","mai"],
 			"anotimp":["primavara"]
 
 		},
@@ -23,13 +23,13 @@
 		{
 			"fisier":"football.png",
 			"descriere":"Fotbal",
-			"luni":["martie","aprilie"],
+			"luni":["martie","aprilie", "mai"],
 			"anotimp":["primavara"]
 		},
 		{
 			"fisier":"golf.png",
 			"descriere":"Golf",
-			"luni":["martie","aprilie"],
+			"luni":["martie","aprilie", "mai"],
 			"anotimp":["primavara"]
 		},
 		{

@@ -19,5 +19,3 @@ body {
 body.disable-hover ul.meniu > li:not(:has(ul)):not(.sale):not(.produse):hover::before {
   transform: scaleX(0);
 }
-
-/*# sourceMappingURL=nav1000.css.map */

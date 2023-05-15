@@ -56,12 +56,10 @@ body ul.meniu li ul li a:hover {
 }
 
 #acasa-mediu span {
-  display: absolute;
+  position: relative;
   margin-top: 5px;
   margin-bottom: 5px;
   font-size: 20px;
-  left: 645%;
-  transform: translateX(645%);
+  left: 26%;
+  transform: translateX(100%);
 }
-
-/*# sourceMappingURL=nav750.css.map */

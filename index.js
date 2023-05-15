@@ -27,6 +27,15 @@ obGlobal = {
     optiuniMeniu:[]
 }; // obiect global
 
+client.query("select * from unnest(enum_range(null::tipuri_produse_sport))", function(err, rezTipuri){
+    if (err){
+        console.log(err);
+    }
+    else{
+        obGlobal.optiuniMeniu=rezTipuri.rows;
+        //console.log(obGlobal.optiuniMeniu);
+    }
+});
 
 
 app = express();
@@ -48,8 +57,7 @@ for (let folder of vectorFoldere) {
 }
 function compileazaScss(caleScss, caleCss) {
     if (!caleCss) {
-        let vectorCale = caleScss.split("\\");
-        let numeFisierExt = vectorCale[vectorCale.length - 1];
+        let numeFisierExt = path.basename(caleScss);
         let numeFis = numeFisierExt.split(".")[0];
         caleCss = numeFis + ".css";
         
@@ -61,10 +69,11 @@ function compileazaScss(caleScss, caleCss) {
     if (!path.isAbsolute(caleCss)) {
         caleCss = path.join(obGlobal.folderCss, caleCss);
     }
-
-    let vectorCale = caleCss.split("\\");
-    let numeFisCss = vectorCale[vectorCale.length - 1];
-
+    let caleResBackup = path.join(obGlobal.folderBackup, "resurse/css");
+    if (!fs.existsSync(caleResBackup)) {
+        fs.mkdirSync(caleResBackup, { recursive: true });
+    }
+    let numeFisCss = path.basename(caleCss);
     let data_curenta = new Date();
     let numeBackup =
         numeFisCss.split(".")[0] +
@@ -81,7 +90,7 @@ function compileazaScss(caleScss, caleCss) {
     fs.writeFileSync(path.join(obGlobal.folderBackup, numeBackup), "backup");
 
     if (fs.existsSync(caleCss)) {
-        fs.copyFileSync(caleCss, path.join(obGlobal.folderBackup, numeBackup));
+        fs.copyFileSync(caleCss, path.join(obGlobal.folderBackup,"resurse/css",numeBackup));
     }
 
     rez = sass.compile(caleScss, { sourceMap: true });
@@ -120,6 +129,12 @@ app.use("/resurse", express.static(__dirname + "/resurse"));
 
 app.use("/node_modules", express.static(__dirname + "/node_modules"));
 
+app.use("/*", function(req, res, next){
+    res.locals.optiuniMeniu = obGlobal.optiuniMeniu;
+    console.log(obGlobal.optiuniMeniu);
+    next();
+})
+
 app.use(/^\/resurse(\/[a-zA-Z0-9]*(?!\.)[a-zA-Z0-9]*)*$/, function (req, res) {
     afiseazaEroare(res, 403);
 });
@@ -130,24 +145,25 @@ app.get("/produse",function(req, res){
     //TO DO query pentru a selecta toate produsele
     //TO DO se adauaga filtrarea dupa tipul produsului
     //TO DO se selecteaza si toate valorile din enum-ul categ_prajitura
-    client.query("select * from unnest(enum_range(null::categ_prajitura))", function(err, rezCategorie){
+    client.query("select * from unnest(enum_range(null::categ_produs_sport))", function(err, rezCategorie){
         if (err){
             console.log(err);
         }
         else{
             let conditieWhere="";
+            //console.log(req.query.tip, rezCategorie.rows);
             if(req.query.tip)
                 conditieWhere=` where tip_produs='${req.query.tip}'`  //"where tip='"+req.query.tip+"'"
             
 
-            client.query("select * from prajituri "+conditieWhere , function( err, rez){
-                console.log(300)
+            client.query("select * from produs_sport "+conditieWhere , function( err, rez){
+                //console.log(300)
                 if(err){
                     console.log(err);
                     afiseazaEroare(res, 2);
                 }
                 else{
-                    console.log(rez);
+                    //console.log(rez);
                     res.render("pagini/produse", {produse:rez.rows, optiuni:rezCategorie.rows});
                 }
             });
@@ -161,7 +177,7 @@ app.get("/produse",function(req, res){
 app.get("/produs/:id",function(req, res){
     console.log(req.params);
     
-    client.query(`select * from prajituri where id=${req.params.id}`, function( err, rezultat){
+    client.query(`select * from produs_sport where id=${req.params.id}`, function( err, rezultat){
         if(err){
             console.log(err);
             afiseazaEroare(res, 2);
@@ -284,30 +300,49 @@ idem pentru celelalte
 */
 
 //function afisareEroare(res, {_identificator, _titlu, _text, _imagine}={} ){
-function afiseazaEroare(res, _identificator, _titlu = "titlu default", _text, _imagine) {
-    let vErori = obGlobal.obErori.info_erori;
-    let eroare = vErori.find(function (element) {
-        return element.identificator === _identificator;
-    });
-    if (eroare) {
-        let titlu = _titlu == "titlu default" ? (eroare.titlu || _titlu) : _titlu;
-        // daca programatorul seteaza titlul, se ia titlul din argument,
-        //daca nu e setat, se ia cel din json, 
-        // daca nu avem titlu nici in json, se ia titlul din valoarea default 
-        let text = _text || eroare.text;
-        let imagine = _imagine || eroare.imagine;
-        if (eroare.status) {
-            res.status(eroare.identificator).render("pagini/eroare", { titlu: titlu, text: text, imagine: imagine });
+function afiseazaEroare(
+        res,
+        _identificator,
+        _titlu = "titlu default",
+        _text = "text default",
+        _imagine
+    ) {
+        let vErori = obGlobal.obErori.info_erori;
+        let eroare = vErori.find(function (element) {
+            return element.identificator === _identificator;
+        });
+    
+        if (eroare) {
+            let titlu = (_titlu = "titlu default"
+                ? eroare.titlu || _titlu
+                : _titlu);
+            let text = (_text = "text default" ? eroare.text || _text : _text);
+            let imagine = (_imagine = "imagine default"
+                ? eroare.imagine || _imagine
+                : _imagine);
+            if (eroare.status) {
+                res.status(eroare.identificator).render("pagini/eroare.ejs", {
+                    titlu: titlu,
+                    text: text,
+                    imagine: imagine,
+                    optiuni: obGlobal.optiuniMeniu
+                });
+            } else {
+                res.render("pagini/eroare.ejs", {
+                    titlu: titlu,
+                    text: text,
+                    imagine: imagine
+                });
+            }
         } else {
-            res.render("pagini/eroare", { titlu: titlu, text: text, imagine: obGlobal.obErori.cale_baza = "/" + errDef.imagine });
-
+            let errDef = obGlobal.obErori.eroare_default;
+            res.render("pagini/eroare.ejs", {
+                titlu: errDef.titlu,
+                text: errDef.text,
+                imagine: obGlobal.obErori.cale_baza + "/" + errDef.imagine
+            });
         }
     }
-    else {
-        let errDef = obGlobal.obErori.eroare_default;
-        res.render("pagini/eroare", { titlu: errDef.titlu, text: errDef.text, imagine: errDef.imagine });
-    }
-}
 
 
 
