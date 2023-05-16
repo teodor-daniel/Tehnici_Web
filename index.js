@@ -139,7 +139,7 @@ app.use(/^\/resurse(\/[a-zA-Z0-9]*(?!\.)[a-zA-Z0-9]*)*$/, function (req, res) {
     afiseazaEroare(res, 403);
 });
 
-
+//PRODUSE
 app.get("/produse",function(req, res){
     //console.log(req.query)
     //TO DO query pentru a selecta toate produsele

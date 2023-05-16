@@ -22,12 +22,18 @@ body {
 }
 
 
-body.dark {
-    /*dark-mode*/
-    --culoare-fundal: black;
-    --culoare-text: white;
-
+body.dark{
+    --culoare-mov:rgb(31, 31, 31);
+	--culoare-roz-inchis:rgb(64,27,66);
+	--culoare-roz-inchis-t:rgb(64,27,66,0.5);
+    --cl-marcare:rgb(81,43,81,0.5);
+    --cl-light-t:rgba(255,255,255,0.2);
+    --cl-text:white;
+    text-shadow:0px 0px 2px black,0px 0px 1px black,0px 0px 1px black;
+    --imag-body-backgr:url("../imagini/background-bomboane-dark.jpg");
+    --gradient-body:linear-gradient(transparent, transparent 25%, rgba(255,255,255,0.5) 50%, transparent 75%, transparent);
 }
+
 
 body {
     /*general*/
@@ -39,11 +45,7 @@ body {
     font-family: 'Montserrat Alternates', sans-serif;
 }
 
-body {
-    /*resetat proprietati baza css*/
-    margin: 0;
-    text-align: center;
-}
+
 
 
 h1 { 
