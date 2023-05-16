@@ -2,5 +2,5 @@ node_modules/
 temp/
 backup/
 *.json
-customizare_bootsrap/
+customizare_bootsrap.css
 ```
