@@ -20,14 +20,23 @@
   $font-family-base: "Raleway",
 
   // customizare culori background
-  $primary: #0066cc,
-  $danger: #ff8c42,
+  $primary: #ff8c42,
+  $danger: #0066cc,
+
+  $form-range-thumb-width: 1.5rem,
+  $form-range-thumb-height: 1.5rem,
+
+
+  $form-range-thumb-bg: #0066cc,
+
+  // Customize the color of the range slider track
+  $form-range-track-bg: #b3e5fc,
 
   // schimba font la butoane
   $btn-close-color: #b3e5fc,
 
   // background body - ales in plus
-  $body-bg: #f1f1f1
+  $body-bg: #ffffff
 );
 
 .btn-primary{
@@ -39,8 +48,7 @@ body {
 
 
 ol, ul, dl{
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-left: 400px;
 };
 
 table {
@@ -77,4 +85,55 @@ table {
       font-weight: smaller;
       color: var(--culoare-text);
     }
+
+    
+.custom-radio {
+  display: inline-block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.custom-radio input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.custom-radio .custom-control-label::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #b35123;
+  background-color: #bf00ff;
+}
+
+.custom-radio .custom-control-label::after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.custom-radio input[type="radio"]:checked + .custom-control-label::before {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.custom-radio input[type="radio"]:checked + .custom-control-label::after {
+  display: block;
+}
+
+// Custom styles for the label text
+.custom-radio label {
+  color: #333;
+  font-weight: bold;
+}
+
+
   }
+  

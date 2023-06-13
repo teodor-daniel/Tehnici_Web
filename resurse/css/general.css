@@ -8,7 +8,7 @@ body {
     energizantă pentru clienții noștri. Albastrul reprezintă calmul, serenitatea și încrederea, fiind o alegere excelentă pentru articolele noastre 
     de îmbrăcăminte și echipament de sport. Portocaliul simbolizează entuziasmul,
      dinamismul și vitalitatea, fiind o opțiune ideală pentru a adăuga un strop de energie în experiența de cumpărare a clienților noștri. */ 
-    --culoare-fundal: #f1f1f1;
+    --culoare-fundal: #ffffff;
     --culoare-fundal-inchis: #0066cc; /*Pentru nav*/
     --culoare-linii-interimitente:#ff8c42;
     --fundal-deschis:#c7e1f4;
@@ -23,15 +23,14 @@ body {
 
 
 body.dark{
-    --culoare-mov:rgb(31, 31, 31);
-	--culoare-roz-inchis:rgb(64,27,66);
-	--culoare-roz-inchis-t:rgb(64,27,66,0.5);
-    --cl-marcare:rgb(81,43,81,0.5);
-    --cl-light-t:rgba(255,255,255,0.2);
-    --cl-text:white;
-    text-shadow:0px 0px 2px black,0px 0px 1px black,0px 0px 1px black;
-    --imag-body-backgr:url("../imagini/background-bomboane-dark.jpg");
-    --gradient-body:linear-gradient(transparent, transparent 25%, rgba(255,255,255,0.5) 50%, transparent 75%, transparent);
+	--culoare-fundal: #222222;
+	--culoare-fundal-inchis: #6699cc; /* Pentru nav */
+	--culoare-linii-interimitente: #6e2302;
+	--fundal-deschis: #39414a;
+	--fundal-deschis-portocaliu: #ff8c6e;
+	--fundal-deschis-albastru: #102e4d;
+	--culoare-header: #ffffff9b;
+	--culoare-text: #ffffff;
 }
 
 
@@ -42,6 +41,8 @@ body {
     padding-left: var(--spatiere-pagina);
     padding-right: var(--spatiere-pagina);
     min-width: 400px;
+	width: auto;
+	height: auto;
     font-family: 'Montserrat Alternates', sans-serif;
 }
 
@@ -73,123 +74,6 @@ p {
 	border: 2px solid var(--umbra);
   }
 
-@media print {
-	
-	#banner {
-	display: block;
-	width: 70%;
-	margin: 0 auto;
-	border: 4px inset black;
-	padding: 10px;
-	text-align: center;
-	}
-	
-	img, video, iframe, .container-iframe, [href="#top"], [href="#"], [role="banner"], [role="navigation"], figcaption {
-	display: none !important;
-	}
-	
-	.container {
-	display: block;
-	}
-	.nav{
-		display:contents;
-	}
-	
-	a {
-	text-decoration: none;
-	color: black;
-	}
-	
-	h1 {
-	font-size: 2.5em;
-	text-align: center;
-	text-decoration: underline;
-	margin-top: 500px; 
-	page-break-after: always;
-	}
-	
-	#Z-date_server_site{
-		page-break-after: always;
-	}
-	
-	body::after {
-	content: "Teodor-Daniel Balan";
-	position: fixed;
-	bottom: 0;
-	right: 0;
-	width: 4cm;
-	height: 1cm;
-	border: 2px solid black;
-	border-radius: 3px;
-	opacity: 0.4;
-	font-size: 0.8em;
-	font-weight: bold;
-	text-align: center;
-	padding-top: 0.25cm;
-	}
-
-	#banner {
-		display: block;
-		border: 2px solid black;
-		height: 30px;
-		width: 70%;
-		margin: 0;
-		position: absolute;
-		bottom: 20px; 
-		text-align: center;
-		padding-bottom: 40px; 
-		line-height: 30px;
-	}
-	
-	
-	@page {
-	margin: 0;
-	}
-
-	
-	@page:left {
-	margin-left: 3cm;
-	margin-right: 1cm;
-	}
-	
-	@page:right {
-	margin-left: 1cm;
-	margin-right: 3cm;
-	}
-
-	footer {
-	page-break-before: always;
-	}
-
-}
-
-
-@page {
-		size: A4 portrait;
-		margin-bottom:2cm;
-		margin-top:2cm;
-		counter-increment: page;
-			
-	}
-	@page:left{
-
-		margin-left:2cm;
-		margin-right:1cm;
-	}
-	@page:right{
-
-		margin-right:2cm;
-		margin-left:1cm;
-}
-
-
-	
-.container {
-  position: auto;
-  display: inline;
-  width: 60%; 
-
-}
 
 #hr {
 	border-top: 3px solid black;
@@ -227,3 +111,75 @@ p {
 	column-gap: 20px;
 	column-rule: 1px solid black;
   }
+
+main{
+	background-color: var(--culoare-fundal);
+}
+.container {
+	background-color: var(--culoare-fundal);
+  }
+
+
+  
+
+  #bgvid {
+    object-fit: cover;
+    width: 100vw;
+    height: 100vh;
+    /* position: fixed; */
+    /* top: 0; */
+    /* left: 0; */
+    z-index: -100;
+}
+
+.disclaimer-banner {
+  position: fixed;
+  bottom: 0;
+/*middle*/
+  left: 0;
+  right: 0;
+  margin: auto;
+  margin-bottom: 15%;
+  background-color: var(--culoare-fundal-inchis);
+  transition: opacity 5s, background-color 5s;
+  padding: var(--padding-sectiune);
+  height: 25vh;
+  width: 25vw;
+  opacity: 0;
+}
+
+
+.banner-content p:first-of-type {
+  margin-left: -8px;
+}
+
+.banner-content p {
+  font-size: 1.5vw;
+  margin-bottom: 10px;
+  color: var(--culoare-text);
+}
+
+.banner-content button {
+  background-color: var(--culoare-fundal-inchis);
+  color: var(--text-white);
+  border: black solid 1px;
+  cursor: pointer;
+  position: relative;
+  left: 40%;
+}
+
+@keyframes bannerAnimation {
+  0% {
+      opacity: 0;
+      background-color: var(--fundal-deschis-albastru);
+  }
+
+  100% {
+      opacity: 100%;
+      background-color: var(--culoare-linii-interimitente);
+  }
+}
+
+.disclaimer-banner.animation {
+  animation: bannerAnimation 3s forwards;
+}

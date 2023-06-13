@@ -11,7 +11,7 @@ body {
 
 nav {
   background-color: var(--culoare-meniu);
-  width: calc(100vw - 16.5px); /*elimin scroll bar*/
+  width: calc(100vw - 20px); /*elimin scroll bar*/
   height: var(--inaltime-meniu);
   position: sticky; /*sa urmareasca nav-ul*/
   top: 0;

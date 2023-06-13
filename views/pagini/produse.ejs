@@ -2,78 +2,211 @@
 <html  lang="ro">
     <head>
         <%- include("../fragmente/head") %>     
-
-        <%-include ("../fragmente/header") %>
         <link rel="stylesheet" href="/resurse/css/produse.css" type="text/css" />
-        <script type="text/javascript" src=/resurse/js/produse.js></script>
-
+        <script type="text/javascript" src="/resurse/js/produse.js"></script>
     </head>
     <body>
-
+    <%-include ("../fragmente/header") %>
     <main>
-        <label> Nume: <input type="text" id="inp-nume"></label>
-        <!--<label> Maxim calorii: <input type="number" id="inp-calorii" value="10000"></label>-->
-        <div> Calorii:<!-- trebuie sa aiba acelasi name ca sa formeze un grup -->
-            <p><label>Usor (gramaj &lt; 1000)
-                <input id="i_rad1"  name="gr_rad" value="0:1000" type="radio"/>
-            </label></p>
-            <p><label>Mediu (1000 &le; gramaj &lt; 5000)
-                <input id="i_rad2"  name="gr_rad" value="1000:5000" type="radio"/>
-            </label>
-            <p><label>Greu (5000 &le; gramaj)
-                <input id="i_rad3" name="gr_rad" value="5000:1000000000" type="radio"/>
-            </label>
-            <p><label>Toate
-                <input id="i_rad4" checked name="gr_rad" value="toate" type="radio"/>
-            </label>
-        </div>
-
-
-        <label> Pret minim: <input type="range" id="inp-pret" value="0" min="0"  max="70"> <span id="infoRange">(0)</span></label>
-        <label>Select simplu:
-            <select id="inp-categorie">
-                <option id="sel-toate" selected value="toate">toate</option>
-                <% for (let opt of locals.optiuni) { %>
-                    <option value="<%- opt.unnest %>"><%- opt.unnest %> </option>
-                <% } %>
-            </select>
-        </label>
-        <p>
-        <button id="filtrare">Filtreaza</button> 
-
-        <button id="resetare">Reseteaza</button><br/>
-        <button id="sortCrescNume">Sorteaza crescator dupa pret si nume</button>
-        <button id="sortDescrescNume">Sorteaza descrescator dupa pret si nume</button>
-        
-        </p>
-        
-        <p id="p-suma">Apăsați Alt+"c" pentru suma preturilor produselor afișate. </p>
-        <section id="produse">
-            <h2>Produse</h2>
-            <div class="grid-produse">
-                <% for( let prod of locals.produse) { %>
-                    <article class="produs" >
-                        <h3 class="nume">Nume: <a href="/produs/<%-prod.id %>" ><span class="val-nume"><%- prod.nume%></span></a></h3>
-                        <figure>
-                            <a href="/produs/<%-prod.id %>" ><img src="/resurse/imagini/produse/<%- prod.imagine %>" style="width:50%;height:auto;" alt="[imagine <%- prod.nume %>]" /></a>
-                        </figure>
-                        <div class="info-prod">
-                            <p class="pret">Pret: <span class="val-pret"><%- prod.pret%></span></p>
-                            <p class="greutate">Greutate: <span class="val-greutate"><%- prod.greutate%></span></p>
-                            <p class="gramaj">Bucati: <span class="val-bucati"><%- prod.bucati%></span></p> 
-                        </div>
-                        <p class="categorie">Categorie:<span class="val-categorie"><%- prod.categorie%></span></p>
-
-                        <label class="selecteaza-cos">
-                            Selectează:<br/>
-                            <input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">
-                        </label>
-                    </article>
-                <% }%>
+      <div class="card">
+        <div class="card-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="text" id="inp-nume" class="form-control" placeholder=" ">
+                  <label for="inp-nume">Nume</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="d-flex flex-column">
+                  <p class="mb-2">Greutate</p>
+                  <label class="custom-radio mb-2">
+                    Usor (greutate &lt; <%= medieGreutate %>)
+                    <input id="i_rad1" name="gr_rad" value="<%= minGreutate %>:<%= medieGreutate %>" type="radio" />
+                  </label>
+                  <label class="custom-radio mb-2">
+                    Mediu (<%= medieGreutate %> &le; greutate &lt; <%= medieGreutate*5 %>)
+                    <input id="i_rad2" name="gr_rad" value="<%= medieGreutate %>:<%= medieGreutate*5 %>" type="radio" />
+                  </label>
+                  <label class="custom-radio mb-2">
+                    Greu ( <%= medieGreutate*5 %> &le; <%= maxGreutate %>)
+                    <input id="i_rad3" name="gr_rad" value="<%= medieGreutate*5%>:<%= maxGreutate %>" type="radio" />
+                  </label>
+                  <label class="custom-radio">
+                    Toate
+                    <input id="i_rad4" checked name="gr_rad" value="toate" type="radio" />
+                  </label>
+                </div>
+              </div>
             </div>
-        </section>
-    </main>
+      
+            <div class="row mt-3">
+              <div class="col">
+                <label>Pret:</label>
+                <span><%-locals.minPrice%></span>
+                <input class="form-range" type="range" id="inp-pret" value="<%- minPret %>" min="<%- minPret %>" max="<%- maxPret %>" style="width: 50%;">
+                <span><%-locals.maxPret%></span>
+                <span id="infoRange">(0)</span>
+              </div>
+            </div>
+      
+            <div class="row mt-3">
+              <div class="col">
+                <label>Select simplu:</label>
+                <select id="inp-categorie" class="form-select">
+                  <option id="sel-toate" selected value="toate">toate</option>
+                  <% for (let opt of locals.optiuni) { %>
+                    <option value="<%- opt.unnest %>"><%- opt.unnest %> </option>
+                  <% } %>
+                </select>
+              </div>
+            </div>
+      
+            <div class="row custom-padding mt-3">
+              <div class="col">
+                <br/>
+                <button id="filtrare" class="btn btn-primary mb-2 custom-button">Filtreaza</button> 
+                <button id="resetare" class="btn btn-secondary mb-2 custom-button">Reseteaza</button>
+                <br/>
+                <button id="sortCrescNume" class="btn btn-primary mb-2 custom-button">Sorteaza crescator dupa pret si nume</button>
+                <button id="sortDescrescNume" class="btn btn-primary mb-2 custom-button">Sorteaza descrescator dupa pret si nume</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card mt-3">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <label>Culoare:</label>
+              <input list="id_lista" id="i_datalist" class="form-control">
+              <datalist id="id_lista">
+                <% for (let culoare of culori) { %>
+                  <option value="<%- culoare %>"><%- culoare %></option>
+                <% } %>
+              </datalist>
+            </div>
+            <div class="col">
+              <label value="Selectați categoriile pe care NU vi le doriți">Materiale pe care NU le doriți:</label>
+              <select id="i_sel_multiplu" multiple size="4" class="form-select">
+                <% for(let material of locals.materiale) { %>
+                  <option value="<%- material %>"><%- material %></option>
+                <% } %>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card m-3">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <p id="p-suma">Apăsați Alt+"c" pentru suma preturilor produselor afișate.</p>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-6">
+              <div class="form-floating">
+                <textarea class="form-control" id="i_textarea" placeholder=" " required></textarea>
+                <label for="i_textarea">Descriere</label>
+                <div class="invalid-feedback">We don't have products matching this description. Please enter a valid description.</div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="testatCheckbox" name="testatCheckbox" value="checkboxValue">
+                <label class="form-check-label align-self-start" for="testatCheckbox" style="margin-right:20rem;">Testat</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
+
+      <section id="produse">
+        <div class="container">
+          <div class="grid-produse">
+            <% for (let prod of locals.produse) { %>
+              <article class="produs <%-prod.categorie%> card-animation" id="ar_ent_<%-prod.id%>">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="card">
+                      <div class="card-body">
+                        <h3 class="card-title nume">
+                          <a href="/produs/<%-prod.id %>"><span class="val-nume"><%- prod.nume%></span></a>
+                        </h3>
+                        <p class="card-text categorie">Categorie <span class="val-categorie"><%- prod.categorie%></span></p>
+                        <p class="card-text descriere disnone"><span class="val-descriere"><%- prod.descriere%></span></p>
+                        <p class="card-text culoare">Culoare: <span class="val-culoare"><%-prod.culoare%></span></p>
+                        <p class="card-text test">A fost testat? <span class="val-test"><%-prod.testat%></span></p>
+                        <% function formatDate(date) { const options={ day: '2-digit' , month: 'long' ,year: 'numeric' , weekday: 'long' }; 
+                        const formattedDate=new Date(date).toLocaleDateString('ro-RO', options);
+                        const parts=formattedDate.split(' ');
+                        const day = parts[1];
+                        const month=parts[2].charAt(0).toUpperCase() + parts[2].slice(1);
+                        const year=parts[3];
+                        const weekday=parts[0].split(',')[0].charAt(0).toUpperCase() + parts[0].split(',')[0].slice(1);
+                        return `${day}-${month}-${year} [${weekday}]`; } %>
+                        <p class="card-text data">Data: <time datetime="<%- prod.data_adaugare %>">
+                            <span class="val-data"><%- formatDate(prod.data_adaugare) %></span></time>
+                        </p>
+                        <p><span class="materiale" style="visibility: hidden;"><%- prod.materiale %> </span></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="card">
+                      <img src="/resurse/imagini/produse/<%- prod.imagine %>" class="card-img-top" alt="[imagine <%- prod.nume %>]" style="max-height: 250px;">
+                      <div class="card-body">
+                        <p class="card-text pret">Pret <span class="val-pret"><%- prod.pret%></span> RON</p>
+                        <p class="card-text pentru disnone">Pentru <span class="val-pentru" style="text-transform: capitalize;"><%- prod.tip_produs%></span></p>
+                        <p class="card-text categorie disnone">Greutate <span class="val-greutate"><%- prod.greutate%></span>g</p>
+                        <label class="card-text selecteaza-cos">Adaugă în coș
+                          <input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            <% } %>
+          </div>
+        </div>
+      </section>
+      <script>
+        
+        // Funcția pentru afișarea treptată a cardurilor
+        function showCardsWithDelay() {
+          // Obține toate cardurile
+          const cards = document.querySelectorAll('.card-animation');
+      
+          // Intervalul de timp pentru afișarea fiecărui card
+          const interval = 1000; // ms
+      
+          let delay = 1000;
+      
+          cards.forEach(card => {
+            setTimeout(() => {
+              card.style.opacity = '1';
+            }, delay);
+      
+            delay += interval;
+          });
+        }
+      
+        // Apelăm funcția pentru a afișa cardurile cu o animație treptată
+        showCardsWithDelay();
+      </script>
+         
+    
+        <div id="loc-afișare-produse">
+        </div>
+        </main>
+        
     <%- include("../fragmente/footer") %>
     </body>
 </html>

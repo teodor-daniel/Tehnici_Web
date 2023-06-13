@@ -1,4 +1,31 @@
 <link rel="stylesheet" href="/resurse/css/links.css" type="text/css" />
+<style>
+    #tema {
+  position: sticky;
+  bottom: 20px;
+  right: 20px;
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+}
+
+#tema:hover {
+  opacity: 1;
+}
+
+</style>
+<br>
+<br>
+
+<div id="tema" class="d-flex align-items-center mt-10">
+    <i class="fas fa-moon fa-regular ml-4"></i>
+    <div class="form-check form-switch ml-2" id="cont_switch">
+      <input class="form-check-input" type="checkbox" role="switch" id="switch_tema">
+    </div>
+    <i class="fas fa-sun fa-regular ml-2"></i>
+  </div>
+  
+  
+  
 
 <footer>
     <a href="#" id="link-top" title="Buton Înapoi sus">           
@@ -45,11 +72,16 @@
             E-mail:<a href="mailto:teobalan79@yahoo.com" class="footer-link"><i class="fa-solid fa-envelope fa-bounce"></i></i></a>
             <a href="https://wa.me/+40732657369/?text=Mesajul_dvs" class="footer-link">Whatsapp</a>
         </address>
-        <div id="banner"> Acesta este un proiect scolar !</div>
         <p><small>Copyright &copy; 2023 Teodor-Daniel Balan</small></p>
         <p><small>Proiect cu scop educativ <time datetime="2023-02-27T23:09:00+02:00">27 februarie 2023,
                     23:09</time> </small> </p>
     </section>
-    <%- locals.optiuniMeniu %>
-        <p id="banner">Acesta este un proiect scolar. Acceptati cookies? <button id="ok_cookies">Ok</button></p>
+    <!--<%- locals.optiuniMeniu %> -->
+    <div id="banner" class="disclaimer-banner">
+      <div class="banner-content">
+        <p>Acesta este un proiect scolar!</p>
+        <p>Acceptati cookie-uri?</p>
+        <button id="ok_cookies">OK</button>
+      </div>
+    </div>
 </footer>

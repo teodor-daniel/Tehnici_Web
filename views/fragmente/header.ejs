@@ -1,35 +1,44 @@
+<script src="/resurse/js/tema.js"></script>
+<script src="/resurse/js/cookies.js"></script>
+
 <nav>
-    <label id="hamburger" for="ch-menu">
-      <img src="/resurse/imagini/Hamburger_icon_alb.png" alt="menu">
-    </label>
-    <input id="ch-menu" type="checkbox">
+
+  <label id="hamburger" for="ch-menu">
+    <img src="/resurse/imagini/Hamburger_icon_alb.png" alt="menu">
+  </label>
+  <input id="ch-menu" type="checkbox">
     <ul class="meniu">
       <li>
-        
         <div id="acasa" ><a href="/despre">Acasa</a></div>
         <div id="acasa-mediu">
-          <a href="/despre"> <span class="fas fa-regular fa-house"></span></a>
+          <a href="/despre"> <i class="fas fa-regular fa-house"></i></a>
         </div>
       </li>
+      <!--
       <li>
         <a href="#">Sale</a>
         <ul>
           <li><a href="#Z-produse">Winter Sale</a></li>
           <li><a href="#">Summer Sale</a></li>
+
         </ul>
       </li>
-      <li> 
-        <a href="/produse">Produse</a>
+      -->
+      <li>
+        <a href="/inregistrare"><i class="fa-solid fa-user"></i>Inregistrare</a></li>
+
+      <li><a href="/produse"><i class="fa-sharp fa-solid fa-cart-shopping"></i>Produse</a>
         <ul>
           <% for (let opt of locals.optiuniMeniu) { %>
-            <li><a href="/produse?tip=<%= opt.unnest %>"><%= opt.unnest %></a></li>
-                <% } %>
-        </ul>
+          <li><a href="/produse?categorie=<%- opt.unnest %>"><%- opt.unnest %> </a></li>
+          <% } %>
       </li>
+      
+      
+      
     </ul>
     
   </nav>
-
 
 <header class="c1" id="h1">
           <h1>TeoSport</h1>

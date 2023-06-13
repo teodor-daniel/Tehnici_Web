@@ -4,8 +4,8 @@
 		{
 			"fisier":"adidasi.png",
 			"descriere":"Adidasi de vara",
-			"luni":["aprilie","mai"],
-			"anotimp":["primavara"]
+			"luni":["aprilie","mai","iunie"],
+			"anotimp":["vara"]
 
 		},
 		{
@@ -17,8 +17,8 @@
 		{
 			"fisier":"bike.png",
 			"descriere":"Bicicleta de vara",
-			"luni":["martie","aprilie","mai"],
-			"anotimp":["primavara"]
+			"luni":["martie","aprilie","iunie"],
+			"anotimp":["vara"]
 		},
 		{
 			"fisier":"football.png",
@@ -41,20 +41,20 @@
 		{
 			"fisier":"proteine.png",
 			"descriere":"Proteine",
-			"luni":["martie","aprilie"],
-			"anotimp":["primavara"]
+			"luni":["martie","aprilie","iunie"],
+			"anotimp":["vara"]
 		},
 		{
 			"fisier":"snowbike.png",
 			"descriere":"Bicicleta de iarna",
-			"luni":["martie","aprilie"],
-			"anotimp":["primavara"]
+			"luni":["martie","aprilie","iunie"],
+			"anotimp":["vara"]
 		},
 		{
 			"fisier":"snowboard.png",
 			"descriere":"Snowboard",
-			"luni":["martie","aprilie"],
-			"anotimp":["primavara"]
+			"luni":["martie","aprilie","iunie"],
+			"anotimp":["vara"]
 		},
 		{
 			"fisier":"surf.png",

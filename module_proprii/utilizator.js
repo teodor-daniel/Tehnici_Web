@@ -10,7 +10,7 @@ class Utilizator{
     static tipConexiune="local";
     static tabel="utilizatori"
     static parolaCriptare="tehniciweb";
-    static emailServer="test.tweb.node@gmail.com";
+    static emailServer="tehniciwebteodor@gmail.com";
     static lungimeCod=64;
     static numeDomeniu="localhost:8080";
     #eroare;
@@ -24,11 +24,14 @@ class Utilizator{
             this.username = username;
         }
         catch(e){ this.#eroare=e.message}
-
+        //fiecare element din constructor
         for(let prop in arguments[0]){
+        //copiez argumentele in utilizator
             this[prop]=arguments[0][prop]
         }
+        //Verific daca am setat rolul atunci transform din string in obiect
         if(this.rol)
+        //iau codul daca exista atunci creez o instanta a rolului , daca nu exista atunci consider ca e string 
             this.rol=this.rol.cod? RolFactory.creeazaRol(this.rol.cod):  RolFactory.creeazaRol(this.rol);
         console.log(this.rol);
 
@@ -61,12 +64,18 @@ class Utilizator{
     }
 
     static criptareParola(parola){
+        //foloseste un alt string cu care cripteaza, si parola efectiva,
+        //cripteaza sincron , primeste parola din constructor, cu ajutorul parolei de criptare , unde e setata tehnici web, pt fiecare utilizator un token unic, salt string 
+        //
         return crypto.scryptSync(parola,Utilizator.parolaCriptare,Utilizator.lungimeCod).toString("hex");
     }
 
+    //Datele scrise in formular, avem deja utilizatorul 
     salvareUtilizator(){
+        //parolele trebuie criptate, si o si salvam in aceelasi timp
         let parolaCriptata=Utilizator.criptareParola(this.parola);
         let utiliz=this;
+        //bonus genreaza un string
         let token=parole.genereazaToken(100);
         AccesBD.getInstanta(Utilizator.tipConexiune).insert({tabel:Utilizator.tabel,
             campuri:{
@@ -96,7 +105,7 @@ class Utilizator{
             secure: false,
             auth:{//date login 
                 user:Utilizator.emailServer,
-                pass:"rwgmgkldxnarxrgu"
+                pass:"kudjfqewbivixkbj"
             },
             tls:{
                 rejectUnauthorized:false
@@ -139,7 +148,7 @@ class Utilizator{
     static getUtilizDupaUsername (username,obparam, proceseazaUtiliz){
         if (!username) return null;
         let eroare=null;
-        AccesBD.getInstanta(Utilizator.tipConexiune).select({tabel:"utilizatori",campuri:['*'],conditiiAnd:[`username=$1`]}, function (err, rezSelect){
+        AccesBD.getInstanta(Utilizator.tipConexiune).select({tabel:"utilizatori",campuri:['*'],conditiiAnd:[`username='${username}'`]}, function (err, rezSelect){
             if(err){
                 console.error("Utilizator:", err);
                 console.log("Utilizator",rezSelect.rows.length);
@@ -152,7 +161,7 @@ class Utilizator{
             //constructor({id, username, nume, prenume, email, rol, culoare_chat="black", poza}={})
             let u= new Utilizator(rezSelect.rows[0])
             proceseazaUtiliz(u, obparam, eroare);
-        }, [username]);
+        });
     }
 
     areDreptul(drept){

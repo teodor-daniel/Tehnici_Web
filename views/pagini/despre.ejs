@@ -4,7 +4,7 @@
 <head>
     <meta name="keywords"  content="sport, sportiva, adidas, nike, echipamente sportive, incaltaminte, suplimente alimentare, sale ">
     <meta name="description" content="Echipament sportiv. Suplimente alimentare, imbracaminte si incaltaminte sport.">
-   <%- include ("../fragmente/test.ejs") %>
+    <%- include ("../fragmente/head.ejs") %>
 
 </head>
 
@@ -30,34 +30,43 @@
               </section>
               <section id="Z-utilizatori">
                 <h2>Utilizatori</h2>
-                <!--
-                <div id ="imagine">
-                </div>
-                -->
+                
+                <div id ="imagine"></div>
+              
               </section>
 
             <section id="Z-date_utilizatori">
                 <h2>Date-Utilizatori</h2>
-                <!-- 
-                <p>
-                  Ip 
-                  <%- locals.ip %>
-                  <%- locals.a + locals.b %>
-                  <button class="btn btn-primary">ceva</button>
-                </p>
-                -->
+                  <h2>Bine ati venit</h2>
+                  <% if(!locals.utilizator) { %>
+                      <form id="form_inreg"  method="post" class="date"  action="/login"  enctype="multipart/form-data">
+                          <p>
+                              <label>
+                                  Username: <input type="text" name="username" id="inp-username" value="" required pattern="[A-Za-z0-9]+">
+                              </label>
+                          </p>
+                          <p>
+                              <label>
+                                  Parola: <input id="parl" type="password" required  name="parola" value="">
+                              </label>
+                          </p>
+                          <p><input type="submit" value="Logare"></p>
+                      </form>
+                  <% }  %>
+                      <p><%- locals.mesajLogin %></p>
+
             </section>
 
             <section id="Z-date_server_site">
               <h2>Date-Server</h2>
-              <!--
+
               <div id ="text">
                 <p>"Un text"</p>
                 <div id="text-reflectat"> <p>"Un text"</p></div>
               </div>
               
               <div class="animat-text">Textul animat</div>
-            -->
+
             </section>
 
             <section id="Z-tabel">
@@ -121,7 +130,7 @@
 
             <section id="Z-calendar" >
                 <h2>Calendar</h2>
-                  <!--
+
                 <div id="column-container">
                 
                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
@@ -129,7 +138,6 @@
                     industry's standard dummy text ever since the 1500s.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
                     industry's standard dummy text ever since the 1500s.</p>
                 </div>
-              -->
             </section>
 
             <section id="Z-anunturi">
@@ -165,7 +173,7 @@
   
     
   </section>
-    <%- include ("../fragmente/video.ejs") %>
+    <%- include ("../fragmente/video.ejs") %> 
     <%- include ("../fragmente/footer.ejs") %>
 </body>
 

@@ -12,13 +12,19 @@
   <%- include ("../fragmente/header.ejs") %>
     <main>
         <h2>Home</h2>
-        <ul class="list-group">
-          <li class="list-group-item">Item 1</li>
-          <li class="list-group-item">Item 2</li>
-          <li class="list-group-item">
-            <button class="btn btn-primary">Click me</button>
-          </li>
-        </ul>
+        <div class="row">
+          <video playsinline autoplay muted loop poster="/resurse/imagini/mingi_mari.jpg" id="bgvid">
+            <source src="/resurse/video/prezentare.mp4">
+          </video>
+        </div>
+        <div id=" imagine">
+        </div>
+        <video controls poster="/resurse/imagini/mingi_mari.jpg" preload="metadata">
+          <source src="/resurse/video/prezentare.mp4" type="video/mp4">
+          <source src="/resurse/video/prezentare.ogv" type="video/ogv">
+          <track label="Romanian" kind="subtitles" srclang="ro" src="/resurse/subtitiles/subtitles-ro.vtt" default>
+          <track label="English" kind="subtitles" srclang="en" src="/resurse/subtitiles/subtitles-en.vtt">
+        </video>
     </main>
 
     <%- include ("../fragmente/footer.ejs") %>

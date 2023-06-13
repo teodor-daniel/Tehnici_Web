@@ -1,19 +1,29 @@
 h2{
+    text-align: center;
+    margin:0;
     padding:0.4rem;
+    background-color:none;
+    color: var(--culoare-text);
+    font-size:1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    border-radius: 0.4rem;
+    padding-bottom: 1rem;
+
 }
 #art-produs{
     margin:0 auto;
     width:70%;
     max-width:700px;
-    background-color: var(--cl-light-t);
-    box-shadow: 0px 0px 10px 5px grey;
-    padding:0.4rem;
+    background-color: var(--fundal-deschis);
+    box-shadow: 0px 0px 10px 5px grey; 
 }
 
 #art-produs p{
     margin:0;
-    padding:0.4rem;
     font-weight:bold;
+    padding:0.2rem; 
     font-size:1.1rem;
 }
 
@@ -21,19 +31,19 @@ h2{
     font-weight: normal;
 }
 #art-produs p:nth-of-type(even){
-    background-color: var(--culoare-roz-inchis);
+    color: var(--culoare-linii-interimitente);
 }
-#art-produs p:nth-of-type(odd){
-    background-color: var(--cl-marcare);
-}
+
 .imag-produs{
     text-align: center;
 }
 .imag-produs img{
-    width:50%;
-    height:auto;
+    text-align: center;
+    width:300px;
+    height:250px;
+    padding-bottom: 0.5rem;
 }
-@media screen and (max-width: 700px){
+@media screen and (max-width: 750px){
     #art-produs{
         margin:0 auto;
         width:95%;

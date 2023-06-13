@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html  lang="ro">
     <head>
-        <%-include ("../fragmente/header") %>
-        <%- include("../fragmente/head") %>     
-        <link href="/resurse/css/produs.css" type="text/css" rel="stylesheet" />
+        <%- include("../fragmente/head") %>
+        <link href="/resurse/css/produs.css" type="text/css" rel="stylesheet" />     
     </head>
+    <header>
+        <%-include ("../fragmente/header") %>
+
+    </header>
     <body>
-
-
     <main>
         <section>
             <h2>Pagină produs</h2>
@@ -15,11 +16,12 @@
                     <h3><span class="nume"><%- locals.prod.nume %></span></h3>
                     <p>Pret: <span class="pret"><%- locals.prod.pret %> </span></p>
                     <p>Descriere: <span class="descriere"><%- locals.prod.descriere %> </span></p>
-                    <p>Materiale folosite: <span class="ingrediente"><%- locals.prod.materiale %> </span></p>
-                    <p>Greutate: <span class="calorii"><%- locals.prod.greutate %> </span></p>
-                    <p>Numar obiecte: <span class="gramaj"><%- locals.prod.bucati%> </span></p>
+                    <p>Pentru: <span class="descriere"><%- locals.prod.tip_produs %> </span></p>
+                    <p>Materiale folosite: <span class="materiale"><%- locals.prod.materiale %> </span></p>
+                    <p>Greutate: <span class="greutate"><%- locals.prod.greutate %> </span></p>
+                    <p>Numar obiecte: <span class="bucati"><%- locals.prod.bucati%> </span></p>
                     <p>Categorie: <span class="categorie"><%- locals.prod.categorie %> </span></p>
-                    <p>A fost acest produs testat?: <span class="pt_diabetici"><%- locals.prod.testat %> </span></p>
+                    <p>A fost acest produs testat?: <span class="testat"><%- locals.prod.testat %> </span></p>
                     <p>Data adăugare: <span class="categorie"><%- locals.prod.data_adaugare %> </span></p>
                     <figure class="imag-produs">
                         <img  src="/resurse/imagini/produse/<%- locals.prod.imagine %>" alt="[imagine <%- locals.prod.nume %>]" />

@@ -22,7 +22,6 @@
 header {
     background-color: var(--culoare-fundal);
     color: var(--culoare-header);
-    padding: 20px;
     text-align: center;
   }
   

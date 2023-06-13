@@ -1,11 +1,11 @@
 
 const Drepturi=require('./drepturi.js');
-
-
+//
 class Rol{
     static get tip() {return "generic"}
     static get drepturi() {return []}
     constructor (){
+        ///pot sa dau string sau o instanta
         this.cod=this.constructor.tip;
     }
 
@@ -48,17 +48,19 @@ class RolClient extends Rol{
         super()
     }
 }
-
-class RolFactory{
+//de instante
+class RolFactory {
     static creeazaRol(tip) {
-        switch(tip){
-            case RolAdmin.tip : return new RolAdmin();
-            case RolModerator.tip : return new RolModerator();
-            case RolClient.tip : return new RolClient();
-        }
+      switch (tip) {
+        case RolAdmin.tip:  return new RolAdmin();
+        case RolModerator.tip:return new RolModerator();
+        case RolClient.tip:return new RolClient();
+        default:
+          console.error('Invalid tip:', tip);
+          return null;
+      }
     }
-}
-
+  }
 
 module.exports={
     RolFactory:RolFactory,

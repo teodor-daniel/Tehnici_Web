@@ -2,41 +2,37 @@
 
 ATENTIE!
 inca nu am implementat protectia contra SQL injection
-design pattern: singleton
 */
 
 const {Client, Pool}=require("pg");
 
 
 class AccesBD{
-    static #instanta=null; //o proprietate statica nu apartine instantei ci clasei
-    static #initializat=false;//# = private (nu poate fi accesat din afara clasei) iar public fara # (nu poate fi accesat din afara clasei)
+    static #instanta=null;
+    static #initializat=false;
 
+
+// Singleton - clasa AccesBD va avea o singura instanta in tot programul
     constructor() {
         if(AccesBD.#instanta){
-            throw new Error("Deja a fost instantiat"); //instanta este deja creata deci instanta unica nu mai poate fi creata
+            throw new Error("Deja a fost instantiat");
         }
+//Nu a fost initializata baza de date => nu se poate instantia clasa
         else if(!AccesBD.#initializat){
             throw new Error("Trebuie apelat doar din getInstanta; fara sa fi aruncat vreo eroare");
         }
     }
 
+// metoda initializarea bazei de date locale
     initLocal(){
-        this.client= new Client({database:"laborator",
-            user:"irina", 
-            password:"irina", 
+        this.client= new Client({database:"site",
+            user:"teo", 
+            password:"7979", 
             host:"localhost", 
             port:5432});
-        /*
-        this.client2= new Pool({database:"laborator",
-                user:"irina", 
-                password:"irina", 
-                host:"localhost", 
-                port:5432});
-        */
         this.client.connect();
     }
-
+// initializarea bazei de date de pe heroku (in cloud)
     getClient(){
         if(!AccesBD.#instanta ){
             throw new Error("Nu a fost instantiata clasa");
@@ -56,7 +52,8 @@ class AccesBD{
      * @param {ObiectConexiune} un obiect cu datele pentru query
      * @returns {AccesBD}
      */
-    static getInstanta({init="local"}={}){
+
+    static getInstanta({init="local"}={}){ 
         console.log(this);//this-ul e clasa nu instanta pt ca metoda statica
         if(!this.#instanta){
             this.#initializat=true;
@@ -69,8 +66,6 @@ class AccesBD{
                 switch(init){
                     case "local":this.#instanta.initLocal();
                 }
-                
-
                 //daca ajunge aici inseamna ca nu s-a produs eroare la initializare
                 
             }
@@ -107,7 +102,7 @@ class AccesBD{
      * @param {function} callback - o functie callback cu 2 parametri: eroare si rezultatul queryului
      */
     select({tabel="",campuri=[],conditiiAnd=[]} = {}, callback, parametriQuery=[]){
-        let conditieWhere=""; //IN CONDITII O SA II DAU UN VECTOR DE VECTORI 
+        let conditieWhere="";
         if(conditiiAnd.length>0)
             conditieWhere=`where ${conditiiAnd.join(" and ")}`; 
         let comanda=`select ${campuri.join(",")} from ${tabel} ${conditieWhere}`;
@@ -137,6 +132,13 @@ class AccesBD{
         }
     }
     insert({tabel="",campuri={}} = {}, callback){
+                /*
+        campuri={
+            nume:"savarina",
+            pret: 10,
+            calorii:500
+        }
+        */
         console.log("-------------------------------------------")
         console.log(Object.keys(campuri).join(","));
         console.log(Object.values(campuri).join(","));
