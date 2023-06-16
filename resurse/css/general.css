@@ -74,9 +74,45 @@ p {
 	border: 2px solid var(--umbra);
   }
 
+  .container {
+    display: inline-flex;
+    align-items: center;
+    padding: left 100px; ;
+  }
+  
+  #hr {
+    border-top: 3px solid black;
+    opacity: 100%;
+    width: 20%;
+  }
+  
+  #pauza {
+    width: 0;
+    height: 0;
+    border-left: 0.6vw solid transparent;
+    border-bottom: 6vw solid black;
+    border-right: 0.6vw solid transparent;
+    rotate: 270deg;
 
+  }
+  
+  #pauza2 {
+    width: 0;
+    height: 0;
+    border-left: 0.6vw solid transparent;
+    border-top: 6vw solid black;
+    border-right: 0.6vw solid transparent;
+    rotate: 270deg;
 
-
+  }
+  
+  #column-container {
+    column-count: 2;
+    column-gap: 20px;
+    column-rule: 1px solid black;
+  }
+  
+  
 
 main{
 	background-color: var(--culoare-fundal);
@@ -148,32 +184,4 @@ main{
 
 .disclaimer-banner.animation {
   animation: bannerAnimation 3s forwards;
-}
-
-
-.custom-hr {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 2px;
-  border: none;
-  background-color: black;
-  margin: 0;
-  padding: 0;
-}
-
-.custom-hr::before,
-.custom-hr::after {
-  content: "";
-  flex-grow: 1;
-  height: 1px;
-  background-color: black;
-}
-
-.custom-hr::before {
-  margin-right: 10px;
-}
-
-.custom-hr::after {
-  margin-left: 10px;
 }

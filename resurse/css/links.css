@@ -12,7 +12,7 @@ a.footer-link:link {
   }
   
   a.footer-link[href^="http"]:hover::before {
-    color: var(--culoare-text); /* se schimbă culoarea simbolului la hover */
+    color: var(--culoare-text);
   }
   
   a.footer-link:hover {
