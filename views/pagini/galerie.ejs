@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <meta name="keywords"  content="sport, sportiva, adidas, nike, echipamente sportive, incaltaminte, suplimente alimentare, sale ">
+    <meta name="description" content="Echipament sportiv. Suplimente alimentare, imbracaminte si incaltaminte sport.">
+   <%- include ("../fragmente/head.ejs") %>
+
+</head>
+
+<body>
+  <%- include ("../fragmente/header.ejs") %>
+    <main>
+        <div class="galerie_animata" id="galanim" style="--nrImg: <% locals.nrImagini %>">
+
+            <% var i=0; %>
+                <% for (let imag of locals.imgInv) { %>
+                    <% i=i + 1; %>
+                        <% if(i> locals.nrImagini) { break; }%>
+
+                            <% var nume_imag=imag.fisier.split('\\'); %>
+                                <% nume_imag=nume_imag[nume_imag.length - 1]; %>
+
+                                    <figure>
+                                        <picture>
+                                            <source srcset="<%- imag.fisier_mic %>" media="(max-width:700px)" />
+                                            <source srcset="<%- imag.fisier_mediu %>"
+                                                media="(max-width:1400px)" />
+                                            <img src="<%- imag.fisier %>" alt=" <%- imag.alt || nume_imag %> ">
+                                        </picture>
+                                        <figcaption><%- imag.attribution || imag.descriere %></figcaption>
+                                    </figure>
+
+                                    <% } %>
+        </div>
+        <br>
+        <div>
+            <br>
+        </div>
+    </main>
+
+
+</body>
+
+</html>

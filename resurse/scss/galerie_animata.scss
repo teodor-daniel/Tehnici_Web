@@ -1,0 +1,97 @@
+$nrImg: 9;
+.galerie_animata {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1em;
+    width: 30%;
+    figcaption {
+        position: absolute;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.7);
+        width: 100%;
+        text-align: center;
+        overflow: hidden;
+    }
+    figure {
+        border: 0.5em solid;
+        position: relative;
+        width: 30%;
+        height: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}
+#galanim {
+    figure {
+        position: absolute;
+        left: 35%;
+        margin-bottom: 10em;
+        z-index: 0;
+        animation-name: gal_exemplu;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-fill-mode: forwards;
+        animation-duration: calc(2s * $nrImg);
+        transform-origin: center;
+    }
+    &:hover figure {
+        -webkit-animation-play-state: paused;
+        -moz-animation-play-state: paused;
+        -o-animation-play-state: paused;
+        animation-play-state: paused;
+        cursor: pointer;
+    }
+}
+
+
+#spacer {
+    height: 20em;
+    background: transparent;
+}
+
+
+@for $i from 0 through $nrImg {
+    #galanim figure:nth-child(#{$i}) {
+        animation-delay: 2s * $i;
+    }
+}
+
+
+$start: calc(1.5 / ($nrImg * 3) * 100%);
+$mid: calc(3 / ($nrImg * 3) * 100%);
+$midm1: calc(3 / ($nrImg * 3) * 100% - 2%);
+$end: calc(100% - (1.5 / ($nrImg * 3) * 100%));
+
+@keyframes gal_exemplu {
+    0% {
+        opacity: 1;
+    }
+    #{$start} {
+        opacity: 1;
+        transform: rotate(0deg);
+        clip-path: circle(70%);
+    }
+    #{$midm1} {
+        clip-path: circle(25%);
+        transform: rotate(0deg);
+        opacity: 1;
+    }
+    #{$mid} {
+        opacity: 0;
+        transform: rotate(360deg);
+        clip-path: circle(0%);
+    }
+    #{$end} {
+        opacity: 0;
+        transform: rotate(0deg);
+        clip-path: circle(70%);
+    }
+    100% {
+        opacity: 1;
+    }
+}
