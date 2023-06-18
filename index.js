@@ -219,15 +219,27 @@ app.post("/inregistrare",function(req, res){ //intra aici
         var eroare="";
 
         var utilizNou=new Utilizator(); //obiect nou tip utilizator
+        if (campuriText.parola.length < 4) {
+            eroare += "Parola trebuie sa contina cel putin 4 caractere. ";
+            res.render("pagini/inregistrare", {err: "Eroare: "+eroare});
+          }
+          if (campuriText.nume.toLowerCase().includes('malefic')) {
+            eroare += "Numele nu poate conține combinații negative.";
+            res.render("pagini/inregistrare", {err: "Eroare: " + eroare});
+          }
+    if(eroare == ''){
         try{
             //aici se seteaza camp de camp sa pot face anumite verificari
+            console.log(campuriText.nume);
+
             utilizNou.setareNume=campuriText.nume;
             utilizNou.setareUsername=campuriText.username; //in setter, vine ceea ce e dupa egal
             utilizNou.email=campuriText.email;
             utilizNou.prenume=campuriText.prenume;
-            
+            utilizNou.data_adaugare = campuriText.data_adaugare;
             utilizNou.parola=campuriText.parola;
             utilizNou.culoare_chat=campuriText.culoare_chat;
+            utilizNou.tema = campuriText.tema;
             utilizNou.poza= poza;
             //functia asta primeste un obiect de tip utilizator, un parametru si o eroare
             Utilizator.getUtilizDupaUsername(campuriText.username, {}, function(u, parametru ,eroareUser ){
@@ -257,7 +269,7 @@ app.post("/inregistrare",function(req, res){ //intra aici
     
 
 
-
+    }
     });
     //primrea campurilor, pentru fiecare filed, mai intai text, apoi fisier
     formular.on("field", function(nume,val){  // primul eveniment 1
@@ -321,10 +333,67 @@ app.get("/cod/:username/:token",function(req,res){
     }
 })
 
+app.get("/useri", function (req, res) {
+
+    if (req?.utilizator?.areDreptul?.(Drepturi.vizualizareUtilizatori)) {
+        AccesBD.getInstanta().select({ tabel: "utilizatori", campuri: ["*"] }, function (err, rezQuery) {
+            console.log(err);
+            res.render("pagini/useri", { useri: rezQuery.rows });
+        });
+    }
+    else {
+        renderError(res, 403);
+    }
+});
 
 
+app.post("/sterge_utiliz", function (req, res) {
+    if (req?.utilizator?.areDreptul?.(Drepturi.stergereUtilizatori)) {
+        var formular = new formidable.IncomingForm();
+
+        formular.parse(req, function (err, campuriText, campuriFile) {
+
+            AccesBD.getInstanta().delete({ tabel: "utilizatori", conditiiAnd: [`id=${campuriText.id_utiliz}`] }, function (err, rezQuery) {
+                console.log(err);
+                res.redirect("/useri");
+            });
+        });
+    } else {
+        renderError(res, 403);
+    }
+})
 
 
+//sterge utilizator
+Utilizator.stergeUtilizatorDupaId(2);
+
+app.post("/login",function(req, res){
+    var username;
+    console.log("ceva");
+    var formular= new formidable.IncomingForm()
+    formular.parse(req, function(err, campuriText, campuriFisier ){
+        Utilizator.getUtilizDupaUsername (campuriText.username,{
+            req:req,
+            res:res,
+            parola:campuriText.parola
+        }, function(u, obparam ){
+            let parolaCriptata=Utilizator.criptareParola(obparam.parola);
+            if(u.parola==parolaCriptata && u.confirmat_mail ){
+                u.poza=u.poza?path.join("poze_uploadate",u.username, u.poza):"";
+                obparam.req.session.utilizator=u;
+                
+                obparam.req.session.mesajLogin="Bravo! Te-ai logat!";
+                obparam.res.redirect("/despre");
+                //obparam.res.render("/login");
+            }
+            else{
+                console.log("Eroare logare")
+                obparam.req.session.mesajLogin="Date logare incorecte sau nu a fost confirmat mailul!";
+                obparam.res.redirect("/despre");
+            }
+        })
+    });
+});
 
 app.get("/favicon.ico", function (req, res) {
     res.sendFile(__dirname + "/resurse/ico/favicon.ico");
@@ -338,7 +407,7 @@ app.get("/ceva", function (req, res) {
 
  
 
-app.get(["/despre", "/", "/homee"], function (req, res) {
+app.get(["/despre", "/", "/homee", "/login"], function (req, res) {
     res.render("pagini/despre", { ip: req.ip, a: 10, b: 20, imagini: obGlobal.obImagini.imagini });
 }) 
 app.get("/*.ejs", function (req, res) {

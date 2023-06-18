@@ -7,15 +7,36 @@ const nodemailer=require("nodemailer");
 
 
 class Utilizator{
-    static tipConexiune="local";
-    static tabel="utilizatori"
-    static parolaCriptare="tehniciweb";
-    static emailServer="tehniciwebteodor@gmail.com";
-    static lungimeCod=64;
-    static numeDomeniu="localhost:8080";
-    #eroare;
-
-    constructor({id, username, nume, prenume, email, parola, rol, culoare_chat="black", poza}={}) {
+  /**
+   * @type {string} - Tipul de conexiune.
+   * @type {string} - Numele tabelului utilizatorilor în baza de date.
+   * @type {string} - Parola utilizată pentru criptarea parolelor utilizatorilor.
+   * @type {string} - Adresa de email a serverului.
+   * @type {number} - Lungimea codului generat pentru utilizatori.
+   * @type {string} -  Numele de domeniu utilizat pentru generarea link-urilor.
+   * @type {string} -
+   */
+  static tipConexiune = "local";
+  static tabel = "utilizatori";
+  static parolaCriptare = "tehniciweb";
+  static emailServer = "tehniciwebteodor@gmail.com";
+  static lungimeCod = 64;
+  static numeDomeniu = "localhost:8080";
+  #eroare;
+  /**
+   * Creează o instanță a clasei Utilizator.
+   * @param {Object} options - Opțiuni pentru utilizator.
+   * @param {number} options.id - ID-ul utilizatorului.
+   * @param {string} options.username - Numele de utilizator.
+   * @param {string} options.nume - Numele utilizatorului.
+   * @param {string} options.prenume - Prenumele utilizatorului.
+   * @param {string} options.email - Adresa de email a utilizatorului.
+   * @param {string} options.parola - Parola utilizatorului.
+   * @param {Object|string} options.rol - Rolul utilizatorului (obiect sau cod).
+   * @param {string} options.culoare_chat - Culoarea utilizatorului în chat (implicit "black").
+   * @param {string} options.poza - Poza de profil a utilizatorului.
+   */
+    constructor({id, username, nume, prenume, email, parola, rol, data_adaugare, culoare_chat, tema, poza}={}) {
         this.id=id;
 
         //optional sa facem asta in constructor
@@ -83,17 +104,22 @@ class Utilizator{
                 nume: this.nume,
                 prenume:this.prenume,
                 parola:parolaCriptata,
+                data_adaugare:this.data_adaugare,
                 email:this.email,
                 culoare_chat:this.culoare_chat,
+                tema:this.tema,
                 cod:token,
                 poza:this.poza}
             }, function(err, rez){
             if(err)
                 console.log(err);
             //metoda trimiteMail, primeste subiect, mesaj text, mesaj html, atasamente
-            utiliz.trimiteMail("Te-ai inregistrat cu succes","Username-ul tau este "+utiliz.username,
-            `<h1>Salut!</h1><p style='color:blue'>Username-ul tau este ${utiliz.username}.</p> <p><a href='http://${Utilizator.numeDomeniu}/cod/${utiliz.username}/${token}'>Click aici pentru confirmare</a></p>`,
-            )
+            let subiect = `Salut, ${utiliz.prenume} ${utiliz.nume}`;
+            let mesajText = `Te-ai înregistrat pe TeoSport cu username-ul ${utiliz.username}`;
+            let mesajHtml = `<h1>Salut!</h1><p>Te-ai înregistrat pe TeoSport cu username-ul <em>${utiliz.username}</em>.</p><p><a href="http://${Utilizator.numeDomeniu}/cod/${utiliz.username}/${token}">Click aici pentru confirmare</a></p>`;
+      
+            utiliz.trimiteMail(subiect, mesajText, mesajHtml);
+
         });
     }
 //xjxwhotvuuturmqm
@@ -115,7 +141,7 @@ class Utilizator{
         //genereaza html functie asyncrona, vreau sa vad ca s-a dat mailul, dupa ce s-a dat mailul, vreau sa vad ca s-a trimis mailul
         await transp.sendMail({
             from:Utilizator.emailServer,
-            to:this.email, //email-ul utilizatorului44444444444444444444g8t
+            to:this.email, //email-ul utilizatorului
             subject:subiect,//"Te-ai inregistrat cu succes",
             text:mesajText, //"Username-ul tau este "+username
             html: mesajHtml,// `<h1>Salut!</h1><p style='color:blue'>Username-ul tau este ${username}.</p> <p><a href='http://${numeDomeniu}/cod/${username}/${token}'>Click aici pentru confirmare</a></p>`,
@@ -123,7 +149,19 @@ class Utilizator{
         })
         console.log("trimis mail");
     }
-   
+    static stergeUtilizatorDupaId(id) {
+        AccesBD.getInstanta(Utilizator.tipConexiune).delete({
+          tabel: Utilizator.tabel,
+          conditiiAnd: [`id=${id}`]
+        }, function(err, rez) {
+          if (err) {
+            console.error("Eroare la ștergerea utilizatorului:", err);
+          } else {
+            console.log("Utilizatorul a fost șters cu succes.");
+          }
+        });
+      }
+      
     static async getUtilizDupaUsernameAsync(username){
         if (!username) return null;
         try{

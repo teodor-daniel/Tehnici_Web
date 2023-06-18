@@ -162,7 +162,10 @@ window.addEventListener("DOMContentLoaded", function () {
 
         }
     });
-
+/*
+Metoda replace(/[\u0300-\u036f]/g, "") este apelată pe textul normalizat. Această metodă înlocuiește orice caracter din 
+intervalul Unicode [\u0300-\u036f] (care reprezintă diacriticele) cu un șir vid, eliminând astfel diacriticele.
+*/
     function removeDiacritics(text) {
         return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");//de re explicat
     }
