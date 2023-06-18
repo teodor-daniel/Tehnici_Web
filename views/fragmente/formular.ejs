@@ -1,17 +1,23 @@
+  <!--post pentru a trimite date, formularul tag form toate inputuri, pana acum faceam cu check dar acum luam din input catre backend
+        acum postam , date inserate in table, avem method post daca nu trimite cu get, get(cere o resursa)
+        daca vrei sa scrii date noi (cereri post!, update pe tabel atunci would? cererile astea sunt http)-->
+
+
 <form id="form_inreg"  method="post" class="date"  action="<%= locals.action %>"  enctype="multipart/form-data" >
-    <p>
+    <p>                                                 <!-- Trimis de catre inregistrare-->
+        
         <label>
             Username: <input type="text" name="username" id="inp-username" value="prof<%= Math.floor(Math.random()*100000) %>" required pattern="[A-Za-z0-9#_./]+">
         </label>
     </p>
     <p>
         <label>
-            Nume: <input type="text" name="nume" id="inp-nume"  value="Gogulescu" >
+            Nume: <input type="text" name="nume" id="inp-nume"  value="Miau" >
         </label>
     </p>
     <p>
         <label>
-            Prenume: <input type="text" name="prenume" id="inp-prenume" value="Gogu"  >
+            Prenume: <input type="text" name="prenume" id="inp-prenume" value="Miau"  >
         </label>
     </p>
     <p>
@@ -26,7 +32,7 @@
     </p>
     <p>
         <label>
-            Email: <input type="text" name="email" id="inp-email" required value="profprofprof007@gmail.com"  size="50">
+            Email: <input type="text" name="email" id="inp-email" required value="tehniciwebteodor@gmail.com"  size="50">
         </label>
     </p>
     <p>

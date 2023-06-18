@@ -37,7 +37,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
         let val_culoare = document.getElementById("i_datalist").value;
 
-        // Check if the entered value exists in the datalist options
+        //Verific daca data exista in datalist
         let datalistOptions = document.getElementById("id_lista").children;
         let isculoare = false;
         for (let i = 0; i < datalistOptions.length; i++) {
@@ -48,12 +48,12 @@ window.addEventListener("DOMContentLoaded", function () {
         }
 
         if (!isculoare) {
-            // Display alert and make the input box border red
+            // Eroare ca nu este un material valid
             alert("Invalid material!");
             val_culoareInput.style.border = "3px solid red";
-            return; // Stop further processing
+            return; 
         } else {
-            // Reset the border to the default style
+        
             val_culoareInput.style.border = "";
         }
 
@@ -63,24 +63,32 @@ window.addEventListener("DOMContentLoaded", function () {
 
         for (let prod of produse) {
             prod.style.display = "none";
+
             let nume = prod.getElementsByClassName("val-nume")[0].innerHTML.toLowerCase();
+
             let greutate = parseInt(prod.getElementsByClassName("val-greutate")[0].innerHTML);
+
             let pret = parseFloat(prod.getElementsByClassName("val-pret")[0].innerHTML);
+
             let categorie = prod.getElementsByClassName("val-categorie")[0].innerHTML;
+
             let prod_material = prod.getElementsByClassName("materiale")[0].innerHTML.toLowerCase();
+
             let prod_materials_array = prod_material.split(",").map(material => material.trim());
 
-            let cond1 = (nume.startsWith(val_nume));
-            let cond2 = (val_criteriu == "toate" || (cal_a <= greutate && greutate < cal_b));
-            let cond3 = (pret >= val_pret);
-            let cond4 = (val_categ == "toate" || val_categ == categorie);
             let prod_culoare = prod.getElementsByClassName("val-culoare")[0].innerHTML;
-            let cond6 = (val_culoare === "" || prod_culoare.includes(val_culoare));
-            let prod_testat = prod.getElementsByClassName("val-test")[0].innerHTML === "true";
-            let cond7 = !testatChecked || (testatChecked && prod_testat);
-            let cond8 = (selectedMaterials.length == 0 || selectedMaterials.filter(material => prod_materials_array.includes(material.toLowerCase())).length == 0);
 
-            if (cond1 && cond2 && cond3 && cond4 && cond8 && cond6 && cond7) {
+            let prod_testat = prod.getElementsByClassName("val-test")[0].innerHTML === "true";
+
+            let cond1 = (nume.startsWith(val_nume));//nume
+            let cond2 = (val_criteriu == "toate" || (cal_a <= greutate && greutate < cal_b)); //greutate
+            let cond3 = (pret >= val_pret);//pret
+            let cond4 = (val_categ == "toate" || val_categ == categorie);//categorie
+            let cond6 = (val_culoare === "" || prod_culoare.includes(val_culoare));//culoare
+            let cond7 = !testatChecked || (testatChecked && prod_testat);//testat
+            let cond8 = (selectedMaterials.length == 0 || selectedMaterials.filter(material => prod_materials_array.includes(material.toLowerCase())).length == 0);//materiale
+
+            if (cond1 && cond2 && cond3 && cond4  && cond6 && cond7 && cond8) {
                 prod.style.display = "block";
                 produseAfisate++;
             }
@@ -156,7 +164,7 @@ window.addEventListener("DOMContentLoaded", function () {
     });
 
     function removeDiacritics(text) {
-        return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");//de re explicat
     }
 
 

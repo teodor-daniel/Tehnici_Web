@@ -12,7 +12,7 @@ const Drepturi = require("./module_proprii/drepturi.js");
 const AccesBD = require("./module_proprii/accesbd.js");
 const { randomInt } = require("crypto");
 app = express();
-
+app.set("view engine", "ejs");
 
 
 obGlobal = {
@@ -31,9 +31,21 @@ var client= new Client({
     password:"7979",
     host:"localhost",
     port:5432
-});
+});11       
 
 client.connect();
+
+client.query("SELECT * FROM unnest(enum_range(null::tipuri_produse_sport))", function(err, rezultat){
+
+    if(err){
+        console.log(err);
+    }
+    else{
+        obGlobal.optiuniMeniu=rezultat.rows;
+}
+});
+
+
 
 
 AccesBD.getInstanta().select({tabel:"produs_sport", campuri:["nume"], conditiiAnd:["id=1"]},
@@ -42,16 +54,6 @@ function(err, rez){
     console.log(err);
 }
 )
-client.query("select * from unnest(enum_range(null::tipuri_produse_sport))", function(err, rezTipuri){
-    if (err){
-        console.log(err);
-    }
-    else{
-        obGlobal.optiuniMeniu=rezTipuri.rows;
-    }
-});
-
-
 
 
 console.log("Folder proiect", __dirname);
@@ -60,7 +62,7 @@ console.log("Cale fisier", __filename);
 
 console.log("Director de lucru ", process.cwd());
 
-vectorFoldere = ["temp", "temp1", "backup","statistici","poze_uploadate"]
+vectorFoldere = ["temp", "temp1", "backup","poze_uploadate"]
 for (let folder of vectorFoldere) {
     //let caleFolder =__dirname+"/"+folder;
     let caleFolder = path.join(__dirname, folder)
@@ -75,7 +77,7 @@ console.log(vFisiere);
 
 
 
-app.set("view engine", "ejs");
+
 
 app.use("/resurse", express.static(__dirname + "/resurse"));
 
@@ -83,7 +85,6 @@ app.use("/node_modules", express.static(__dirname + "/node_modules"));
 
 app.use("/*", function(req, res, next){
     res.locals.optiuniMeniu = obGlobal.optiuniMeniu;
-    //console.log(obGlobal.optiuniMeniu);
     next();
 })
 
@@ -146,13 +147,8 @@ app.use(/^\/resurse(\/[a-zA-Z0-9]*)*$/, function (req, res) {
                                                   console.log(err);
                                                   afiseazaEroare(res, 2);
                                                 } else {
-                                                  var produseAfisate = rez.rows.length;
-                                                  if (produseAfisate === 0) {
-                                                    var locAfișareProduse = document.getElementById("loc-afișare-produse");
-                                                    while (locAfișareProduse.firstChild) {
-                                                      locAfișareProduse.firstChild.remove();
-                                                    }
-                                                  }
+                                                    
+                                                  
       
                                                   res.render("pagini/produse", {
                                                     produse: rez.rows,
@@ -190,6 +186,7 @@ app.use(/^\/resurse(\/[a-zA-Z0-9]*)*$/, function (req, res) {
       });
       
 
+
 app.get("/produs/:id",function(req, res){
     console.log(req.params);
     
@@ -206,67 +203,46 @@ app.get("/produs/:id",function(req, res){
 
 
 
-app.get("/galerie", function (req, res) {
-    let nrImagini = randomInt(5, 11);
-    if (nrImagini % 2 == 0) nrImagini++;
-
-    let imgInv = [...obGlobal.obImagini.imagini].reverse();
-
-    let fisScss = path.join(__dirname, "resurse/scss/galerie_animata.scss");
-    let liniiFisScss = fs.readFileSync(fisScss).toString().split("\n");
-
-    let stringImg = "$nrImg: " + nrImagini + ";";
-
-    liniiFisScss = liniiFisScss.slice(1);
 
 
-    liniiFisScss.unshift(stringImg);
-
-
-    fs.writeFileSync(fisScss, liniiFisScss.join("\n"));
-
-    res.render("pagini/galerie.ejs", {
-        imagini: obGlobal.obImagini.imagini,
-        nrImagini: nrImagini,
-        imgInv: imgInv
-    });
-});
-
-
-app.post("/inregistrare",function(req, res){
-    var username;
-    var poza;
+//submit trimit catre server datele din formular
+app.post("/inregistrare",function(req, res){ //intra aici
+    var username; 
+    var poza; //fara valoare pt toate functiiile fcallback
     console.log("ceva");
-    var formular= new formidable.IncomingForm()
-    formular.parse(req, function(err, campuriText, campuriFisier ){//4
+    var formular= new formidable.IncomingForm()//definesc obiect de tip formular, o clasa
+    formular.parse(req, function(err, campuriText, campuriFisier ){//4 parsez datele din formular doar dupa ce le-a primit pe toate
+        //si callback eroare, campuri text, campuri fisier 
         console.log("Inregistrare:",campuriText);
 
         console.log(campuriFisier);
         var eroare="";
 
-        var utilizNou=new Utilizator();
+        var utilizNou=new Utilizator(); //obiect nou tip utilizator
         try{
+            //aici se seteaza camp de camp sa pot face anumite verificari
             utilizNou.setareNume=campuriText.nume;
-            utilizNou.setareUsername=campuriText.username;
+            utilizNou.setareUsername=campuriText.username; //in setter, vine ceea ce e dupa egal
             utilizNou.email=campuriText.email;
             utilizNou.prenume=campuriText.prenume;
             
             utilizNou.parola=campuriText.parola;
             utilizNou.culoare_chat=campuriText.culoare_chat;
             utilizNou.poza= poza;
+            //functia asta primeste un obiect de tip utilizator, un parametru si o eroare
             Utilizator.getUtilizDupaUsername(campuriText.username, {}, function(u, parametru ,eroareUser ){
-                if (eroareUser==-1){//nu exista username-ul in BD
-                    utilizNou.salvareUtilizator();
+                if (eroareUser==-1){//verific ca nu exista username-ul in BD, cauta in tabel user-nameul
+                    utilizNou.salvareUtilizator();//daca nu exista, salvez utilizatorul
                 }
                 else{
-                    eroare+="Mai exista username-ul";
+                    eroare+="Mai exista username-ul"; //daca exista, eroare
                 }
 
-                if(!eroare){
+                if(!eroare){ //daca nu am eroare, randez pagina de inregistrare cu un raspuns setat (nu mai afisez formularul)
                     res.render("pagini/inregistrare", {raspuns:"Inregistrare cu succes!"})
                     
                 }
-                else
+                else //randez cu eroarea respectiva
                     res.render("pagini/inregistrare", {err: "Eroare: "+eroare});
             })
             
@@ -283,26 +259,32 @@ app.post("/inregistrare",function(req, res){
 
 
     });
-    formular.on("field", function(nume,val){  // 1 
+    //primrea campurilor, pentru fiecare filed, mai intai text, apoi fisier
+    formular.on("field", function(nume,val){  // primul eveniment 1
 	
         console.log(`--- ${nume}=${val}`);
 		
         if(nume=="username")
             username=val;
     }) 
-    formular.on("fileBegin", function(nume,fisier){ //2
+    //vine un fisier,
+    formular.on("fileBegin", function(nume,fisier){ // al 2lea  2
         console.log("fileBegin");
         console.log(nume,fisier);
+        //folder cu nume si user pentru poze
         let folderUser=path.join(__dirname, "poze_uploadate",username);
 
         console.log(folderUser);
+        //daca nu exista folderul, il creez
         if (!fs.existsSync(folderUser))
             fs.mkdirSync(folderUser);
+        //in folderul a,                      //aici ar trebuii sa modific
         fisier.filepath=path.join(folderUser, fisier.originalFilename)
+        //fisierul primeste calea
         poza=fisier.originalFilename
 
     })    
-    formular.on("file", function(nume,fisier){//3
+    formular.on("file", function(nume,fisier){//3 cand s-a terminat uploadul
         console.log("file");
         console.log(nume,fisier);
     }); 
@@ -312,15 +294,17 @@ app.post("/inregistrare",function(req, res){
 
 
 //http://${Utilizator.numeDomeniu}/cod/${utiliz.username}/${token}
+//
 app.get("/cod/:username/:token",function(req,res){
     console.log(req.params);
     try {
+        //am usernameul in link, vreau sa vad daca exista in baza de date, req.params.token
         Utilizator.getUtilizDupaUsername(req.params.username,{res:res,token:req.params.token} ,function(u,obparam){
-            AccesBD.getInstanta().update(
+            AccesBD.getInstanta().update( //dupa ce l-am gasit, fac update in baza de date
                 {tabel:"utilizatori",
                 campuri:{confirmat_mail:'true'}, 
-                conditiiAnd:[`cod='${obparam.token}'`]}, 
-                function (err, rezUpdate){
+                conditiiAnd:[`cod='${obparam.token}'`]},
+                function (err, rezUpdate){ //callback daca totul e bine randez pagina de confirmare
                     if(err || rezUpdate.rowCount==0){
                         console.log("Cod:", err);
                         afisareEroare(res,3);
@@ -570,7 +554,31 @@ function afiseazaEroare(
         }
     }
 
-
+    app.get("/galerie", function (req, res) {
+        let nrImagini = randomInt(5, 11);
+        if (nrImagini % 2 == 0) nrImagini++;
+    
+        let imgInv = [...obGlobal.obImagini.imagini].reverse();
+    
+        let fisScss = path.join(__dirname, "resurse/scss/galerie_animata.scss");
+        let liniiFisScss = fs.readFileSync(fisScss).toString().split("\n");
+    
+        let stringImg = "$nrImg: " + nrImagini + ";";
+    
+        liniiFisScss = liniiFisScss.slice(1);
+    
+    
+        liniiFisScss.unshift(stringImg);
+    
+    
+        fs.writeFileSync(fisScss, liniiFisScss.join("\n"));
+    
+        res.render("pagini/galerie.ejs", {
+            imagini: obGlobal.obImagini.imagini,
+            nrImagini: nrImagini,
+            imgInv: imgInv
+        });
+    });
 
 
 app.listen(8080);

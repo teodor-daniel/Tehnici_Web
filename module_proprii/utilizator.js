@@ -90,7 +90,7 @@ class Utilizator{
             }, function(err, rez){
             if(err)
                 console.log(err);
-            
+            //metoda trimiteMail, primeste subiect, mesaj text, mesaj html, atasamente
             utiliz.trimiteMail("Te-ai inregistrat cu succes","Username-ul tau este "+utiliz.username,
             `<h1>Salut!</h1><p style='color:blue'>Username-ul tau este ${utiliz.username}.</p> <p><a href='http://${Utilizator.numeDomeniu}/cod/${utiliz.username}/${token}'>Click aici pentru confirmare</a></p>`,
             )
@@ -98,23 +98,24 @@ class Utilizator{
     }
 //xjxwhotvuuturmqm
 
-
+    
     async trimiteMail(subiect, mesajText, mesajHtml, atasamente=[]){
+        //creez un obiect care primeste serviciul mail, securitate fals nu e bine productie, 
         var transp= nodemailer.createTransport({
             service: "gmail",
             secure: false,
             auth:{//date login 
                 user:Utilizator.emailServer,
-                pass:"kudjfqewbivixkbj"
+                pass:"kudjfqewbivixkbj" //parola data de google
             },
             tls:{
                 rejectUnauthorized:false
             }
         });
-        //genereaza html
+        //genereaza html functie asyncrona, vreau sa vad ca s-a dat mailul, dupa ce s-a dat mailul, vreau sa vad ca s-a trimis mailul
         await transp.sendMail({
             from:Utilizator.emailServer,
-            to:this.email, //TO DO
+            to:this.email, //email-ul utilizatorului44444444444444444444g8t
             subject:subiect,//"Te-ai inregistrat cu succes",
             text:mesajText, //"Username-ul tau este "+username
             html: mesajHtml,// `<h1>Salut!</h1><p style='color:blue'>Username-ul tau este ${username}.</p> <p><a href='http://${numeDomeniu}/cod/${username}/${token}'>Click aici pentru confirmare</a></p>`,
@@ -145,9 +146,10 @@ class Utilizator{
         }
         
     }
-    static getUtilizDupaUsername (username,obparam, proceseazaUtiliz){
+    static getUtilizDupaUsername (username,obparam, proceseazaUtiliz){ //primeste username, un parametru, si o functie callback,
         if (!username) return null;
         let eroare=null;
+        //selectez din tabelul utilizatori, toate val unde username-ul e cel primit ca parametru
         AccesBD.getInstanta(Utilizator.tipConexiune).select({tabel:"utilizatori",campuri:['*'],conditiiAnd:[`username='${username}'`]}, function (err, rezSelect){
             if(err){
                 console.error("Utilizator:", err);
@@ -155,11 +157,11 @@ class Utilizator{
                 //throw new Error()
                 eroare=-2;
             }
-            else if(rezSelect.rowCount==0){
+            else if(rezSelect.rowCount==0){ //verific daca avem randuri in select daca exista, in baza de date, daca nu exista, eroare
                 eroare=-1;
             }
             //constructor({id, username, nume, prenume, email, rol, culoare_chat="black", poza}={})
-            let u= new Utilizator(rezSelect.rows[0])
+            let u= new Utilizator(rezSelect.rows[0]) //daca exista,apelez un constructor din clasa utilizator creez un obiect utilizator, cu datele din baza de date
             proceseazaUtiliz(u, obparam, eroare);
         });
     }

@@ -6,7 +6,7 @@ inca nu am implementat protectia contra SQL injection
 
 const {Client, Pool}=require("pg");
 
-
+//1 o proprietate statică numită instanta, care va conține unica instanță a clasei. Inițial are valoarea null.
 class AccesBD{
     static #instanta=null;
     static #initializat=false;
@@ -14,15 +14,23 @@ class AccesBD{
 
 // Singleton - clasa AccesBD va avea o singura instanta in tot programul
     constructor() {
+        //un constructor care va arunca o eroare dacă deja a fost instanțiată clasa.
+
         if(AccesBD.#instanta){
             throw new Error("Deja a fost instantiat");
         }
 //Nu a fost initializata baza de date => nu se poate instantia clasa
+
         else if(!AccesBD.#initializat){
             throw new Error("Trebuie apelat doar din getInstanta; fara sa fi aruncat vreo eroare");
         }
     }
+/*
+una sau mai multe metode de inițializare a bazei de date prin care se oferă datele de autentificare (
+utilizator, parola, baza de date, port). Aceste metode vor salva în proprietatea client obiectul
+corespunzător conexiunii prin care se realizează cererile către baza de date. Se va scrie și un getter pentru client.
 
+*/
 // metoda initializarea bazei de date locale
     initLocal(){
         this.client= new Client({database:"site",
@@ -52,7 +60,9 @@ class AccesBD{
      * @param {ObiectConexiune} un obiect cu datele pentru query
      * @returns {AccesBD}
      */
-
+/*o metodă getInstanta() care creează o instanță, dacă nu a fost deja creată, și o atribuie variabilei statice instanta. 
+în această metodă se va ințializa și conexiunea la baza de date. Metoda va returna o referință către instanță.
+*/
     static getInstanta({init="local"}={}){ 
         console.log(this);//this-ul e clasa nu instanta pt ca metoda statica
         if(!this.#instanta){

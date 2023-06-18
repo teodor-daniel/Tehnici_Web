@@ -14,7 +14,6 @@
  * @name module.exports.Drepturi
  * @type Drepturi
  */
-//token 
 const Drepturi = {
 	vizualizareUtilizatori: Symbol("vizualizareUtilizatori"),
 	stergereUtilizatori: Symbol("stergereUtilizatori"),

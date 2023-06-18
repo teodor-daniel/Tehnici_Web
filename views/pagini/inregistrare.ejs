@@ -1,21 +1,16 @@
 <!DOCTYPE html>
-<html  lang="ro">
-    <head>
-        <meta name="description" content="Cofetaria Dulcelind - înregistrare utilizatori.">
-        <meta name="keywords" content="cofetarie, Dulcelind, inregistrare, utilizatori">
-        <link rel="stylesheet" href="/resurse/css/produse.css" type="text/css" />
-        <title>Cofetăria Dulcelind - înregistrare </title>
-        <%- include("../fragmente/head") %>     
-        <script type="text/javascript" src=/resurse/js/inregistrare.js></script>
-    </head>
-    <body>
+<html lang="en"></html>
+<head>
+    <%-include ("../fragmente/head") %>
     <%- include("../fragmente/header") %>
-
+    <script type="text/javascript" src="/resurse/js/inregistrare.js"></script>
     <main>
     <div class="afisaj">
         <h1>Inregistrare utilizator</h1>
+        <!--obiectul prin functia rez.render,  verific daca nu am primit raspuns, -->
         <% if(!locals.raspuns) { %>    
-
+            <!-- afiseaza formularul, acest action e proprietate pentru locals , daca nu am primit raspuns afisam formularul
+            app.post/inregistrare,-->
 			<%-include("../fragmente/formular", {action: "/inregistrare"}) %>
         <% } %>
         

@@ -30,7 +30,7 @@ body.dark{
 	--fundal-deschis-portocaliu: #ff8c6e;
 	--fundal-deschis-albastru: #102e4d;
 	--culoare-header: #ffffff9b;
-	--culoare-text: #ffffff;
+	--culoare- : #ffffff;
 }
 
 
@@ -75,9 +75,7 @@ p {
   }
 
   .container {
-    display: inline-flex;
-    align-items: center;
-    padding: left 100px; ;
+
   }
   
   #hr {
