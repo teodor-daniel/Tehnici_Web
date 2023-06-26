@@ -62,6 +62,14 @@ console.log("Cale fisier", __filename);
 
 console.log("Director de lucru ", process.cwd());
 
+//o sesiune e valabil cat utilizatorul e logat
+app.use(session({ // aici se creeaza proprietatea session a requestului (pot folosi req.session)
+    secret: 'abcdefg',//folosit de express session pentru criptarea id-ului de sesiune
+    resave: true,
+    saveUninitialized: false
+  }));
+
+
 vectorFoldere = ["temp", "temp1", "backup","poze_uploadate"]
 for (let folder of vectorFoldere) {
     //let caleFolder =__dirname+"/"+folder;
@@ -81,10 +89,16 @@ console.log(vFisiere);
 
 app.use("/resurse", express.static(__dirname + "/resurse"));
 
+app.use("/poze_uploadate", express.static(__dirname + "/poze_uploadate"));
+
 app.use("/node_modules", express.static(__dirname + "/node_modules"));
 
-app.use("/*", function(req, res, next){
+app.use("/*", function(req, res, next){ //vector de peste tot in footer
     res.locals.optiuniMeniu = obGlobal.optiuniMeniu;
+    res.locals.Drepturi=Drepturi;//trimit si drepturle clientului
+    if (req.session.utilizator){//e un utilizator logat?
+        req.utilizator=res.locals.utilizator=new Utilizator(req.session.utilizator);//il pun in fisierele ejs ca toate paginile sa il vada
+    }  
     next();
 })
 
@@ -232,7 +246,7 @@ app.post("/inregistrare",function(req, res){ //intra aici
             //aici se seteaza camp de camp sa pot face anumite verificari
             console.log(campuriText.nume);
 
-            utilizNou.setareNume=campuriText.nume;
+            utilizNou.setareNume=campuriText.nume;//campuriText.nume (adica efectiv name = "username" din formular")
             utilizNou.setareUsername=campuriText.username; //in setter, vine ceea ce e dupa egal
             utilizNou.email=campuriText.email;
             utilizNou.prenume=campuriText.prenume;
@@ -303,10 +317,14 @@ app.post("/inregistrare",function(req, res){ //intra aici
 });
 
 
-
+app.get("/logout", function(req, res){//utilizatorul isi poate distruge sesiunea
+    res.locals.utilizator=null;
+    req.session.destroy(); //verific sa golesc si locals
+    res.render("pagini/home");
+});
 
 //http://${Utilizator.numeDomeniu}/cod/${utiliz.username}/${token}
-//
+//[numeDomeniu]/confirmare_mail/[token]/[username]
 app.get("/cod/:username/:token",function(req,res){
     console.log(req.params);
     try {
@@ -335,10 +353,10 @@ app.get("/cod/:username/:token",function(req,res){
 
 app.get("/useri", function (req, res) {
 
-    if (req?.utilizator?.areDreptul?.(Drepturi.vizualizareUtilizatori)) {
-        AccesBD.getInstanta().select({ tabel: "utilizatori", campuri: ["*"] }, function (err, rezQuery) {
+    if (req?.utilizator?.areDreptul?.(Drepturi.vizualizareUtilizatori)) { //are dreptul sa vada utilizatori?
+        AccesBD.getInstanta().select({ tabel: "utilizatori", campuri: ["*"] }, function (err, rezQuery) {//daca are dreptul facem un select toate informatiile
             console.log(err);
-            res.render("pagini/useri", { useri: rezQuery.rows });
+            res.render("pagini/useri", { useri: rezQuery.rows });//ori avem eroare ori afisam toate randurile din tabel,
         });
     }
     else {
@@ -348,14 +366,13 @@ app.get("/useri", function (req, res) {
 
 
 app.post("/sterge_utiliz", function (req, res) {
-    if (req?.utilizator?.areDreptul?.(Drepturi.stergereUtilizatori)) {
-        var formular = new formidable.IncomingForm();
-
-        formular.parse(req, function (err, campuriText, campuriFile) {
-
+    if (req?.utilizator?.areDreptul?.(Drepturi.stergereUtilizatori)) {//daca am dreptu de a sterge
+        var formular = new formidable.IncomingForm(); //iau din formular id-ul lui
+        formular.parse(req, function (err, campuriText, campuriFile) {//parsez datele din formular
+//querry de dlete
             AccesBD.getInstanta().delete({ tabel: "utilizatori", conditiiAnd: [`id=${campuriText.id_utiliz}`] }, function (err, rezQuery) {
                 console.log(err);
-                res.redirect("/useri");
+                res.redirect("/useri");//dupa  iar trimitem pe
             });
         });
     } else {
@@ -366,34 +383,122 @@ app.post("/sterge_utiliz", function (req, res) {
 
 //sterge utilizator
 Utilizator.stergeUtilizatorDupaId(2);
-
+//cineva da submit la formularul de login
 app.post("/login",function(req, res){
     var username;
     console.log("ceva");
     var formular= new formidable.IncomingForm()
     formular.parse(req, function(err, campuriText, campuriFisier ){
-        Utilizator.getUtilizDupaUsername (campuriText.username,{
+        Utilizator.getUtilizDupaUsername (campuriText.username,{ //returneaza un obiect din clasa utilizator, si il caut dupa user
             req:req,
             res:res,
             parola:campuriText.parola
-        }, function(u, obparam ){
-            let parolaCriptata=Utilizator.criptareParola(obparam.parola);
-            if(u.parola==parolaCriptata && u.confirmat_mail ){
-                u.poza=u.poza?path.join("poze_uploadate",u.username, u.poza):"";
-                obparam.req.session.utilizator=u;
+        }, function(u, obparam ){ // functia asta luam parola din campuritext, si o criptam, ca sa nu avem parola in clar in baza de date
+            let parolaCriptata=Utilizator.criptareParola(obparam.parola);//verfic daca parola din tabel si cea din formular sunt la fel
+            if(u.parola==parolaCriptata && u.confirmat_mail ){//verific daca e true, daca da, setez sesiunea
+                u.poza=u.poza?path.join("poze_uploadate",u.username, u.poza):"";//creez calea catre poza de profil
+                obparam.req.session.utilizator=u;//setez utilizator in request sesion, u care e obiectul de tip utilizator
                 
-                obparam.req.session.mesajLogin="Bravo! Te-ai logat!";
-                obparam.res.redirect("/despre");
+                obparam.req.session.mesajLogin="Bravo! Te-ai logat!"; // daca e ok
+                obparam.res.redirect("/despre");//
                 //obparam.res.render("/login");
             }
             else{
-                console.log("Eroare logare")
+                console.log("Eroare logare") //daca nu
                 obparam.req.session.mesajLogin="Date logare incorecte sau nu a fost confirmat mailul!";
                 obparam.res.redirect("/despre");
             }
         })
     });
 });
+
+
+
+app.post("/profil", function(req, res){
+    console.log("profil");
+    if (!req.session.utilizator){ //daca nu e logat
+        afiseazaEroare(res,403,)
+        res.render("pagini/eroare_generala",{text:"Nu sunteti logat."});
+        return;
+    }
+    var formular= new formidable.IncomingForm(); //primesc datele din formular , in campuri text
+ 
+    formular.parse(req,function(err, campuriText, campuriFile){
+       
+        var parolaCriptata=Utilizator.criptareParola(campuriText.parola);
+        // AccesBD.getInstanta().update(
+        //     {tabel:"utilizatori",
+        //     campuri:["nume","prenume","email","culoare_chat"],
+        //     valori:[`${campuriText.nume}`,`${campuriText.prenume}`,`${campuriText.email}`,`${campuriText.culoare_chat}`],
+        //     conditiiAnd:[`parola='${parolaCriptata}'`]
+        // },  
+        AccesBD.getInstanta().updateParametrizat(//seamana cu update simplu
+            {tabel:"utilizatori",
+            campuri:["nume","prenume","email","culoare_chat"], //campuri pe care le updatez
+            valori:[`${campuriText.nume}`,`${campuriText.prenume}`,`${campuriText.email}`,`${campuriText.culoare_chat}`], //valori respective din bd
+            conditiiAnd:[`parola='${parolaCriptata}'`, `username='${campuriText.username}'`]//atat parola +user!
+        },          
+        function(err, rez){ //functia callback dupa realizarea querryului
+            if(err){ //daca eroare bd
+                console.log(err);
+                afiseazaEroare(res,2);
+                return;
+            }
+            console.log(rez.rowCount); //daca nu actualizez nici un rand,avertizare trimis prin locals
+            if (rez.rowCount==0){
+                res.render("pagini/profil",{mesaj:"Update-ul nu s-a realizat. Verificati parola introdusa."});
+                return;
+            }
+            else{            
+                //actualizare sesiune
+                console.log("ceva");
+                req.session.utilizator.nume= campuriText.nume;
+                req.session.utilizator.prenume= campuriText.prenume;
+                req.session.utilizator.email= campuriText.email;
+                req.session.utilizator.culoare_chat= campuriText.culoare_chat;
+                res.locals.utilizator=req.session.utilizator;
+            }
+ 
+ 
+            res.render("pagini/profil",{mesaj:"Update-ul s-a realizat cu succes."});
+ 
+        });
+       
+ 
+    });
+});
+
+app.get("/useri", function(req, res){
+   
+    if(req?.utilizator?.areDreptul?.(Drepturi.vizualizareUtilizatori)){
+        AccesBD.getInstanta().select({tabel:"utilizatori", campuri:["*"]}, function(err, rezQuery){
+            console.log(err);
+            res.render("pagini/useri", {useri: rezQuery.rows});
+        });
+    }
+    else{
+        afisareEroare(res, 403);
+    }
+});
+
+
+app.post("/sterge_utiliz", function(req, res){
+    if(req?.utilizator?.areDreptul?.(Drepturi.stergereUtilizatori)){
+        var formular= new formidable.IncomingForm();
+ 
+        formular.parse(req,function(err, campuriText, campuriFile){
+           
+                AccesBD.getInstanta().delete({tabel:"utilizatori", conditiiAnd:[`id=${campuriText.id_utiliz}`]}, function(err, rezQuery){
+                console.log(err);
+                res.redirect("/useri");
+            });
+        });
+    }else{
+        afisareEroare(res,403);
+    }
+})
+
+
 
 app.get("/favicon.ico", function (req, res) {
     res.sendFile(__dirname + "/resurse/ico/favicon.ico");
@@ -407,15 +512,41 @@ app.get("/ceva", function (req, res) {
 
  
 
-app.get(["/despre", "/", "/homee", "/login"], function (req, res) {
-    res.render("pagini/despre", { ip: req.ip, a: 10, b: 20, imagini: obGlobal.obImagini.imagini });
+app.get(["/despre", "/", "/homee","/login"], function (req, res) {
+    let sir=req.session.mesajLogin;
+    req.session.mesajLogin=null;
+    res.render("pagini/despre", { ip: req.ip, a: 10, b: 20, imagini: obGlobal.obImagini.imagini,  mesajLogin:sir});
 }) 
 app.get("/*.ejs", function (req, res) {
 
     afiseazaEroare(res, 400);
 });
 
+app.get("/galerie", function (req, res) {
+    let nrImagini = randomInt(5, 11);
+    if (nrImagini % 2 == 0) nrImagini++;
 
+    let imgInv = [...obGlobal.obImagini.imagini].reverse();
+
+    let fisScss = path.join(__dirname, "resurse/scss/galerie_animata.scss");
+    let liniiFisScss = fs.readFileSync(fisScss).toString().split("\n");
+
+    let stringImg = "$nrImg: " + nrImagini + ";";
+
+    liniiFisScss = liniiFisScss.slice(1);
+
+
+    liniiFisScss.unshift(stringImg);
+
+
+    fs.writeFileSync(fisScss, liniiFisScss.join("\n"));
+
+    res.render("pagini/galerie", {
+        imagini: obGlobal.obImagini.imagini,
+        nrImagini: nrImagini,
+        imgInv: imgInv
+    });
+});
 
 
 
@@ -623,31 +754,7 @@ function afiseazaEroare(
         }
     }
 
-    app.get("/galerie", function (req, res) {
-        let nrImagini = randomInt(5, 11);
-        if (nrImagini % 2 == 0) nrImagini++;
-    
-        let imgInv = [...obGlobal.obImagini.imagini].reverse();
-    
-        let fisScss = path.join(__dirname, "resurse/scss/galerie_animata.scss");
-        let liniiFisScss = fs.readFileSync(fisScss).toString().split("\n");
-    
-        let stringImg = "$nrImg: " + nrImagini + ";";
-    
-        liniiFisScss = liniiFisScss.slice(1);
-    
-    
-        liniiFisScss.unshift(stringImg);
-    
-    
-        fs.writeFileSync(fisScss, liniiFisScss.join("\n"));
-    
-        res.render("pagini/galerie.ejs", {
-            imagini: obGlobal.obImagini.imagini,
-            nrImagini: nrImagini,
-            imgInv: imgInv
-        });
-    });
+
 
 
 app.listen(8080);

@@ -1,3 +1,8 @@
+<style>
+    .card{
+  background-color: var(--fundal-deschis);
+}
+</style>
 <script>
     function validateForm() {
         var username = document.getElementById("inp-username").value;
@@ -38,65 +43,75 @@
         acum postam , date inserate in table, avem method post daca nu trimite cu get, get(cere o resursa)
         daca vrei sa scrii date noi (cereri post!, update pe tabel atunci would? cererile astea sunt http)-->
 
-
-        <form id="form_inreg" method="post" class="date" action="<%= locals.action %>" enctype="multipart/form-data" onsubmit="return validateForm()">
-            <p>                                                 <!-- Trimis de catre inregistrare-->
-        
-        <label>
-            Username: <input type="text" name="username" id="inp-username" value="Sobi<%= Math.floor(Math.random()*10000) %>" required pattern="[A-Za-z][A-Za-z0-9]{0,8}[0-9]{4}" title="Username-ul trebuie să înceapă cu o literă, să conțină maxim 10 caractere și ultimele 4 caractere să fie cifre.">
-        </label>
-    </p>
-    <p>
-        <label>
-            Nume: <input type="text" name="nume" id="inp-nume"  value="Miau" >
-        </label>
-    </p>
-    <p>
-        <label>
-            Prenume: <input type="text" name="prenume" id="inp-prenume" value="Miau"  >
-        </label>
-    </p>
-    <p>
-        <label>
-            Parola: <input id="parl" type="password" required  name="parola" value="">
-        </label>
-    </p>
-    <p id="p-reintrod">
-        <label >
-            Reintroduceti parola: <input id="rparl" required type="password" name="rparola" value="">
-        </label>
-    </p>
-    <p>
-        <label>
-            Email: <input type="text" name="email" id="inp-email" required value="tehniciwebteodor@gmail.com"  size="50">
-        </label>
-    </p>
-    <label>
-        Data nașterii: <input type="date" name="data_adaugare" required min="1900-01-01">
-    </label>
-    <p>
-        <label>
-            Culoare text chat: <select name="culoare_chat" id="sel-culoare"><option value="black" selected>negru</option><option value="green">verde</option><option value="blue">albastru</option></select>
-        </label>
-    </p>
-    <p>
-        <label>
-            Preferință temă: 
-            <label>
-                Light <input type="radio"  id="sel-tema-light" name="tema" value="light" checked>
-            </label>
-            <label>
-                Dark <input type="radio"id="sel-tema-dark"  name="tema" value="dark">
-            </label>
-        </label>
-    </p>
-    <p>
-        <label>
-            Poza: <input type="file" name="poza">
-        </label>			
-    </p>
-    <p>		
-        <input type="submit" value="Trimite">
-        <input type="reset" value="Reseteaza">
-    </p>
-</form>
+        <div class="card text-center" style="width: 40rem; margin: 0 auto; ">
+            <div class="card-body">
+              <form id="form_inreg" method="post" class="date" action="<%= locals.action %>" enctype="multipart/form-data" onsubmit="return validateForm()">
+                <p>
+                  <label>
+                    Username: <input type="text" name="username" id="inp-username" value="Sobi<%= Math.floor(Math.random()*10000) %>" required pattern="[A-Za-z][A-Za-z0-9]{0,8}[0-9]{4}" title="Username-ul trebuie să înceapă cu o literă, să conțină maxim 10 caractere și ultimele 4 caractere să fie cifre.">
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    Nume: <input type="text" name="nume" id="inp-nume"  value="Miau">
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    Prenume: <input type="text" name="prenume" id="inp-prenume" value="Miau">
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    Parola: <input id="parl" type="password" required name="parola" value="">
+                  </label>
+                </p>
+                <p id="p-reintrod">
+                  <label>
+                    Reintroduceti parola: <input id="rparl" required type="password" name="rparola" value="">
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    Email: <input type="text" name="email" id="inp-email" required value="tehniciwebteodor@gmail.com" size="50">
+                  </label>
+                </p>
+                <label>
+                  <div class="hide">
+                    Data nașterii: <input type="date" name="data_adaugare" id="inp-data" required min="1900-01-01">
+                  </div>
+                </label>
+                <p>
+                  <label>
+                    Culoare text chat:
+                    <select name="culoare_chat" id="sel-culoare">
+                      <option value="black" selected>negru</option>
+                      <option value="green">verde</option>
+                      <option value="blue">albastru</option>
+                    </select>
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    Preferință temă:
+                    <label>
+                      Light <input type="radio" id="sel-tema-light" name="tema" value="light" checked>
+                    </label>
+                    <label>
+                      Dark <input type="radio" id="sel-tema-dark" name="tema" value="dark">
+                    </label>
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    Poza: <input type="file" name="poza">
+                  </label>
+                </p>
+                <p>
+                  <input type="submit" value="Trimite" class="btn btn-primary">
+                  <input type="reset" value="Reseteaza" class="btn btn-secondary">
+                </p>
+              </form>
+            </div>
+          </div>
+          

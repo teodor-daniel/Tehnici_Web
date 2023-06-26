@@ -1,5 +1,8 @@
 <script src="/resurse/js/tema.js"></script>
 <script src="/resurse/js/cookies.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 
 <nav>
 
@@ -14,19 +17,28 @@
           <a href="/despre"> <i class="fas fa-regular fa-house"></i></a>
         </div>
       </li>
-      <!--
-      <li>
-        <a href="#">Sale</a>zz
-        <ul>
-          <li><a href="#Z-produse">Winter Sale</a></li>
-          <li><a href="#">Summer Sale</a></li>
 
-        </ul>
+      <% if(locals?.utilizator?.areDreptul?.(Drepturi.vizualizareUtilizatori)) { %> <!--verific daca utiliz are dreptul de admin-->
+        <li><div>Administrare</div>
+            <ul>
+                <li><a href="/useri">Useri</a></li>
+                <li><a href="/grafice">Grafice</a></li>
+                <li><a href="/comenzi">Comenzi</a></li>
+            </ul>
+        </li>
+    <% } %>
+    <% if(locals.utilizator) { %> <!--verific daca utilizatorul este logat-->
+        <li><div><%- locals.utilizator.username %></div>
+            <ul>
+                <li><a href="/profil">Profil</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </li>
+    <% } %>
+
+      <li>
+        <a href="/inregistrare"><i class="fa-solid fa-user"></i>Inregistrare</a>
       </li>
-      -->
-      <li>
-        <a href="/inregistrare"><i class="fa-solid fa-user"></i>Inregistrare</a></li>
-
       <li><a href="/produse"><i class="fa-sharp fa-solid fa-cart-shopping"></i>Produse</a>
         <ul>
           <% for (let opt of locals.optiuniMeniu) { %>
@@ -34,11 +46,65 @@
           <% } %>
       </li>
       
+      <!-- verific daca are prop utilizator , si ?. fals daca nu exista ce e in dreapta-->
+
       
       
     </ul>
     
   </nav>
+
+  <div class="container mt-1">
+    <div class="card text-left sticky-card" style="width: 300px; height: auto; outline: none;">
+      <% if(!locals.utilizator) { %>
+        <button type="button" class="btn btn-primary ml-3" data-toggle="modal" data-target="#loginModal">
+          Ai deja cont?
+        </button>
+  
+        <!-- Login Modal -->
+        <div class="modal fade mt-5" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content mt-3">
+              <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Completeaza datele!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form id="form_inreg" method="post" class="date" action="/login" enctype="multipart/form-data">
+                  <p>
+                    <label>
+                      Username: <input type="text" style="width: 100%;" name="username" id="inp-username" value="">
+                    </label>
+                  </p>
+                  <p>
+                    <label>
+                      Parola: <input id="parl" style="width: 100%;" type="password"  name="parola" value="">
+                    </label>
+                  </p>
+                  <p>
+                    <input type="submit" value="Logare">
+                  </p>
+                </form>
+                <p><%- locals.mesajLogin %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% } else { %>
+
+      <% if (locals.utilizator.poza === '') { %>
+          <img width="200px" style="border-radius: 30%;" src="/resurse/imagini/home-icon.png">
+      <% } else { %>
+          <img width="200px" style="border-radius: 30%;" src="/<%- locals.utilizator.poza %>">
+      <% } %>
+
+        <% } %>
+    </div>
+
+  </div>
+
 
 <header class="c1" id="h1">
           <h1>TeoSport</h1>

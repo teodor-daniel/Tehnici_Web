@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="ro">
 	<head>
-		
+		<style>
+			.hide{
+				display: none;
+			}
+		</style>
 		<title>Profil</title>
 		<%- include("../fragmente/head") %>
         
@@ -18,6 +22,7 @@
 				document.getElementById("inp-prenume").value="<%= locals.utilizator.prenume %>";
 				document.getElementById("inp-email").value="<%= locals.utilizator.email %>";
 				document.getElementById("p-reintrod").remove();
+				document.getElementById("inp-data").remove();
 				var optiuni=document.getElementById("sel-culoare").options
 				for (let opt of optiuni)
 					if (opt.value=="<%= locals.utilizator.culoare_chat %>")
@@ -26,7 +31,7 @@
 		</script>
 		<% } %>
 	</head>
-	<body class="container">
+	<body >
 		<header>
 			<%- include("../fragmente/header") %>
 		</header>
@@ -34,15 +39,20 @@
 			<% if(locals.utilizator) { %>
 			<section>
 				<h2>Profil</h2>
-                <p>Mănânci prea multe prajituri și știi și tu asta!</p>
+                <p>Ne bucuram ca te intereseaza afacerea noastra!</p>
 				<p><%= locals.raspuns %></p>
 				<img src="/<%- locals.utilizator.poza%>" alt="nu ati incarcat poza de profil" />
 			</section>
 			<%- include("../fragmente/formular",{action:"/profil"}) %>
+			
 		</main>
 		<% } else { %>
 			<p>Nu sunteti logat</p>
 		<% } %>
+		<p><%- locals.mesaj %></p>
+
+
+
 		<%- include("../fragmente/footer") %>
 		
 	</body>

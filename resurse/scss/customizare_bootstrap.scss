@@ -23,6 +23,7 @@
   $primary: #ff8c42,
   $danger: #0066cc,
 
+
   $form-range-thumb-width: 1.5rem,
   $form-range-thumb-height: 1.5rem,
 
@@ -45,7 +46,9 @@
 body {
     text-align: center;
   }
-
+.card{
+  background-color: #ffffff;
+}
 
 ol, ul, dl{
   margin-left: 400px;

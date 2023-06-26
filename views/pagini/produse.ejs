@@ -64,21 +64,24 @@
                 </select>
               </div>
             </div>
-      
-            <div class="row custom-padding mt-3">
-              <div class="col">
-                <br/>
-                <button id="filtrare" class="btn btn-primary mb-2 custom-button">Filtreaza</button> 
-                <button id="resetare" class="btn btn-secondary mb-2 custom-button">Reseteaza</button>
-                <br/>
-                <button id="sortCrescNume" class="btn btn-primary mb-2 custom-button">Sorteaza crescator dupa pret si nume</button>
-                <button id="sortDescrescNume" class="btn btn-primary mb-2 custom-button">Sorteaza descrescator dupa pret si nume</button>
+            <div class="row mt-3">
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <textarea class="form-control" id="i_textarea" placeholder=" " required></textarea>
+                  <label for="i_textarea">Descriere</label>
+                  <div class="invalid-feedback">We don't have products matching this description. Please enter a valid description.</div>
+                </div>
               </div>
-            </div>
+              <div class="col-md-6">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="testatCheckbox" name="testatCheckbox" value="checkboxValue">
+                  <label class="form-check-label align-self-start" for="testatCheckbox" style="margin-right:20rem;">Testat</label>
+                </div>
+              </div>
+
           </div>
         </div>
-
-      
+      </div>
       <div class="card mt-3">
         <div class="card-body">
           <div class="row">
@@ -110,18 +113,15 @@
               <p id="p-suma">Apăsați Alt+"c" pentru suma preturilor produselor afișate.</p>
             </div>
           </div>
-          <div class="row mt-3">
-            <div class="col-md-6">
-              <div class="form-floating">
-                <textarea class="form-control" id="i_textarea" placeholder=" " required></textarea>
-                <label for="i_textarea">Descriere</label>
-                <div class="invalid-feedback">We don't have products matching this description. Please enter a valid description.</div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="testatCheckbox" name="testatCheckbox" value="checkboxValue">
-                <label class="form-check-label align-self-start" for="testatCheckbox" style="margin-right:20rem;">Testat</label>
+
+            <div class="row custom-padding mt-3">
+              <div class="col">
+                <br/>
+                <button id="filtrare" class="btn btn-primary mb-2 custom-button">Filtreaza</button> 
+                <button id="resetare" class="btn btn-secondary mb-2 custom-button">Reseteaza</button>
+                <br/>
+                <button id="sortCrescNume" class="btn btn-primary mb-2 custom-button">Sorteaza crescator dupa pret si nume</button>
+                <button id="sortDescrescNume" class="btn btn-primary mb-2 custom-button">Sorteaza descrescator dupa pret si nume</button>
               </div>
             </div>
           </div>

@@ -9834,6 +9834,10 @@ body {
   text-align: center;
 }
 
+.card {
+  background-color: #ffffff;
+}
+
 ol, ul, dl {
   margin-left: 400px;
 }

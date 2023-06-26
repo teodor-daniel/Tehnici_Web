@@ -10,7 +10,6 @@
 
 <body>
   <%- include ("../fragmente/header.ejs") %>
-
     <main>
         <div id="grid-pagina">
             <section id="Z-Sale">
@@ -38,7 +37,9 @@
             <section id="Z-date_utilizatori">
                 <h2>Date-Utilizatori</h2>
                 <p class="intro">Vă mulțumim că ne vizitați site-ul. Luați de aici niște biscuiți virtuali. Poftă bună!</p>
+                <!--Utilizatorul e trimis in locals pentru a invata restul paginilor, daca nu e logat utilizatorul atunci login-->
                 <% if(!locals.utilizator) { %>
+                  <!--Ruta pt el app.post/login (din cauza lui method)-->
                     <form id="form_inreg"  method="post" class="date"  action="/login"  enctype="multipart/form-data">
                         <p>
                             <label>
@@ -52,7 +53,7 @@
                         </p>
                         <p><input type="submit" value="Logare"></p>
                     </form>
-                    <p><%- locals.eroareLogin %></p>
+                    <p><%- locals.mesajLogin %></p>
                     <% } else {%>
                        <%- locals.succesLogin %>
                     <% }  %>

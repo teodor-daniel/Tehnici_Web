@@ -1,4 +1,43 @@
 window.addEventListener("DOMContentLoaded", function () {
+    let iduriProduse=localStorage.getItem("cos_virtual");//memorez id-ul ca string separate prin virgula
+    iduriProduse=iduriProduse?iduriProduse.split(","):[];//daca am ceva , obtiun un vector cu subsiruri separate prin virgula, daca nu am nimic, obtin un vector gol
+
+    for(let idp of iduriProduse){ //iau pe rand fiecare produs
+        let ch = document.querySelector(`[value='${idp}'].select-cos`);//selectez primul dupa un selector de css, care selecteaza un element cu atributul idp si clasa select-cos
+        if(ch){
+            ch.checked=true; //daca exista checkboxul il bifez
+        }
+        else{
+            console.log("id cos virtual inexistent:", idp);//alfel ii dau eroare
+        }
+    }
+
+    //----------- adaugare date in cosul virtual (din localStorage)
+    let checkboxuri= document.getElementsByClassName("select-cos");
+    for(let ch of checkboxuri){
+        ch.onchange=function(){//la fiecare schimbare , schimbam vectorul de id-uri
+            let iduriProduse=localStorage.getItem("cos_virtual");
+            iduriProduse=iduriProduse?iduriProduse.split(","):[];
+
+            if( this.checked){ // daca e bifat atunci pun in vect de id-uri in checkbox
+                iduriProduse.push(this.value)
+            }
+            else{
+                let poz= iduriProduse.indexOf(this.value);//altfel id-ul de dinainte inseamana ca il scot,
+                if(poz != -1){//daca l-am gasit 
+                    iduriProduse.splice(poz,1);
+                }
+            }
+
+            localStorage.setItem("cos_virtual", iduriProduse.join(","))//le pun in cosul virtual
+        }
+        
+    }
+
+
+    document.getElementById("inp-pret").onchange=function(){
+        document.getElementById("infoRange").innerHTML=`(${this.value})`
+    }
 
     function Filtru() {
         let val_nume = document.getElementById("inp-nume").value.toLowerCase();
@@ -163,8 +202,12 @@ window.addEventListener("DOMContentLoaded", function () {
         }
     });
 /*
-Metoda replace(/[\u0300-\u036f]/g, "") este apelată pe textul normalizat. Această metodă înlocuiește orice caracter din 
-intervalul Unicode [\u0300-\u036f] (care reprezintă diacriticele) cu un șir vid, eliminând astfel diacriticele.
+text.normalize("NFD") este o metodă a obiectului de tip șir de caractere (text) care normalizează textul prin separarea caracterelor 
+diacritice de literele de bază. Astfel, diacriticele sunt transformate în caractere separate, numite "combining marks" sau "combining diacritical marks".
+.replace(/[\u0300-\u036f]/g, "") este o metodă care înlocuiește toate caracterele diacritice cu un șir vid (adică le elimină din text).
+ Expresia regulată /[\u0300-\u036f]/g reprezintă un interval de caractere Unicode care acoperă toate diacriticele posibile.
+Practic, funcția removeDiacritics primește un text ca argument și aplică aceste două transformări asupra acestuia, 
+eliminând astfel diacriticele din text și returnând rezultatul.
 */
     function removeDiacritics(text) {
         return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");//de re explicat

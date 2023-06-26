@@ -184,25 +184,30 @@ class Utilizator{
         }
         
     }
-    static getUtilizDupaUsername (username,obparam, proceseazaUtiliz){ //primeste username, un parametru, si o functie callback,
-        if (!username) return null;
-        let eroare=null;
-        //selectez din tabelul utilizatori, toate val unde username-ul e cel primit ca parametru
-        AccesBD.getInstanta(Utilizator.tipConexiune).select({tabel:"utilizatori",campuri:['*'],conditiiAnd:[`username='${username}'`]}, function (err, rezSelect){
-            if(err){
-                console.error("Utilizator:", err);
-                console.log("Utilizator",rezSelect.rows.length);
-                //throw new Error()
-                eroare=-2;
-            }
-            else if(rezSelect.rowCount==0){ //verific daca avem randuri in select daca exista, in baza de date, daca nu exista, eroare
-                eroare=-1;
+
+    static getUtilizDupaUsername(username, obparam, proceseazaUtiliz) {//primeste username, un parametru, si o functie callback,
+        if (!username) return null
+        let eroare = null//selectez din tabelul utilizatori, toate val unde username-ul e cel primit ca parametru, unde user e cel din formularul de login
+        AccesBD.getInstanta(Utilizator.tipConexiune).select(
+          { tabel: 'utilizatori', campuri: ['*'], conditiiAnd: [`username='${username}'`] },// selectul e din baza de date
+          function (err, rezSelect) {
+            let u = null
+            if (err) {
+              console.error('Utilizator:', err)
+              //throw new Error()
+              eroare = -2
+            } else if (rezSelect.rowCount == 0) {//verific daca avem randuri in select daca exista, in baza de date, daca nu exista, eroare
+              eroare = -1
             }
             //constructor({id, username, nume, prenume, email, rol, culoare_chat="black", poza}={})
-            let u= new Utilizator(rezSelect.rows[0]) //daca exista,apelez un constructor din clasa utilizator creez un obiect utilizator, cu datele din baza de date
-            proceseazaUtiliz(u, obparam, eroare);
-        });
-    }
+            else {
+              u = new Utilizator(rezSelect.rows[0])//daca exista,apelez un constructor din clasa utilizator creez un obiect utilizator, cu datele din baza de date
+            }
+            proceseazaUtiliz(u, obparam, eroare)//cu utiliz si eroare apelez functia callback
+          }
+        )
+      }
+
 
     areDreptul(drept){
         return this.rol.areDreptul(drept);

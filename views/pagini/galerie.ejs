@@ -13,15 +13,21 @@
     <main>
         <div class="galerie_animata" id="galanim" style="--nrImg: <% locals.nrImagini %>">
 
-            <% var i=0; %>
+            <% var cnt=0; %>
                 <% for (let imag of locals.imgInv) { %>
-                    <% i=i + 1; %>
-                        <% if(i> locals.nrImagini) { break; }%>
+                    <% cnt++; %>
+                        <% if(cnt> locals.nrImagini) { break; }%>
+<!--Aici se extrage numele fișierului din calea către imagine. Variabila nume_imag primește valoarea ultimului 
+element din array-ul rezultat în urma divizării căii de fișier utilizând caracterul de escape "\", care separă directoarele într-o cale.-->
 
                             <% var nume_imag=imag.fisier.split('\\'); %>
                                 <% nume_imag=nume_imag[nume_imag.length - 1]; %>
-
                                     <figure>
+<!--Aici se afișează fiecare imagine într-un element figure care conține și un element figcaption. 
+În interiorul elementului picture, sunt definite două surse (source) cu atributul srcset pentru a oferi imagini de dimensiuni 
+diferite în funcție de latimea ecranului (media). Imaginea finală este specificată cu elementul img care conține atributul src 
+și atributul alt, unde alt va fi numele imaginii sau valoarea din imag.alt în cazul în care există.
+ Textul din imag.attribution sau imag.descriere este afișat în interiorul elementului figcaption. -->                                        
                                         <picture>
                                             <source srcset="<%- imag.fisier_mic %>" media="(max-width:700px)" />
                                             <source srcset="<%- imag.fisier_mediu %>"

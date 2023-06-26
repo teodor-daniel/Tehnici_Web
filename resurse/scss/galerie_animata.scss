@@ -1,4 +1,50 @@
-$nrImg: 5;
+$nrImg: 9;
+$start: calc(1.5 / ($nrImg * 3) * 100%);
+$mid: calc(3 / ($nrImg * 3) * 100%);
+$centru: calc(3 / ($nrImg * 3) * 100% - 1%);
+$end: calc(100% - (1.5 / ($nrImg * 3) * 100%));
+// a=presentation time for one image
+// b=duration for cross fading
+// Total animation-duration is of course t=(a+b)*n
+// animation-delay = t/n or = a+b
+// Percentage for keyframes:
+// 0%
+// a/t*100%
+// (a+b)/t*100% = 1/n*100%
+// 100%-(b/t*100%)
+// 100%
+@keyframes gal_exemplu {
+    0% {
+        opacity: 1;
+    }
+    #{$start} {
+        opacity: 1;
+        transform: rotate(0deg);
+        clip-path: circle(70%);
+    }
+    #{$centru} {
+
+        transform: rotate(0deg);
+        clip-path: circle(25%);
+        opacity: 1;
+    }
+    #{$mid} {
+        opacity: 0;
+        transform: rotate(360deg);
+        clip-path: circle(0%);
+    }
+    #{$end} {
+        opacity: 0;
+        transform: rotate(0deg);
+        clip-path: circle(70%);
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+
 .galerie_animata {
     margin-left: auto;
     margin-right: auto;
@@ -7,13 +53,13 @@ $nrImg: 5;
     figcaption {
         position: absolute;
         bottom: 0;
-        background: rgba(255, 255, 255, 0.7);
+        background: rgb(255, 255, 255);
         width: 100%;
         text-align: center;
         overflow: hidden;
     }
     figure {
-        border: 0.5em solid;
+        border: 0.5em solid var(--culoare-fundal-inchis);
         position: relative;
         width: 30%;
         height: 50%;
@@ -62,36 +108,3 @@ $nrImg: 5;
 }
 
 
-$start: calc(1.5 / ($nrImg * 3) * 100%);
-$mid: calc(3 / ($nrImg * 3) * 100%);
-$midm1: calc(3 / ($nrImg * 3) * 100% - 2%);
-$end: calc(100% - (1.5 / ($nrImg * 3) * 100%));
-
-@keyframes gal_exemplu {
-    0% {
-        opacity: 1;
-    }
-    #{$start} {
-        opacity: 1;
-        transform: rotate(0deg);
-        clip-path: circle(70%);
-    }
-    #{$midm1} {
-        clip-path: circle(25%);
-        transform: rotate(0deg);
-        opacity: 1;
-    }
-    #{$mid} {
-        opacity: 0;
-        transform: rotate(360deg);
-        clip-path: circle(0%);
-    }
-    #{$end} {
-        opacity: 0;
-        transform: rotate(0deg);
-        clip-path: circle(70%);
-    }
-    100% {
-        opacity: 1;
-    }
-}
