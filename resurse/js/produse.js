@@ -201,14 +201,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
         }
     });
-/*
-text.normalize("NFD") este o metodă a obiectului de tip șir de caractere (text) care normalizează textul prin separarea caracterelor 
-diacritice de literele de bază. Astfel, diacriticele sunt transformate în caractere separate, numite "combining marks" sau "combining diacritical marks".
-.replace(/[\u0300-\u036f]/g, "") este o metodă care înlocuiește toate caracterele diacritice cu un șir vid (adică le elimină din text).
- Expresia regulată /[\u0300-\u036f]/g reprezintă un interval de caractere Unicode care acoperă toate diacriticele posibile.
-Practic, funcția removeDiacritics primește un text ca argument și aplică aceste două transformări asupra acestuia, 
-eliminând astfel diacriticele din text și returnând rezultatul.
-*/
+
     function removeDiacritics(text) {
         return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");//de re explicat
     }

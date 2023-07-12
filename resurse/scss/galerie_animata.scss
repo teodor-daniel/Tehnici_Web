@@ -1,4 +1,4 @@
-$nrImg: 9;
+$nrImg: 7;
 $start: calc(1.5 / ($nrImg * 3) * 100%);
 $mid: calc(3 / ($nrImg * 3) * 100%);
 $centru: calc(3 / ($nrImg * 3) * 100% - 1%);
@@ -59,12 +59,13 @@ $end: calc(100% - (1.5 / ($nrImg * 3) * 100%));
         overflow: hidden;
     }
     figure {
+    
         border: 0.5em solid var(--culoare-fundal-inchis);
         position: relative;
         width: 30%;
         height: 50%;
-        margin-left: auto;
-        margin-right: auto;
+        margin-top:50px;
+        margin-left: 155px;
         img {
             width: 100%;
             height: 100%;
@@ -96,7 +97,7 @@ $end: calc(100% - (1.5 / ($nrImg * 3) * 100%));
 
 
 #spacer {
-    height: 20em;
+
     background: transparent;
 }
 

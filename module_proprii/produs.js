@@ -4,18 +4,19 @@ class Produs {
      * @param {Object} [props={}] - Un obiect cu proprietățile dorite pentru produs.
      */
     constructor({
-      id,
-      nume,
+      id ,
+      nume ,
       descriere,
-      pret,
-      gramaj,
-      tip_produs,
-      calorii,
-      categorie,
-      ingrediente,
-      pt_diabetici,
       imagine,
-      data_adaugare
+      tip_produs,
+      categorie ,
+      pret ,
+      bucati ,
+      greutate ,
+      data_adaugare,
+      culoare ,
+      materiale ,
+      testat
     } = {}) {
       for (let prop in arguments[0]) {
         this[prop] = arguments[0][prop];

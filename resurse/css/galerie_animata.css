@@ -2,22 +2,22 @@
   0% {
     opacity: 1;
   }
-  5.5555555556% {
+  7.1428571429% {
     opacity: 1;
     transform: rotate(0deg);
     clip-path: circle(70%);
   }
-  10.1111111111% {
+  13.2857142857% {
     transform: rotate(0deg);
     clip-path: circle(25%);
     opacity: 1;
   }
-  11.1111111111% {
+  14.2857142857% {
     opacity: 0;
     transform: rotate(360deg);
     clip-path: circle(0%);
   }
-  94.4444444444% {
+  92.8571428571% {
     opacity: 0;
     transform: rotate(0deg);
     clip-path: circle(70%);
@@ -45,8 +45,8 @@
   position: relative;
   width: 30%;
   height: 50%;
-  margin-left: auto;
-  margin-right: auto;
+  margin-top: 50px;
+  margin-left: 155px;
 }
 .galerie_animata figure img {
   width: 100%;
@@ -63,7 +63,7 @@
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-fill-mode: forwards;
-  animation-duration: 18s;
+  animation-duration: 14s;
   transform-origin: center;
 }
 #galanim:hover figure {
@@ -75,7 +75,6 @@
 }
 
 #spacer {
-  height: 20em;
   background: transparent;
 }
 
@@ -109,12 +108,4 @@
 
 #galanim figure:nth-child(7) {
   animation-delay: 14s;
-}
-
-#galanim figure:nth-child(8) {
-  animation-delay: 16s;
-}
-
-#galanim figure:nth-child(9) {
-  animation-delay: 18s;
 }

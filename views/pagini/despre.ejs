@@ -10,6 +10,7 @@
 
 <body>
   <%- include ("../fragmente/header.ejs") %>
+
     <main>
         <div id="grid-pagina">
             <section id="Z-Sale">
@@ -27,39 +28,27 @@
                   <figcaption>Primul magazin</figcaption>
                 </figure>
               </section>
+
               <section id="Z-utilizatori">
-                <h2>Utilizatori</h2>
+                <h2>Fotografia lunii!</h2>
                 
                 <div id ="imagine"></div>
               
               </section>
 
-            <section id="Z-date_utilizatori">
-                <h2>Date-Utilizatori</h2>
-                <p class="intro">Vă mulțumim că ne vizitați site-ul. Luați de aici niște biscuiți virtuali. Poftă bună!</p>
-                <!--Utilizatorul e trimis in locals pentru a invata restul paginilor, daca nu e logat utilizatorul atunci login-->
-                <% if(!locals.utilizator) { %>
-                  <!--Ruta pt el app.post/login (din cauza lui method)-->
-                    <form id="form_inreg"  method="post" class="date"  action="/login"  enctype="multipart/form-data">
-                        <p>
-                            <label>
-                                Username: <input type="text" name="username" id="inp-username" value="" required">
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                Parola: <input id="parl" type="password" required  name="parola" value="">
-                            </label>
-                        </p>
-                        <p><input type="submit" value="Logare"></p>
-                    </form>
-                    <p><%- locals.mesajLogin %></p>
-                    <% } else {%>
-                       <%- locals.succesLogin %>
-                    <% }  %>
+              <section id="Z-date_utilizatori">
+                <%- include ("../fragmente/galerie_animata.ejs") %>
+                <h2>Produsele Sezonului!</h2>
+
             </section>
+            
+
             <section id="Z-date_server_site">
-              <h2>Date-Server</h2>
+              <h2>Utilizatori</h2>
+              <p class="intro">Vă mulțumim că ne vizitați site-ul!</p>
+              <p>Momentan am ajuns la <strong><%- useri.length %></strong> de utilizatori va multumim!</p>
+<!--
+
 
               <div id ="text">
                 <p>"Un text"</p>
@@ -68,6 +57,7 @@
               
               <div class="animat-text">Textul animat</div>
 
+              -->
             </section>
 
             <section id="Z-tabel">
@@ -130,19 +120,33 @@
             </section>
 
             <section id="Z-calendar" >
-                <h2>Calendar</h2>
-                <div id="column-container">
-    
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s.</p>
+              
+                  <h2>Beneficiile Sportului!</h2>
+                  <div id="column-container">
+                    <p>Cu cat ne miscam mai mult cu atat suntem mai sanatosi si mai veseli, de aceea este bine sa ne bucruam cat mai mult in aer liber! Este timpul sa ne miscam din ce in ce mai mult!</p>
+                    <div class="running">
+                      <div class="outer">
+                        <div class="body">
+                            <div class="arm behind"></div>
+                            <div class="arm front"></div>
+                            <div class="leg behind"></div>
+                            <div class="leg front"></div>
+                        </div>
+                    </div>
                 </div>
+                
+                  </div>
             </section>
 
             <section id="Z-anunturi">
-                <h2>Anunturi</h2>
+              <h2>Anunturi</h2>
+              <h3>Deschidem un nou magazin pe 13 august!</h3>
+              <p>Vă anunțăm cu bucurie că vom deschide un nou magazin pentru a vă oferi o experiență de cumpărături unică. Vă așteptăm cu drag să ne vizitați!</p>
+              <p>Data de deschidere: 13 august</p>
+              Locatia:<a href="https://www.google.com/maps?q=Facultatea+de+Matematica+si+Informatica" i class="fa-solid fa-location-dot"></i></a><br>
+           
             </section>
+            
 
             <section id="Z-produse" >
                     <div>

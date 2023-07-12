@@ -136,10 +136,9 @@ main{
   position: fixed;
   bottom: 0;
 /*middle*/
-  left: 0;
-  right: 0;
+  margin-right: 100%;
   margin: auto;
-  margin-bottom: 15%;
+  margin-top: 50%;
   background-color: var(--culoare-fundal-inchis);
   transition: opacity 5s, background-color 5s;
   padding: var(--padding-sectiune);
@@ -183,3 +182,174 @@ main{
 .disclaimer-banner.animation {
   animation: bannerAnimation 3s forwards;
 }
+
+
+
+/*
+Animatie draguta
+*/
+
+.running {
+  --color: #953553;
+  --duration: 1s;
+  transform: scale(var(--scale, 1));
+  .outer {
+      animation: outer var(--duration) linear infinite;
+      .body {
+          background: var(--color);
+          height: 15px;
+          width: 10px;
+          border-radius: 10px;
+          transform-origin: 10px 10px;
+          position: relative;
+          transform: rotate(32deg);
+          animation: body var(--duration) linear infinite;
+          &:before {
+              content: '';
+              width: 10px;
+              height: 10px;
+              border-radius: 10px;
+              bottom: 16px;
+              left: 0;
+              position: absolute;
+              background: var(--color);
+          }
+          .arm,
+          .arm:before,
+          .leg,
+          .leg:before {
+              content: '';
+              width: var(--w, 11px);
+              height: 4px;
+              top: var(--t, 0);
+              left: var(--l, 2px);
+              border-radius: 2px;
+              transform-origin: 2px 2px;
+              position: absolute;
+              background: var(--c, var(--color));
+              transform: rotate(var(--r, 0deg));
+              animation: var(--name, arm-leg) var(--duration) linear infinite;
+          }
+          .arm {
+              &:before {
+                  --l: 7px;
+                  --name: arm-b;
+              }
+              &.front {
+                  --r: 24deg;
+                  --r-to: 164deg;
+                  &:before {
+                      --r: -48deg;
+                      --r-to: -36deg;
+                  }
+              }
+              &.behind {
+                  --r: 164deg;
+                  --r-to: 24deg;
+                  &:before {
+                      --r: -36deg;
+                      --r-to: -48deg;
+                  }
+              }
+          }
+          .leg {
+              --w: 12px;
+              --t: 11px;
+              &:before {
+                  --t: 0;
+                  --l: 8px;
+              }
+              &.front {
+                  --r: 10deg;
+                  --r-to: 100deg;
+                  &:before {
+                      --r: 10deg;
+                      --r-to: 100deg;
+                  }
+              }
+              &.behind {
+                  --r: 100deg;
+                  --r-to: 10deg;
+                  --c: none;
+                  &:before {
+                      --c: var(--color);
+                      --r: 76deg;
+                      --r-to: 18deg;
+                  }
+                  &:after {
+                      content: '';
+                      top: 0;
+                      right: 0;
+                      height: 4px;
+                      width: 6px;
+                      clip-path: polygon(2px 0, 6px 0, 6px 4px, 0 4px);
+                      border-radius: 0 2px 2px 0;
+                      position: absolute;
+                      background: var(--color);
+                  }
+              }
+          }
+      }
+  }
+}
+
+.running-button {
+  .running {
+      --scale: .64;
+      --color: #fff;
+      position: absolute;
+      top: 13px;
+      right: 100%;
+      transition: transform .4s ease;
+      transform: translateX(var(--running-x, -8px)) scale(var(--scale));
+  }
+  &:hover {
+      --b: var(--background-hover);
+      --y: -2px;
+      --shadow-y: 8px;
+      --shadow-blur: 16px;
+      --default-x: 4px;
+      --running-x: var(--padding-x);
+  }
+  &:active {
+      --y: 1px;
+      --shadow-y: 4px;
+      --shadow-blur: 8px;
+  }
+  &.active {
+      --b: var(--background-active);
+      --default-x: 100%;
+      --active-x: -12%;
+      --running-x: 108px;
+      &:hover {
+          --b: var(--background-active-hover);
+      }
+  }
+}
+
+@keyframes arm-leg {
+  50% {
+      transform: rotate(var(--r-to));
+  }
+}
+
+@keyframes arm-b {
+  30%,
+  70% {
+      transform: rotate(var(--r-to));
+  }
+}
+
+html {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: inherit;
+  &:before,
+  &:after {
+      box-sizing: inherit;
+  }
+}
+

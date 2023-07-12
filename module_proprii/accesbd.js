@@ -1,28 +1,18 @@
-/**
- * ATENTIE!
- * inca nu am implementat protectia contra SQL injection
- */
 
 const { Client } = require("pg");
-
-/**
- * Clasa AccesBD oferă funcționalitatea de acces la baza de date.
- */
-class AccesBD {
   /**
    * Proprietatea statică instanta conține unica instanță a clasei. Inițial are valoarea null.
    * @type {AccesBD|null}
    * @private
    */
-  static #instanta = null;
-
-  /**
+    /**
    * Proprietatea statică initializat indică dacă clasa a fost sau nu inițializată.
    * @type {boolean}
    * @private
    */
+class AccesBD {
+  static #instanta = null;
   static #initializat = false;
-
   /**
    * Constructorul clasei AccesBD aruncă o eroare dacă deja a fost instanțiată clasa sau dacă nu a fost inițializată baza de date.
    */

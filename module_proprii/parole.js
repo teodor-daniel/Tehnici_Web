@@ -4,8 +4,6 @@
  */
 
 sirAlphaNum="";
-//array de array-uri de nr 
-// iteram prin array-ul de array-uri si apoi prin fiecare array iar codurile sunt transformate in caractere ascii, cifrele si literele mari si mici
 
 /**
  * Array-ul de intervale pentru cifre și litere.
@@ -27,7 +25,6 @@ console.log(sirAlphaNum);
 function genereazaToken(n){
     let token=""
     for (let i=0;i<n; i++){
-        // nr de la 0 la lungimea sirului de caracterede la 0 la lungimea sirului de caractere
         token+=sirAlphaNum[Math.floor(Math.random()*sirAlphaNum.length)]
     }
     return token;

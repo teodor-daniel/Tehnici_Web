@@ -1,12 +1,22 @@
-    <div id="galerie-animata" class="galerie-a">
-        <% for (let imag of locals.imagini) { 
-                     %>
-                        <figure>
-                            <picture>
-                                <source srcset="<%- imag.fisier_mediu %>" media="(max-width:1000px)" />
-                                <img src="<%- imag.fisier %>" alt="imagine">
-                            </picture>
-                            <figcaption><%- imag.descriere %></figcaption>
-                        </figure>
-                <% }  %>
-    </div>
+<div class="galerie_animata" id="galanim" style="padding-left:300; --nrImg: <% locals.nrImagini %>">
+
+    <% var cnt=0; %>
+        <% for (let imag of locals.imgInv) { %>
+            <% cnt++; %>
+                <% if(cnt> locals.nrImagini) { break; }%>
+
+                    <% var nume_imag=imag.fisier.split('\\'); %>
+                        <% nume_imag=nume_imag[nume_imag.length - 1]; %>
+                            <figure>
+                            
+                                <picture>
+                                    <source srcset="<%- imag.fisier_mic %>" media="(max-width:700px)" />
+                                    <source srcset="<%- imag.fisier_mediu %>"
+                                        media="(max-width:1400px)" />
+                                    <img src="<%- imag.fisier %>" alt=" <%- imag.alt || nume_imag %> ">
+                                </picture>
+                                <figcaption><%- imag.attribution || imag.descriere %></figcaption>
+                            </figure>
+
+                            <% } %>
+</div>

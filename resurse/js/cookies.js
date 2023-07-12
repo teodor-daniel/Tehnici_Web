@@ -1,7 +1,7 @@
 function setCookie(nume, val, timpExpirare) {//timpExpirare in milisecunde
-    d = new Date();
-    d.setTime(d.getTime() + timpExpirare)
-    document.cookie = `${nume}=${val}; expires=${d.toUTCString()}`;
+    d = new Date();//data curenta
+    d.setTime(d.getTime() + timpExpirare) //seteaza timpul de expirare
+    document.cookie = `${nume}=${val}; expires=${d.toUTCString()}`; //seteaza cookie-ul
 }
 var lastPage = getCookie("last_page");
 
@@ -35,17 +35,22 @@ function setLastFiltersCookie(filters) {
 function resetLastFiltersCookie() {
     deleteCookie("last_filters");
 }
+
 function setLastPageCookie() {
-    var currentPage = window.location.href;
+    var currentPage = window.location.href; //primeste url-ul paginii pe care a acesat-o
     setCookie("last_page", currentPage, 86400000); // Cookie expiră după 24 de ore
   }
   
   function getLastPageCookie() {
-    return getCookie("last_page");
+    return getCookie("last_page"); // Returnează ultima pagină accesată
   }
-  setLastPageCookie();
-  
+  setLastPageCookie();//seteaza cookie-ul la incarcarea paginii
+  if (lastPage) {
+    // Dacă există cookie-ul, afișează ultima pagină accesată
+    console.log("Ultima pagină accesată:", lastPage);
+  }
 
+// Cookie banner
 window.addEventListener("load", function () {
     if (getCookie("acceptat_banner")) {
         document.getElementById("banner").style.display = "none";
@@ -59,6 +64,3 @@ window.addEventListener("load", function () {
     }
 })
 
-if (lastPage) {
-    console.log("Ultima pagină accesată:", lastPage);
-  }

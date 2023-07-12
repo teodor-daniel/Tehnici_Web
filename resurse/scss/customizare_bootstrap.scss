@@ -136,6 +136,56 @@ table {
   color: #333;
   font-weight: bold;
 }
+.disclaimer-banner {
+  position: fixed;
+  bottom: 0;
+/*middle*/
+  margin-right: 100%;
+  margin: auto;
+  margin-top: 50%;
+  background-color: var(--culoare-fundal-inchis);
+  transition: opacity 5s, background-color 5s;
+  padding: var(--padding-sectiune);
+  height: 25vh;
+  width: 25vw;
+  opacity: 0;
+}
+
+
+.banner-content p:first-of-type {
+  margin-left: -8px;
+}
+
+.banner-content p {
+  font-size: 1.5vw;
+  margin-bottom: 10px;
+  color: var(--culoare-text);
+}
+
+.banner-content button {
+  background-color: var(--culoare-fundal-inchis);
+  color: var(--text-white);
+  border: black solid 1px;
+  cursor: pointer;
+  position: relative;
+  left: 40%;
+}
+
+@keyframes bannerAnimation {
+  0% {
+      opacity: 0;
+      background-color: var(--fundal-deschis-albastru);
+  }
+
+  100% {
+      opacity: 100%;
+      background-color: var(--culoare-linii-interimitente);
+  }
+}
+
+.disclaimer-banner.animation {
+  animation: bannerAnimation 3s forwards;
+}
 
 
   }

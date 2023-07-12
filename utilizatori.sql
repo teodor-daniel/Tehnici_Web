@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS utilizatori (
    rol roluri NOT NULL DEFAULT 'comun',
    email VARCHAR(100) NOT NULL,
    culoare_chat VARCHAR(50) NOT NULL DEFAULT 'negru',
-   data_adaugare TIMESTAMP DEFAULT current_timestamp,
+   data_adaugare TIMESTAMP  NOT NULL,
    tema VARCHAR(50) NOT NULL DEFAULT 'light',
    cod character varying(200),
    confirmat_mail boolean DEFAULT false,
