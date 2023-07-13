@@ -134,11 +134,8 @@ main{
 
 .disclaimer-banner {
   position: fixed;
-  bottom: 0;
 /*middle*/
-  margin-right: 100%;
   margin: auto;
-  margin-top: 50%;
   background-color: var(--culoare-fundal-inchis);
   transition: opacity 5s, background-color 5s;
   padding: var(--padding-sectiune);

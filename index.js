@@ -13,6 +13,8 @@ const AccesBD = require("./module_proprii/accesbd.js");
 const { randomInt } = require("crypto");
 app = express();
 app.set("view engine", "ejs");
+const PORT = process.env.PORT || 8080;
+
 
 
 obGlobal = {
@@ -762,7 +764,9 @@ function afiseazaEroare(
     }
 
 
+    app.listen(PORT, () => {
+        console.log(`Serverul rulează la adresa http://localhost:${PORT}/`);
+    });
 
-
-app.listen(8080);
+//app.listen(8080);
 console.log("Serverul a pornit");
