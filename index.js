@@ -652,8 +652,7 @@ initImagini();
 
 
 
-
-
+/*
 function compileazaScss(caleScss, caleCss) {
     if (!caleCss) {
         let numeFisierExt = path.basename(caleScss);
@@ -715,7 +714,7 @@ fs.watch(obGlobal.folderScss, function (event, filename) {
 
 
 
-
+*/
 
 
 
