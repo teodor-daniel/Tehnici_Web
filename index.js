@@ -33,19 +33,10 @@ var client= new Client({
     password:"7979",
     host:"localhost",
     port:5432
-});11       
+});
 
 client.connect();
 
-client.query("SELECT * FROM unnest(enum_range(null::tipuri_produse_sport))", function(err, rezultat){
-
-    if(err){
-        console.log(err);
-    }
-    else{
-        obGlobal.optiuniMeniu=rezultat.rows;
-}
-});
 
 
 
