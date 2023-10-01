@@ -14,7 +14,7 @@ const { randomInt } = require("crypto");
 app = express();
 app.set("view engine", "ejs");
 
-
+const port = process.env.PORT || 8080;
 
 obGlobal = {
     obErori: null,
@@ -756,5 +756,5 @@ function afiseazaEroare(
 }
 
 
-app.listen(8080);
+app.listen(process.env.PORT || port, () => console.log(`The port is on ${port}`));
 console.log("Serverul a pornit");
